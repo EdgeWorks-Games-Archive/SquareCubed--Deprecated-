@@ -22,6 +22,9 @@ include_directories ("${CMAKE_CURRENT_SOURCE_DIR}/Common")
 # Add Client
 add_subdirectory (Client)
 
+# Add Server
+add_subdirectory (Server)
+
 # Build a CPack driven Installer Package
 include (InstallRequiredSystemLibraries)
 set (CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
