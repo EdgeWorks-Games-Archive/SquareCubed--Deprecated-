@@ -11,6 +11,7 @@ add_library (WorldServerBase ${WorldServerBase_SRC})
 
 # Link Required Libraries
 target_link_libraries (WorldServerBase CommonLib)
+target_link_libraries (WorldServerBase Physics)
 
 # Set Directory
 SET_PROPERTY(TARGET WorldServerBase PROPERTY FOLDER "Server")

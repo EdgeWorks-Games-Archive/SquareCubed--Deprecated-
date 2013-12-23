@@ -17,5 +17,8 @@ file (GLOB RakNet_SRC
 # Add Library Build Output
 add_library (RakNet ${RakNet_SRC})
 
+# Link Required Libraries
+target_link_libraries (RakNet ws2_32)
+
 # Set Directory
 set_property (TARGET RakNet PROPERTY FOLDER "Dependencies")

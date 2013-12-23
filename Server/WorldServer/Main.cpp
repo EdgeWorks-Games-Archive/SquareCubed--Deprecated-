@@ -1,6 +1,6 @@
 #include <WorldServerBase/WorldServer.h>
 
-#include <WSRakNetNetwork/RakNetNetworkLoader.h>
+#include <ServerRakNetNetwork/RakNetNetworkLoader.h>
 
 #include <CommonLib/LoggingManager.h>
 
