@@ -8,3 +8,9 @@ endif ()
 
 # Configure GLM
 include (CMakeDependencyGLM.txt)
+
+# Configure GLFW
+include (CMakeDependencyGLFW.txt)
+
+# Configure RakNet
+include (CMakeDependencyRakNet.txt)

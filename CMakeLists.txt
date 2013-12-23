@@ -5,12 +5,12 @@ project (SquareCubed)
 SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # Add Version Variables
-set (VERSION_MAJOR 3 CACHE STRING "Major engine version.")
-set (VERSION_MINOR 0 CACHE STRING "Minor engine version.")
+set (VERSION_MAJOR 0 CACHE STRING "Major engine version.")
+set (VERSION_MINOR 3 CACHE STRING "Minor engine version.")
 set (VERSION_PATCH 0 CACHE STRING "Patch engine version.")
 
 # Add Dependencies
-include_directories (Dependencies)
+add_subdirectory (Dependencies)
 
 # Add Dependency Folder as Include Directory
 include_directories (${DEPENDENCY_DIR})

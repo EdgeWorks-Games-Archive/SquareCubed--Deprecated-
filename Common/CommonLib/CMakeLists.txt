@@ -36,7 +36,7 @@ source_group (Utils\\Logger FILES
 # Add Library Build Output
 add_library (CommonLib ${CommonLib_SRC})
 
-# Link Build Output
+# Add Output to Link Directories
 link_directories (${PROJECT_BINARY_DIR}/CommonLib)
 
 # Set Directory
