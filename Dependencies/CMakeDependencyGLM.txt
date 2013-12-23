@@ -1,0 +1,4 @@
+# Make Sure Path Contains GLM
+if (NOT EXISTS ${DEPENDENCY_DIR}/glm)
+	message (FATAL_ERROR "Dependency folder does not contain GLM.")
+endif()
