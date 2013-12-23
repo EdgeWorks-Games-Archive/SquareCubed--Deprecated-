@@ -9,6 +9,19 @@ set (VERSION_MAJOR 0 CACHE STRING "Major engine version.")
 set (VERSION_MINOR 3 CACHE STRING "Minor engine version.")
 set (VERSION_PATCH 0 CACHE STRING "Patch engine version.")
 
+# Add Game Root Variable (for installer generation and debugging)
+set (GAME_ROOT "" CACHE PATH "Root of the game content for use in installer generation. This won't set working directory, you have to do that manually.")
+
+# Make Sure Game Root Path is Valid
+if (NOT EXISTS ${GAME_ROOT}/Content)
+	message (SEND_ERROR "Game Root folder does not contain Content directory.")
+endif()
+
+# Add Installer Details for Content Root
+install (DIRECTORY ${GAME_ROOT}/Bin/ DESTINATION Bin)
+install (DIRECTORY ${GAME_ROOT}/Content/ DESTINATION Content)
+install (DIRECTORY ${GAME_ROOT}/Logs/ DESTINATION Logs)
+
 # Add Dependencies
 add_subdirectory (Dependencies)
 

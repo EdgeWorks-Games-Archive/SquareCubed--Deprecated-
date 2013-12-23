@@ -29,4 +29,4 @@ source_group (RigidBodies FILES
 add_library (Physics ${Physics_SRC})
 
 # Set Directory
-SET_PROPERTY(TARGET Physics PROPERTY FOLDER "Common")
+set_property (TARGET Physics PROPERTY FOLDER "Common")

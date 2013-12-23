@@ -1,6 +1,6 @@
 # Make Sure Path Contains GLFW
 if (NOT EXISTS ${DEPENDENCY_DIR}/glfw)
-	message (FATAL_ERROR "Dependency folder does not contain GLFW.")
+	message (SEND_ERROR "Dependency folder does not contain GLFW.")
 endif()
 
 # Add GLFW Link Directory

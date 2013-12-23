@@ -37,4 +37,4 @@ source_group (Utils\\Logger FILES
 add_library (CommonLib ${CommonLib_SRC})
 
 # Set Directory
-SET_PROPERTY(TARGET CommonLib PROPERTY FOLDER "Common")
+set_property (TARGET CommonLib PROPERTY FOLDER "Common")

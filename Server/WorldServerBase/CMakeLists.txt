@@ -14,4 +14,4 @@ target_link_libraries (WorldServerBase CommonLib)
 target_link_libraries (WorldServerBase Physics)
 
 # Set Directory
-SET_PROPERTY(TARGET WorldServerBase PROPERTY FOLDER "Server")
+set_property (TARGET WorldServerBase PROPERTY FOLDER "Server")

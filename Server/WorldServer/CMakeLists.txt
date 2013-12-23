@@ -17,4 +17,4 @@ target_link_libraries (WorldServer ServerRakNetNetwork)
 install (TARGETS WorldServer DESTINATION Bin)
 
 # Set Directory
-SET_PROPERTY(TARGET WorldServer PROPERTY FOLDER "Server")
+set_property (TARGET WorldServer PROPERTY FOLDER "Server")

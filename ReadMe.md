@@ -30,7 +30,7 @@ Dependencies
 
 Licenses
 --------
-This copy of SquareCubed is released All Rights Reserverd.
+This copy of SquareCubed is released All Rights Reserved.
 Do not redistribute in any way, including but not limited
 to binary form. This page (and License.txt) will be updated
 once we find a more permissive license that fits our aims

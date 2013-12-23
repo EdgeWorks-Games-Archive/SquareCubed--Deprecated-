@@ -4,17 +4,17 @@
 #include <ClientBase/Input.h>
 #include <ClientBase/Content.h>
 
-#include <GLFWContext/GLFWContextLoader.h>
+/*#include <GLFWContext/GLFWContextLoader.h>
 #include <OpenGLGraphics/OpenGLGraphicsLoader.h>
 #include <RakNetNetwork/RakNetNetworkLoader.h>
 #include <CoherentUIOpenGLGUI/CoherentUIOpenGLUILoader.h>
 
-#include <MainMenuState/MainMenuStateSwitcher.h>
+#include <MainMenuState/MainMenuStateSwitcher.h>*/
 
 #include <CommonLib/LoggingManager.h>
 
 int main(int argc, char* args []) {
-	// Initialize Logger
+	/*// Initialize Logger
 	Utils::ILoggingManager *loggingManager = new Utils::LoggingManager("../Logs/Client.log");
 	Utils::Logger logger = loggingManager->CreateLogger("Loader");
 
@@ -60,5 +60,5 @@ int main(int argc, char* args []) {
 	logger.LogHighlight("Executing Main Loop...");
 
 	// Run Engine
-	engine.Execute();
+	engine.Execute();*/
 }
