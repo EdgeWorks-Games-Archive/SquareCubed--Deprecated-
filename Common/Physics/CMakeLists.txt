@@ -28,8 +28,5 @@ source_group (RigidBodies FILES
 # Add Library Build Output
 add_library (Physics ${Physics_SRC})
 
-# Link Build Output
-link_directories (${PROJECT_BINARY_DIR}/Physics)
-
 # Set Directory
 SET_PROPERTY(TARGET Physics PROPERTY FOLDER "Common")

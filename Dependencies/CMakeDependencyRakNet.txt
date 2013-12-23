@@ -3,9 +3,6 @@ if (NOT EXISTS ${DEPENDENCY_DIR}/raknet/Source)
 	message (FATAL_ERROR "Dependency folder does not contain RakNet.")
 endif()
 
-# RakNet Needs to be Built during Project Compile.
-# So we need to add it as a library.
-
 # RakNet uses unsafe string functions, we need to add
 # this to remove the warning spam from build output.
 # Yes this works cross-platform.
@@ -19,9 +16,6 @@ file (GLOB RakNet_SRC
 
 # Add Library Build Output
 add_library (RakNet ${RakNet_SRC})
-
-# Add Output to Link Directories
-link_directories (${PROJECT_BINARY_DIR}/RakNet)
 
 # Set Directory
 set_property (TARGET RakNet PROPERTY FOLDER "Dependencies")
