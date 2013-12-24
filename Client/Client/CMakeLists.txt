@@ -15,6 +15,8 @@ target_link_libraries (Client ClientRakNetNetwork)
 target_link_libraries (Client CoherentUIOpenGLGUI)
 target_link_libraries (Client GLFWContext)
 target_link_libraries (Client OpenGLGraphics)
+target_link_libraries (Client MainMenuState)
+target_link_libraries (Client GameState)
 
 # Add Installer Details
 install (TARGETS Client DESTINATION Bin)

@@ -9,7 +9,7 @@
 #include <Modules/ClientRakNetNetwork/RakNetNetworkLoader.h>
 #include <Modules/CoherentUIOpenGLGUI/CoherentUIOpenGLUILoader.h>
 
-//#include <MainMenuState/MainMenuStateSwitcher.h>
+#include <States/MainMenuState/MainMenuStateSwitcher.h>
 
 #include <CommonLib/LoggingManager.h>
 
@@ -55,7 +55,7 @@ int main(int argc, char* args []) {
 	logger.LogHighlight("Queueing Default State Initialization...");
 
 	// Set Default State
-	//MainMenuState::SwitchToState(*stateEngine);
+	MainMenuState::SwitchToState(*stateEngine);
 
 	logger.LogHighlight("Executing Main Loop...");
 
