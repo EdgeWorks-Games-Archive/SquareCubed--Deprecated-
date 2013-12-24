@@ -31,6 +31,11 @@ add_subdirectory (Dependencies)
 # Add Dependency Folder as Include Directory
 include_directories (${DEPENDENCY_DIR})
 
+# Add Link Folders (Should be moved to the correct files but egh)
+link_directories ("${DEPENDENCY_DIR}/glfw/lib")
+link_directories ("${DEPENDENCY_DIR}/devil/lib")
+link_directories ("${DEPENDENCY_DIR}/glew/lib")
+
 # Add Common
 add_subdirectory (Common)
 include_directories ("${CMAKE_CURRENT_SOURCE_DIR}/Common")

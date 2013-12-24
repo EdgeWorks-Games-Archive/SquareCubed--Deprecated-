@@ -1,7 +1,7 @@
 # Make Sure Path Contains GLFW
 if (NOT EXISTS ${DEPENDENCY_DIR}/glfw)
 	message (SEND_ERROR "Dependency folder does not contain GLFW.")
-endif()
+endif ()
 
 # Add GLFW Link Directory
 link_directories (${DEPENDENCY_DIR}/glfw/lib)

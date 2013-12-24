@@ -4,7 +4,7 @@
 #include <ClientBase/Input.h>
 #include <ClientBase/Content.h>
 
-//#include <GLFWContext/GLFWContextLoader.h>
+#include <Modules/GLFWContext/GLFWContextLoader.h>
 #include <Modules/OpenGLGraphics/OpenGLGraphicsLoader.h>
 #include <Modules/ClientRakNetNetwork/RakNetNetworkLoader.h>
 //#include <CoherentUIOpenGLGUI/CoherentUIOpenGLUILoader.h>
@@ -28,16 +28,16 @@ int main(int argc, char* args []) {
 	engine.SetContent(content);
 
 	// Set up Context Module
-	//Context::IContext *context = GLFWContext::LoadContext();
-	//engine.SetContext(context);
+	Context::IContext *context = GLFWContext::LoadContext();
+	engine.SetContext(context);
 
 	// Set up Graphics Module
-	//Graphics::IGraphics *graphics = OpenGLGraphics::LoadGraphics(context->GetMainWindow(), *content);
-	//engine.SetGraphics(graphics);
+	Graphics::IGraphics *graphics = OpenGLGraphics::LoadGraphics(context->GetMainWindow(), *content);
+	engine.SetGraphics(graphics);
 
 	// Set up Input Module
-	//Input::Input *input = new Input::Input(*context);
-	//engine.SetInput(input);
+	Input::Input *input = new Input::Input(*context);
+	engine.SetInput(input);
 
 	// Set up Network Module
 	Network::INetwork *network = RakNetNetwork::LoadNetwork(*loggingManager);

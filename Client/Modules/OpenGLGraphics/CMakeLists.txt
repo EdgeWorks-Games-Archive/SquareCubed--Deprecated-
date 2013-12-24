@@ -20,6 +20,7 @@ target_link_libraries (OpenGLGraphics debug glfw3debug)
 target_link_libraries (OpenGLGraphics optimized glfw3release)
 target_link_libraries (OpenGLGraphics DevIL)
 target_link_libraries (OpenGLGraphics ILU)
+target_link_libraries (OpenGLGraphics glew32)
 
 # Set Directory
 set_property (TARGET OpenGLGraphics PROPERTY FOLDER "Client/Modules")
