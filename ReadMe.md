@@ -18,13 +18,15 @@ so we can contact the project maintainer.
 
 Build Requirements
 ------------------
-- C++11 Compatible Compiler
+- C++11 Compatible Compiler (Visual Studio 2013 or later)
+- CMake 2.8.3
 
 Dependencies
 ------------
 You can download a package of precompiled dependencies for VC++ 2013 [here](https://dl.dropboxusercontent.com/u/69844866/Dependencies.zip).
 This package does not include CoherentUI and RakNet which must be manually licensed and downloaded.
-RakNet has an online automated form for requesting a indie license. CoherentUI has an online evaluation request form.
+RakNet has an online automated form for requesting a indie license.
+CoherentUI has an online evaluation request form.
 - GLFW
 - GLEW
 - DevIL
