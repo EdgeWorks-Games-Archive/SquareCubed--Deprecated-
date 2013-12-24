@@ -36,6 +36,7 @@ CoherentUI has an online evaluation request form.
 Build Guide
 -----------
 This guide is for Visual Studio 2013. If you are on a different platform or using a different compiler you will have to manually make a dependency folder for your target.
+
 1. Download and unzip the dependency package.
 2. Place CoherentUI in the dependency folder in a folder "CoherentUI".
 3. Place RakNet in the dependency folder in a folder "raknet".
