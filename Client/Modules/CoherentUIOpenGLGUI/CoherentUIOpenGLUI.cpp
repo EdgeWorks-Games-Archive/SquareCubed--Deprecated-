@@ -50,7 +50,7 @@ namespace CoherentUIOpenGLUI {
 		m_ViewListener.OnViewReady.AttachFromThis(CoherentUIOpenGLUI::OnViewReady, m_EventScope);
 
 		// Initialize System
-		m_Settings.HostDirectory = L"../Bin/Win32/host";
+		m_Settings.HostDirectory = L"Host";
 #ifdef _DEBUG
 		m_Settings.DebuggerPort = 1234;
 #endif
@@ -63,8 +63,8 @@ namespace CoherentUIOpenGLUI {
 
 		// Create and compile our GLSL program from the shaders
 		m_ProgramID = m_Renderer.CreateShaderProgram(
-			"../Content/Shaders/CoherentUI.vert",
-			"../Content/Shaders/CoherentUI.frag"
+			"Content/Shaders/CoherentUI.vert",
+			"Content/Shaders/CoherentUI.frag"
 		);
 
 		// Load the initial texture. The texture ID returned is saved internally by the renderer
@@ -210,7 +210,7 @@ namespace CoherentUIOpenGLUI {
 
 		// Build View Path
 		std::wstringstream ss;
-		ss << L"coui://../Content/GUI/Views/" << view << "/" << view << ".html";
+		ss << L"coui://Content/GUI/Views/" << view << "/" << view << ".html";
 
 		// Replace View and Unhook Events if needed
 		if (&m_ViewListener.GetView() != nullptr) {

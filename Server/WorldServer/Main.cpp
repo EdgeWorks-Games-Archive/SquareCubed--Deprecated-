@@ -6,7 +6,7 @@
 
 int main(int argc, char* args []) {
 	// Initialize Logger
-	Utils::ILoggingManager *loggingManager = new Utils::LoggingManager("../Logs/WorldServer.log");
+	Utils::ILoggingManager *loggingManager = new Utils::LoggingManager("./Logs/WorldServer.log");
 	Utils::Logger logger = loggingManager->CreateLogger("Loader");
 
 	logger.LogHighlight("Initializing all World Server Modules...");

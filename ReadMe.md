@@ -19,7 +19,7 @@ so we can contact the project maintainer.
 Build Requirements
 ------------------
 - C++11 Compatible Compiler (Visual Studio 2013 or later)
-- CMake 2.8.3
+- CMake 2.8.3 or Later
 
 Dependencies
 ------------

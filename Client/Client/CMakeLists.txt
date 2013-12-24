@@ -19,7 +19,7 @@ target_link_libraries (Client MainMenuState)
 target_link_libraries (Client GameState)
 
 # Add Installer Details
-install (TARGETS Client DESTINATION Bin)
+install (TARGETS Client DESTINATION ./)
 
 # Set Directory
 SET_PROPERTY(TARGET Client PROPERTY FOLDER "Client")

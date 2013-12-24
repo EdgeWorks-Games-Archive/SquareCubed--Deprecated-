@@ -15,7 +15,7 @@
 
 int main(int argc, char* args []) {
 	// Initialize Logger
-	Utils::ILoggingManager *loggingManager = new Utils::LoggingManager("../Logs/Client.log");
+	Utils::ILoggingManager *loggingManager = new Utils::LoggingManager("./Logs/Client.log");
 	Utils::Logger logger = loggingManager->CreateLogger("Loader");
 
 	logger.LogHighlight("Initializing all Engine Modules...");

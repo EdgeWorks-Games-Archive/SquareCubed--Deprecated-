@@ -18,7 +18,7 @@ if (NOT EXISTS ${GAME_ROOT}/Content)
 endif()
 
 # Add Installer Details for Content Root
-install (DIRECTORY ${GAME_ROOT}/Bin/ DESTINATION Bin)
+install (DIRECTORY ${GAME_ROOT}/Host/ DESTINATION Host)
 install (DIRECTORY ${GAME_ROOT}/Content/ DESTINATION Content)
 install (DIRECTORY ${GAME_ROOT}/Logs/ DESTINATION Logs)
 
@@ -47,11 +47,27 @@ add_subdirectory (Client)
 # Add Server
 add_subdirectory (Server)
 
-# Build a CPack driven Installer Package
+## Build a CPack driven Installer Package ##
+
+# Runtime Libraries
 include (InstallRequiredSystemLibraries)
+install (FILES ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} DESTINATION ./ COMPONENT Libraries)
+set (CPACK_COMPONENT_LIBRARIES_DISPLAY_NAME "Runtime Libraries")
+
+# Additional DLLs
+install (FILES
+	"${DEPENDENCY_DIR}/CoherentUI/lib/${DEPENDENCY_COHERENT_LIB_SUBFOLDER}/${DEPENDENCY_COHERENT_LIB}.dll"
+	"${DEPENDENCY_DIR}/devil/bin/DevIL.dll"
+	"${DEPENDENCY_DIR}/devil/bin/ILU.dll"
+	"${DEPENDENCY_DIR}/glew/bin/glew32.dll"
+	DESTINATION ./
+)
+
+# MetaData
 set (CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
 set (CPACK_PACKAGE_VERSION_MAJOR "${VERSION_MAJOR}")
 set (CPACK_PACKAGE_VERSION_MINOR "${VERSION_MINOR}")
 set (CPACK_PACKAGE_VERSION_PATCH "${VERSION_PATCH}")
 set (CPACK_PACKAGE_VENDOR "EdgeWorks Games")
+
 include (CPack)

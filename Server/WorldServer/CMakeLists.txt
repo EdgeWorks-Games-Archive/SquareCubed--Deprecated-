@@ -14,7 +14,7 @@ target_link_libraries (WorldServer WorldServerBase)
 target_link_libraries (WorldServer ServerRakNetNetwork)
 
 # Add Installer Details
-install (TARGETS WorldServer DESTINATION Bin)
+install (TARGETS WorldServer DESTINATION ./)
 
 # Set Directory
 set_property (TARGET WorldServer PROPERTY FOLDER "Server")

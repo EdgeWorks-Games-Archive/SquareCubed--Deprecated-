@@ -41,7 +41,7 @@ namespace Content {
 			type.GetTypeName(),
 			path,
 			type.New(path)
-			);
+		);
 
 		// Add it to the list
 		m_ContentList.push_back(contentEntry);

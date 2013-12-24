@@ -31,13 +31,13 @@ namespace GameState {
 		m_World(
 			m_Engine.GetNetwork(),
 			m_Engine.GetGraphics(),
-			"../Content/Tiles/tiles.scta"
+			"Content/Tiles/tiles.scta"
 		),
 		m_Agents(
 			m_Engine.GetNetwork(),
 			m_Engine.GetGraphics(),
 			m_Physics,
-			"../Content/Agents/agents.scta"
+			"Content/Agents/agents.scta"
 		),
 		m_Player(m_Engine, m_Agents, m_Physics)
 	{
