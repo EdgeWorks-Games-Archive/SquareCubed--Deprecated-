@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+        <!-- Page Meta inInformation -->
+        <title>Main Menu View</title>
+        <meta name="description" content="Main Menu HTML view, to be loaded with the CoherentUI OpenGL GUI Module." />
+        <meta charset="utf-8" />
+        
+        <!-- Reset CSS -->
+        <link rel="stylesheet" href="../../CSS/reset.css" />
+        
+        <!-- jQuery UI -->
+        <link rel="stylesheet" href="../../CSS/squarecubed-theme/jquery-ui-1.10.3.custom.css" />
+        <script src="../../JS/jquery-1.9.1.js"></script>
+        <script src="../../JS/jquery-ui-1.10.3.custom.js"></script>
+        
+        <!-- Coherent UI -->
+        <script type="text/javascript">
+            engineCreateDeferred = jQuery.Deferred;
+        </script>
+        <script type="text/javascript" src="../../JS/coherent.js"></script>
+        
+        <!-- Common -->
+        <link rel="stylesheet" href="../../CSS/common.css" />
+        <script src="../../JS/common.js"></script>
+        
+        <!-- Page Specific -->
+        <link rel="stylesheet" href="MainMenu.css" />
+        <script src="MainMenu.js"></script>
+	</head>
+	<body>
+        <p id="topleft-label">SquareCubed InDev-0.3 Debug</p>
+        <p id="topright-button"><button id="runserver-button">Run Local Server</button></p>
+		<div id="mainmenu-dialog" class="ui-fixed-dialog" title="Connect to Server">
+            <div id="mainmenu-connect-input">
+                <p>Connect to a server using your username and password for that server.</p>
+                <!-- Connect Form -->
+                <form id="mainmenu-form">
+                    <fieldset>
+                        <table>
+                            <tr>
+                                <td class="table-widthhack"><label for="server">Server IP</label></td>
+                                <td><input type="text" name="server" id="server" value="127.0.0.1" class="text ui-widget-content ui-corner-all" /></td>
+                            </tr>
+                            <tr>
+                                <td class="table-widthhack"><label for="username">Username</label></td>
+                                <td><input type="text" name="username" id="username" value="username" class="text ui-widget-content ui-corner-all" /></td>
+                            </tr>
+                            <tr>
+                                <td class="table-widthhack"><label for="password">Password</label></td>
+                                <td><input type="password" name="password" id="password" value="password" class="text ui-widget-content ui-corner-all" /></td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </form>
+                <div id="mainmenu-status"></div>
+            </div>
+            <!-- Connecting in Progress Text -->
+            <p id="mainmenu-connect-progress" class="ui-progress-info hidden">Connecting to $SERVER$...</p>
+        </div>
+	</body>
+</html>

@@ -10,7 +10,7 @@ set (VERSION_MINOR 3 CACHE STRING "Minor engine version.")
 set (VERSION_PATCH 0 CACHE STRING "Patch engine version.")
 
 # Add Game Root Variable (for installer generation and debugging)
-set (GAME_ROOT "" CACHE PATH "Root of the game content for use in installer generation. This won't set working directory, you have to do that manually.")
+set (GAME_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/GameRoot" CACHE PATH "Root of the game content for use in installer generation. This won't set working directory, you have to do that manually.")
 
 # Make Sure Game Root Path is Valid
 if (NOT EXISTS ${GAME_ROOT}/Content)
@@ -54,20 +54,20 @@ include (InstallRequiredSystemLibraries)
 install (FILES ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} DESTINATION ./ COMPONENT Libraries)
 set (CPACK_COMPONENT_LIBRARIES_DISPLAY_NAME "Runtime Libraries")
 
-# Additional DLLs
-install (FILES
-	"${DEPENDENCY_DIR}/CoherentUI/lib/${DEPENDENCY_COHERENT_LIB_SUBFOLDER}/${DEPENDENCY_COHERENT_LIB}.dll"
-	"${DEPENDENCY_DIR}/devil/bin/DevIL.dll"
-	"${DEPENDENCY_DIR}/devil/bin/ILU.dll"
-	"${DEPENDENCY_DIR}/glew/bin/glew32.dll"
-	DESTINATION ./
-)
+# Descriptions
+set (CPACK_COMPONENT_LIBRARIES_DESCRIPTION "The runtime libraries required to install SquareCubed client and server.")
+set (CPACK_COMPONENT_CLIENT_DESCRIPTION "The client required to connect to servers and play the game.")
+set (CPACK_COMPONENT_SERVER_DESCRIPTION "The server required to host games the client can connect to.")
+
+# Start Menu Shortcuts
+set (CPACK_NSIS_MENU_LINKS "./Client.exe" "Game Client" "./WorldServer.exe" "World Server")
+set (CPACK_PACKAGE_EXECUTABLES "" "")
 
 # MetaData
 set (CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
+set (CPACK_PACKAGE_VENDOR "EdgeWorks Games(TM)")
 set (CPACK_PACKAGE_VERSION_MAJOR "${VERSION_MAJOR}")
 set (CPACK_PACKAGE_VERSION_MINOR "${VERSION_MINOR}")
 set (CPACK_PACKAGE_VERSION_PATCH "${VERSION_PATCH}")
-set (CPACK_PACKAGE_VENDOR "EdgeWorks Games")
 
 include (CPack)
