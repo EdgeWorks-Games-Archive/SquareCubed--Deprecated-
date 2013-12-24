@@ -1,0 +1,8 @@
+# Make Sure Path Contains GLM
+if (NOT EXISTS ${DEPENDENCY_DIR}/CoherentUI)
+	message (SEND_ERROR "Dependency folder does not contain CoherentUI.")
+endif()
+
+# Add CoherentUI Settings
+set (DEPENDENCY_COHERENT_LIB_SUBFOLDER "Win32" CACHE STRING "Library subfolder to target.")
+set (DEPENDENCY_COHERENT_LIB "CoherentUI" CACHE STRING "Library file to target.")

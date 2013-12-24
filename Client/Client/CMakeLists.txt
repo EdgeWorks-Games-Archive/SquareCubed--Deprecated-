@@ -12,6 +12,7 @@ add_executable (Client ${Client_SRC})
 # Link Required Libraries
 target_link_libraries (Client ClientBase)
 target_link_libraries (Client ClientRakNetNetwork)
+target_link_libraries (Client CoherentUIOpenGLGUI)
 target_link_libraries (Client GLFWContext)
 target_link_libraries (Client OpenGLGraphics)
 

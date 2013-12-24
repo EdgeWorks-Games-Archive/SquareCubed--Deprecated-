@@ -7,7 +7,7 @@
 #include <Modules/GLFWContext/GLFWContextLoader.h>
 #include <Modules/OpenGLGraphics/OpenGLGraphicsLoader.h>
 #include <Modules/ClientRakNetNetwork/RakNetNetworkLoader.h>
-//#include <CoherentUIOpenGLGUI/CoherentUIOpenGLUILoader.h>
+#include <Modules/CoherentUIOpenGLGUI/CoherentUIOpenGLUILoader.h>
 
 //#include <MainMenuState/MainMenuStateSwitcher.h>
 
@@ -44,8 +44,8 @@ int main(int argc, char* args []) {
 	engine.SetNetwork(network);
 
 	// Set up GUI Module
-	//GUI::IGUI *gui = CoherentUIOpenGLUI::LoadGUI(*loggingManager, *input);
-	//engine.SetGUI(gui);
+	GUI::IGUI *gui = CoherentUIOpenGLUI::LoadGUI(*loggingManager, *input);
+	engine.SetGUI(gui);
 
 	// Set up State Engine
 	StateEngine::StateEngine *stateEngine = new StateEngine::StateEngine(engine);

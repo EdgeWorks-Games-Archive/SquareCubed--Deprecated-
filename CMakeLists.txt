@@ -35,6 +35,7 @@ include_directories (${DEPENDENCY_DIR})
 link_directories ("${DEPENDENCY_DIR}/glfw/lib")
 link_directories ("${DEPENDENCY_DIR}/devil/lib")
 link_directories ("${DEPENDENCY_DIR}/glew/lib")
+link_directories ("${DEPENDENCY_DIR}/CoherentUI/lib/${DEPENDENCY_COHERENT_LIB_SUBFOLDER}")
 
 # Add Common
 add_subdirectory (Common)
