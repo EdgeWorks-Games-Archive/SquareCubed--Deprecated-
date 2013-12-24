@@ -1,0 +1,11 @@
+# Make Sure Path Contains DevIL
+if (NOT EXISTS ${DEPENDENCY_DIR}/devil)
+	message (SEND_ERROR "Dependency folder does not contain DevIL.")
+endif()
+
+# Add DevIL Link Directory
+link_directories (${DEPENDENCY_DIR}/DevIL/lib)
+
+# To link this in a project just use:
+#target_link_libraries (MyEXE DevIL)
+#target_link_libraries (MyEXE ILU)

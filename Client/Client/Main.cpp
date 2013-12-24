@@ -4,17 +4,17 @@
 #include <ClientBase/Input.h>
 #include <ClientBase/Content.h>
 
-/*#include <GLFWContext/GLFWContextLoader.h>
-#include <OpenGLGraphics/OpenGLGraphicsLoader.h>
-#include <RakNetNetwork/RakNetNetworkLoader.h>
-#include <CoherentUIOpenGLGUI/CoherentUIOpenGLUILoader.h>
+//#include <GLFWContext/GLFWContextLoader.h>
+#include <Modules/OpenGLGraphics/OpenGLGraphicsLoader.h>
+#include <Modules/ClientRakNetNetwork/RakNetNetworkLoader.h>
+//#include <CoherentUIOpenGLGUI/CoherentUIOpenGLUILoader.h>
 
-#include <MainMenuState/MainMenuStateSwitcher.h>*/
+//#include <MainMenuState/MainMenuStateSwitcher.h>
 
 #include <CommonLib/LoggingManager.h>
 
 int main(int argc, char* args []) {
-	/*// Initialize Logger
+	// Initialize Logger
 	Utils::ILoggingManager *loggingManager = new Utils::LoggingManager("../Logs/Client.log");
 	Utils::Logger logger = loggingManager->CreateLogger("Loader");
 
@@ -28,24 +28,24 @@ int main(int argc, char* args []) {
 	engine.SetContent(content);
 
 	// Set up Context Module
-	Context::IContext *context = GLFWContext::LoadContext();
-	engine.SetContext(context);
+	//Context::IContext *context = GLFWContext::LoadContext();
+	//engine.SetContext(context);
 
 	// Set up Graphics Module
-	Graphics::IGraphics *graphics = OpenGLGraphics::LoadGraphics(context->GetMainWindow(), *content);
-	engine.SetGraphics(graphics);
+	//Graphics::IGraphics *graphics = OpenGLGraphics::LoadGraphics(context->GetMainWindow(), *content);
+	//engine.SetGraphics(graphics);
 
 	// Set up Input Module
-	Input::Input *input = new Input::Input(*context);
-	engine.SetInput(input);
+	//Input::Input *input = new Input::Input(*context);
+	//engine.SetInput(input);
 
 	// Set up Network Module
 	Network::INetwork *network = RakNetNetwork::LoadNetwork(*loggingManager);
 	engine.SetNetwork(network);
 
 	// Set up GUI Module
-	GUI::IGUI *gui = CoherentUIOpenGLUI::LoadGUI(*loggingManager, *input);
-	engine.SetGUI(gui);
+	//GUI::IGUI *gui = CoherentUIOpenGLUI::LoadGUI(*loggingManager, *input);
+	//engine.SetGUI(gui);
 
 	// Set up State Engine
 	StateEngine::StateEngine *stateEngine = new StateEngine::StateEngine(engine);
@@ -55,10 +55,10 @@ int main(int argc, char* args []) {
 	logger.LogHighlight("Queueing Default State Initialization...");
 
 	// Set Default State
-	MainMenuState::SwitchToState(*stateEngine);
+	//MainMenuState::SwitchToState(*stateEngine);
 
 	logger.LogHighlight("Executing Main Loop...");
 
 	// Run Engine
-	engine.Execute();*/
+	engine.Execute();
 }

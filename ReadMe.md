@@ -10,7 +10,7 @@ contribute to the development of this project and to allow
 people to use the engine in their own software projects.
 
 If you find this file locally or part of another project, go
-to the [official github page](http://laylconway.github.io/SquareCubed/)
+to the [official github page](https://github.com/LaylConway/SquareCubed/)
 for the latest version. If a project is using SquareCubed in
 a way that doesn't comply with the license granted to that
 project, please notify [EdgeWorks Games](http://edgeworksgames.com/home/contact)&trade;

@@ -7,4 +7,5 @@ endif()
 link_directories (${DEPENDENCY_DIR}/glfw/lib)
 
 # To link this in a project just use:
-# target_link_libraries (MyProject glfw3)
+#target_link_libraries (MyEXE debug glfw3debug)
+#target_link_libraries (MyEXE optimized glfw3release)

@@ -1,0 +1,25 @@
+# Get All Files to Build
+file(GLOB OpenGLGraphics_SRC
+	"*.h"
+	"*.cpp"
+	"*.h.in"
+	"*.cpp.in"
+)
+
+# Add Library Build Output
+add_library (OpenGLGraphics ${OpenGLGraphics_SRC})
+
+# DevIL Doesn't Use Relative Paths
+include_directories (${DEPENDENCY_DIR}/devil/include)
+
+# Link Required Libraries
+target_link_libraries (OpenGLGraphics ClientBase)
+target_link_libraries (OpenGLGraphics opengl32)
+target_link_libraries (OpenGLGraphics glu32)
+target_link_libraries (OpenGLGraphics debug glfw3debug)
+target_link_libraries (OpenGLGraphics optimized glfw3release)
+target_link_libraries (OpenGLGraphics DevIL)
+target_link_libraries (OpenGLGraphics ILU)
+
+# Set Directory
+set_property (TARGET OpenGLGraphics PROPERTY FOLDER "Client/Modules")

@@ -22,6 +22,9 @@ install (DIRECTORY ${GAME_ROOT}/Bin/ DESTINATION Bin)
 install (DIRECTORY ${GAME_ROOT}/Content/ DESTINATION Content)
 install (DIRECTORY ${GAME_ROOT}/Logs/ DESTINATION Logs)
 
+# Add Common Defines
+add_definitions (-D_USE_MATH_DEFINES)
+
 # Add Dependencies
 add_subdirectory (Dependencies)
 

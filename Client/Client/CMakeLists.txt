@@ -11,6 +11,7 @@ add_executable (Client ${Client_SRC})
 
 # Link Required Libraries
 target_link_libraries (Client ClientBase)
+target_link_libraries (Client ClientRakNetNetwork)
 
 # Add Installer Details
 install (TARGETS Client DESTINATION Bin)
