@@ -1,3 +1,7 @@
 #define VERSION_MAJOR @VERSION_MAJOR@
 #define VERSION_MINOR @VERSION_MINOR@
 #define VERSION_PATCH @VERSION_PATCH@
+
+#define _MTS(x) #x
+/** Converts a macro to string literal. */
+#define MTS(x) _MTS(x)
