@@ -48,10 +48,11 @@ namespace Tools {
 			void UpdateAgent(AgentID agentId, DataTypes::Health health, unsigned int graphicId);
 
 			bool AgentExists(AgentID agentId);
+			const std::list<std::unique_ptr<IAgent>>& GetAllAgents();
 
 		public: // Game Loop
 			void RenderAgents();
-
+			
 		public: // Callback Functions
 			void ReceivedUpdateAgentPhysics(const unsigned int agentId, const CNetwork::PhysicsUpdateData &data);
 			void ReceivedAgentDesc(unsigned int agentId, DataTypes::Health health, unsigned int graphicId);

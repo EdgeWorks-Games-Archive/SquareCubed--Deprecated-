@@ -73,6 +73,10 @@ namespace Tools {
 			return false;
 		}
 
+		const std::list<std::unique_ptr<IAgent>>& Agents::GetAllAgents() {
+			return m_Agents;
+		}
+
 		// Game Loop
 
 		void Agents::RenderAgents() {
