@@ -66,6 +66,7 @@ source_group (Tools\\Agents FILES
 	Agents.h Agents.cpp
 	BaseAgentTypes.h BaseAgentTypes.cpp
 	PlayerAgent.h PlayerAgent.cpp
+	AgentSelect.h AgentSelect.cpp
 )
 source_group (Tools\\Player FILES
 	RPGPlayer.h RPGPlayer.cpp
