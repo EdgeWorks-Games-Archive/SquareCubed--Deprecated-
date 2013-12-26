@@ -5,7 +5,7 @@
 
 #include <WorldServerBase/gdefines.h>
 
-#include <CommonLib/PacketTypes.h>
+#include <CRakNetNetwork/PacketTypes.h>
 #include <CommonLib/ILoggingManager.h>
 
 #include <RakPeerInterface.h>

@@ -3,7 +3,7 @@
 #include <ClientBase/INetwork.h>
 #include <ClientBase/IWorldCallback.h>
 
-#include <CommonLib/PacketTypes.h>
+#include <CRakNetNetwork/PacketTypes.h>
 
 #include <BitStream.h>
 

@@ -6,7 +6,7 @@
 #include <WorldServerBase/Players.h>
 #include <WorldServerBase/IAgent.h>
 
-#include <CommonLib/PacketTypes.h>
+#include <CRakNetNetwork/PacketTypes.h>
 
 #include <BitStream.h>
 

@@ -2,7 +2,7 @@
 
 #include "RakNetNetwork.h"
 
-#include <CommonLib/PacketTypes.h>
+#include <CRakNetNetwork/PacketTypes.h>
 
 #include <RakPeerInterface.h>
 #include <BitStream.h>

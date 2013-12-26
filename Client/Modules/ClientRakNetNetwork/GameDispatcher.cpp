@@ -2,7 +2,7 @@
 
 #include "RakNetNetwork.h"
 
-#include <CommonLib/PacketTypes.h>
+#include <CRakNetNetwork/PacketTypes.h>
 
 #include <RakPeerInterface.h>
 #include <BitStream.h>
@@ -18,7 +18,6 @@ namespace RakNetNetwork {
 	// Send Functions
 	
 	void GameDispatcher::SpawnPlayer() {
-
 		// Build Packet to Send
 		RakNet::BitStream bs;
 		bs.Write(GamePacketIDType::PlayerSpawn);
