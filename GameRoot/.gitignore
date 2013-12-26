@@ -1,5 +1,6 @@
 *.dll
 *.exe
 *.ilk
+*.pdb
 /Host/
 /Logs/*.log
