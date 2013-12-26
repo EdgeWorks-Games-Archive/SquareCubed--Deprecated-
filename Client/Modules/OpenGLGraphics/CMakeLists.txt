@@ -6,6 +6,27 @@ file(GLOB OpenGLGraphics_SRC
 	"*.cpp.in"
 )
 
+# Define Source Groups
+source_group ("" FILES
+	OpenGLCamera.h
+	OpenGLGraphics.h OpenGLGraphics.cpp
+	OpenGLGraphicsFactory.h OpenGLGraphicsFactory.cpp
+	OpenGLGraphicsLoader.h
+)
+source_group ("Content Types" FILES
+	Texture2D.h Texture2D.cpp
+	TileArray.h TileArray.cpp
+)
+source_group ("Header Wrappers" FILES
+	GLheaders.h
+	ILheaders.h
+)
+source_group (Renderers FILES
+	UnitRenderer.h UnitRenderer.cpp
+	SelectionRenderer.h SelectionRenderer.cpp
+	TileRenderer.h TileRenderer.cpp
+)
+
 # Add Library Build Output
 add_library (OpenGLGraphics ${OpenGLGraphics_SRC})
 

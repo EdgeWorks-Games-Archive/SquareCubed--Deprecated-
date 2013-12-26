@@ -6,7 +6,7 @@ file(GLOB ClientBase_SRC
 	"*.cpp.in"
 )
 
-# Group Files into Source Groups
+# Define Source Groups
 source_group (Content FILES
 	Content.h Content.cpp
 	IContentBase.h
