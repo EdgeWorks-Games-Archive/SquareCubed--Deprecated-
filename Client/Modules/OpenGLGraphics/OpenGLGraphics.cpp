@@ -26,7 +26,6 @@ namespace OpenGLGraphics {
 		glEnable(GL_MULTISAMPLE);
 
 		glEnable(GL_LINE_SMOOTH);
-		glEnable(GL_LINE_STIPPLE); // < has been deprecated, might not work on all targets
 
 		// Activate Alpha Blending
 		glEnable(GL_BLEND);

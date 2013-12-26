@@ -18,13 +18,14 @@ namespace Tools {
 
 		void UnitSelect::RenderUnitSelections()
 		{
-			m_Renderer->RenderSelectionBoxes(m_Units.GetAllUnits());
+			m_Renderer->RenderUnitSelection(m_Units.GetAllUnits());
+			//m_Renderer->RenderSelectionBox(glm::vec2(2, 2), glm::vec2(3, 2));
 		}
 
 		void UnitSelect::OnMouseButtonChange(const Input::MouseEventArgs &args) {
-			if (args.IsLeftButtonDown)
+			if (args.MouseButton == Input::MouseButton::Left && args.IsPressed)
 				printf("wow you pressed the left mouse button well done\n");
-			if (args.IsRightButtonDown)
+			if (args.MouseButton == Input::MouseButton::Right && args.IsPressed)
 				printf("wow you pressed the right mouse button well done\n");
 		}
 	}
