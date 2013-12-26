@@ -14,7 +14,7 @@ namespace Server {
 			m_Dispatcher(server.GetNetwork().GetFactory().CreateAgentsDispatcher()),
 			m_Agents()
 		{
-			std::unique_ptr<IAgent> agent = std::make_unique<DynamicAgent>(m_Server.GetPhysics(), 10, 2.0);
+			std::unique_ptr<IAgent> agent = std::make_unique<DynamicAgent>(m_Server.GetPhysics(), 10, 2.0f);
 			agent->SetPosition(glm::vec2(2, 1));
 			AddAgent(std::move(agent));
 		}

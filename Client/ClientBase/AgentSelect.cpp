@@ -15,6 +15,7 @@ namespace Tools {
 		{
 			engine.GetInput().OnMouseButtonChange.AttachMember(this, &AgentSelect::OnMouseButtonChange, m_EventScope);
 		}
+
 		void AgentSelect::RenderAgentSelections()
 		{
 			m_Renderer->RenderSelectionBoxes(m_Agents.GetAllAgents());

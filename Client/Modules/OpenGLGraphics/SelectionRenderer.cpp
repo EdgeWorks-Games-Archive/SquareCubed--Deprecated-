@@ -21,6 +21,7 @@ namespace OpenGLGraphics {
 			glTranslated(agent->GetPosition().x, agent->GetPosition().y, 0);
 
 			// Render Line Loop
+			glBindTexture(GL_TEXTURE_2D, NULL);
 			glLineWidth(1.5f);
 			glLineStipple(7, 0xAAAA);
 			glColor4f(0.1f, 0.1f, 0.1f, 0.8f);
