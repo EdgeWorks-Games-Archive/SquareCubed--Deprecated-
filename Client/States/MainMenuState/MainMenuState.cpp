@@ -69,7 +69,7 @@ namespace MainMenuState {
 
 #if defined _DEBUG && _WIN32
 	void MainMenuState::OnRunServerCall(const Utils::EmptyEventArgs &args) {
-		system("start Bin\\WorldServer.exe");
+		system("start WorldServer.exe");
 	}
 #else
 	void MainMenuState::OnRunServerCall(const Utils::EmptyEventArgs &args) {}
