@@ -3,6 +3,7 @@
 #include "INetworkFactory.h"
 #include "IAgentsDispatcher.h"
 #include "IClientID.h"
+#include "BaseAgentTypes.h"
 
 #include "WorldServer.h"
 
@@ -11,9 +12,11 @@ namespace Server {
 		Agents::Agents(Core::WorldServer& server) :
 			m_Server(server),
 			m_Dispatcher(server.GetNetwork().GetFactory().CreateAgentsDispatcher()),
-
 			m_Agents()
 		{
+			std::unique_ptr<IAgent> agent = std::make_unique<DynamicAgent>(m_Server.GetPhysics(), 10, 2.0);
+			agent->SetPosition(glm::vec2(2, 1));
+			AddAgent(std::move(agent));
 		}
 
 		Agents::~Agents() {

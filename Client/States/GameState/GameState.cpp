@@ -39,6 +39,7 @@ namespace GameState {
 			m_Physics,
 			"Content/Agents/agents.scta"
 		),
+		m_AgentSelect(m_Engine, m_Agents),
 		m_Player(m_Engine, m_Agents, m_Physics)
 	{
 		// Set Camera Size
@@ -71,6 +72,9 @@ namespace GameState {
 
 		// Render Agents
 		m_Agents.RenderAgents();
+
+		// Render Agent Selections
+		m_AgentSelect.RenderAgentSelections();
 
 		// Render Walls
 		m_World.RenderWalls();
