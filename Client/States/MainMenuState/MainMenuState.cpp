@@ -50,7 +50,7 @@ namespace MainMenuState {
 	}
 
 	void MainMenuState::ReceivedRequestFailed() {
-		m_Engine.GetGUI().GetBindings().Trigger("OnConnectFail");
+		m_Engine.GetGUI().GetBindings().Trigger("ConnectFail");
 	}
 
 	// Game Loop

@@ -34,7 +34,7 @@ $(function() {
     
     $("#mainmenu-dialog").closest(".ui-dialog").find("button").addClass("mainmenu-buttons");
 
-    engine.on('OnConnectFail', function() {
+    engine.on('ConnectFail', function() {
         // Set Status Text
         var statusText = document.createElement("p");
         $(statusText).addClass("red").text("Failed to connect to server!");

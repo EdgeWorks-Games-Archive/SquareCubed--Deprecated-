@@ -76,7 +76,7 @@ namespace Utils {
 			Attach(std::bind(callback, object, std::placeholders::_1), scope);
 		}
 
-		// Admittely a somewhat ugly hack but it makes classes using this look nicer
+		/** Don't use this anymore, use AttachMember instead. */
 		#define AttachFromThis(callback, scope) Attach(std::bind(&callback, this, std::placeholders::_1), scope)
 
 		void DetachForScope(EventScope &scope) {
