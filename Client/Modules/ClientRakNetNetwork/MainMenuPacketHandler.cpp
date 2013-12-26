@@ -20,6 +20,9 @@ namespace RakNetNetwork {
 		case ID_CONNECTION_REQUEST_ACCEPTED:
 			m_Callback.ReceivedRequestAccepted();
 			return true;
+		case ID_CONNECTION_ATTEMPT_FAILED:
+			m_Callback.ReceivedRequestFailed();
+			return true;
 		}
 
 		return false;

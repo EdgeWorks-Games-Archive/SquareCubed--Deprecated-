@@ -25,4 +25,11 @@ namespace CoherentUIOpenGLUI {
 	}
 
 	// Internal Binding Wrappers
+
+	// Event Triggers
+
+	void GUIBindings::Trigger(const std::string &eventName) {
+		Coherent::UI::View &view = m_ViewListener.GetView();
+		view.TriggerEvent(eventName.c_str());
+	}
 }

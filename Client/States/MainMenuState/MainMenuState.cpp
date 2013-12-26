@@ -49,6 +49,10 @@ namespace MainMenuState {
 		GameState::SwitchToState(m_Engine.GetStateEngine());
 	}
 
+	void MainMenuState::ReceivedRequestFailed() {
+		m_Engine.GetGUI().GetBindings().Trigger("OnConnectFail");
+	}
+
 	// Game Loop
 
 	void MainMenuState::Update(const float delta) {

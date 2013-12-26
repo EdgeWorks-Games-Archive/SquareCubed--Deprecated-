@@ -22,6 +22,7 @@ namespace MainMenuState {
 
 	public: // Network Callback Functions
 		void ReceivedRequestAccepted();
+		void ReceivedRequestFailed();
 
 	public: // Game Loop
 		void Update(const float delta);

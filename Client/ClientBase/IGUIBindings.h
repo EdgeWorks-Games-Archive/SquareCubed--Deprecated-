@@ -20,5 +20,8 @@ namespace GUI {
 		Utils::NoArgsEvent OnRunServerCall;
 
 	public: // Events
+
+	public: // Event Triggers
+		virtual void Trigger(const std::string &eventName) = 0;
 	};
 }

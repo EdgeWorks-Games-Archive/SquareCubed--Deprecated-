@@ -16,5 +16,8 @@ namespace CoherentUIOpenGLUI {
 		void OnViewReadyForBindings(Utils::EmptyEventArgs);
 
 	private: // Internal Binding Wrappers
+
+	public: // Event Triggers
+		void Trigger(const std::string &eventName);
 	};
 }

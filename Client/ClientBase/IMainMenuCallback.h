@@ -7,5 +7,6 @@ namespace Network {
 
 	public: // Callback Functions
 		virtual void ReceivedRequestAccepted() = 0;
+		virtual void ReceivedRequestFailed() = 0;
 	};
 }
