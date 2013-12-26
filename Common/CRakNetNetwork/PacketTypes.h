@@ -13,10 +13,14 @@ enum class GamePacketIDType : RakNet::MessageID {
 	// Server to Client Player Packets
 	PlayerDesc,
 
-	// Server to Client Agent Packets
-	AgentPhysicsUpdate,
-	AgentDesc,
-	AgentRemove,
+	// Server to Client Unit Packets
+	UnitPhysicsUpdate,
+	UnitDesc,
+	UnitRemove,
+
+#ifdef _DEBUG
+	UnitTestSpawn,
+#endif
 
 	WorldChunk
 };

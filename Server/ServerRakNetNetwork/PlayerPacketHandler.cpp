@@ -4,7 +4,7 @@
 #include <WorldServerBase/INetwork.h>
 #include <WorldServerBase/IPlayerCallback.h>
 #include <WorldServerBase/Players.h>
-#include <WorldServerBase/IAgent.h>
+#include <WorldServerBase/IUnit.h>
 
 #include <CRakNetNetwork/PacketTypes.h>
 

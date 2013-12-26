@@ -2,7 +2,7 @@
 
 #include "IClientID.h"
 
-#include <CommonLib/agenttypes.h>
+#include <CommonLib/unittypes.h>
 
 namespace Server {
 	namespace Network {
@@ -11,7 +11,7 @@ namespace Server {
 			virtual ~IPlayerDispatcher() {}
 
 		public: // Send Functions
-			virtual void SendPlayerDesc(const IClientID &clientId, DataTypes::Health health, unsigned int agentId) = 0;
+			virtual void SendPlayerDesc(const IClientID &clientId, DataTypes::Health health, unsigned int unitId) = 0;
 		};
 	}
 }

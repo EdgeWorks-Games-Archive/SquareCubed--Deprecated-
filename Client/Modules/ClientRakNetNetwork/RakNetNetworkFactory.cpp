@@ -4,7 +4,7 @@
 
 // Packet Handlers
 #include "MainMenuPacketHandler.h"
-#include "AgentsPacketHandler.h"
+#include "UnitsPacketHandler.h"
 #include "PlayerPacketHandler.h"
 #include "WorldPacketHandler.h"
 
@@ -23,7 +23,7 @@ namespace RakNetNetwork {
 	// Packet Handlers
 
 	Network::IPacketHandler* RakNetNetworkFactory::CreateMainMenuHandler(Network::IMainMenuCallback &callback) { return new MainMenuPacketHandler(callback); }
-	Network::IPacketHandler* RakNetNetworkFactory::CreateAgentsHandler(Network::IAgentsCallback &callback) { return new AgentsPacketHandler(m_Network, callback); }
+	Network::IPacketHandler* RakNetNetworkFactory::CreateUnitsHandler(Network::IUnitsCallback &callback) { return new UnitsPacketHandler(m_Network, callback); }
 	Network::IPacketHandler* RakNetNetworkFactory::CreatePlayerHandler(Network::IPlayerCallback &callback) { return new PlayerPacketHandler(m_Network, callback); }
 	Network::IPacketHandler* RakNetNetworkFactory::CreateWorldHandler(Network::IWorldCallback &callback) { return new WorldPacketHandler(m_Network, callback); }
 

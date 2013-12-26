@@ -8,11 +8,11 @@ namespace Tools {
 }
 
 namespace Graphics {
-	class ISelectionRenderer {
+	class IUnitRenderer {
 	public: // Initialization/Uninitialization
-		virtual ~ISelectionRenderer() {}
+		virtual ~IUnitRenderer() {}
 
 	public: // Rendering Functions
-		virtual void RenderSelectionBoxes(const std::list<std::unique_ptr<Tools::Units::IUnit>> &units) = 0;
+		virtual void RenderUnits(const std::list<std::unique_ptr<Tools::Units::IUnit>> &units) = 0;
 	};
 }

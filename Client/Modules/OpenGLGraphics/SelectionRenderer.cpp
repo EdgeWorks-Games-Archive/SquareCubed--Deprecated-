@@ -1,6 +1,6 @@
 #include "SelectionRenderer.h"
 
-#include <ClientBase/BaseAgentTypes.h>
+#include <ClientBase/BaseUnitTypes.h>
 
 #include "GLheaders.h"
 
@@ -13,12 +13,12 @@ namespace OpenGLGraphics {
 	{}
 
 	// Rendering Functions
-	void SelectionRenderer::RenderSelectionBoxes(const std::list<std::unique_ptr<Tools::Agents::IAgent>> &agents) {
-		for (const std::unique_ptr<Tools::Agents::IAgent> &agent : agents) {
+	void SelectionRenderer::RenderSelectionBoxes(const std::list<std::unique_ptr<Tools::Units::IUnit>> &units) {
+		for (const std::unique_ptr<Tools::Units::IUnit> &unit : units) {
 			glPushMatrix();
 
 			// Translate to Position
-			glTranslated(agent->GetPosition().x, agent->GetPosition().y, 0);
+			glTranslated(unit->GetPosition().x, unit->GetPosition().y, 0);
 
 			// Render Line Loop
 			glBindTexture(GL_TEXTURE_2D, NULL);

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IPlayerCallback.h"
-#include "PlayerAgent.h"
+#include "PlayerUnit.h"
 
 #include <CommonLib/Logger.h>
 
@@ -23,7 +23,7 @@ namespace Graphics {
 }
 
 namespace Tools {
-	namespace Agents { class Agents; }
+	namespace Units { class Units; }
 
 	namespace Player {
 		class RPGPlayer final : public Network::IPlayerCallback {
@@ -33,11 +33,11 @@ namespace Tools {
 			// External Components
 			Network::INetwork &m_Network;
 			Input::Input &m_Input;
-			Tools::Agents::Agents &m_Agents;
+			Tools::Units::Units &m_Units;
 			Physics::Physics &m_Physics;
 
 			// Internal Components
-			Tools::Agents::PlayerAgent *m_Agent;
+			Tools::Units::PlayerUnit *m_Unit;
 			std::unique_ptr<Network::IPacketHandler> m_PacketHandler;
 			std::unique_ptr<Network::IPlayerDispatcher> m_Dispatcher;
 
@@ -58,17 +58,17 @@ namespace Tools {
 			 * The player will not be added to the world until the
 			 * server responds with a player descriptor packet.
 			 * \param[in,out]	engine	Reference to the engine base object.
-			 * \param[in,out]	agents	Reference to the agents tool.
+			 * \param[in,out]	units	Reference to the units tool.
 			 * \param[in,out]	physics	Reference to the physics engine.
 			 */
-			RPGPlayer(Core::Engine &engine, Tools::Agents::Agents &agents, Physics::Physics &physics);
+			RPGPlayer(Core::Engine &engine, Tools::Units::Units &units, Physics::Physics &physics);
 			~RPGPlayer();
 
 		public: // Network Callback Functions
 			/** Called by network.
 			 * Do not call this manually.
 			 */
-			void ReceivedPlayerDesc(unsigned int agentId, DataTypes::Health health);
+			void ReceivedPlayerDesc(unsigned int unitId, DataTypes::Health health);
 
 		public: // Game Loop
 			/** Updates the state of the player.

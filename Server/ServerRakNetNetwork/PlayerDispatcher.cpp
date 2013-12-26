@@ -13,14 +13,14 @@ namespace Server {
 		{
 		}
 
-		void PlayerDispatcher::SendPlayerDesc(const Network::IClientID &clientId, DataTypes::Health health, unsigned int agentId) {
+		void PlayerDispatcher::SendPlayerDesc(const Network::IClientID &clientId, DataTypes::Health health, unsigned int unitId) {
 			// Cast to RakNet ID to retrieve GUID
 			const RakNetClientID &rakClientId = static_cast<const RakNetClientID&>(clientId);
 
 			// Build Packet to Send
 			RakNet::BitStream bs;
 			bs.Write(GamePacketIDType::PlayerDesc);
-			bs.Write(agentId);
+			bs.Write(unitId);
 			bs.Write(health.Current);
 			bs.Write(health.Max);
 

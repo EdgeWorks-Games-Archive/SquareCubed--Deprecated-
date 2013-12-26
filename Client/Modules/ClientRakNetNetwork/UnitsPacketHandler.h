@@ -4,16 +4,16 @@
 
 namespace Network {
 	class INetwork;
-	class IAgentsCallback;
+	class IUnitsCallback;
 }
 
 namespace RakNetNetwork {
-	class AgentsPacketHandler final : public IRakNetPacketHandler {
+	class UnitsPacketHandler final : public IRakNetPacketHandler {
 		Network::INetwork &m_Network;
-		Network::IAgentsCallback &m_Callback;
+		Network::IUnitsCallback &m_Callback;
 
 	public: // Initialization/Uninitialization
-		AgentsPacketHandler(Network::INetwork &network, Network::IAgentsCallback &callback);
+		UnitsPacketHandler(Network::INetwork &network, Network::IUnitsCallback &callback);
 
 	public: // Game Loop
 		bool HandlePacket(RakNet::Packet &packet);

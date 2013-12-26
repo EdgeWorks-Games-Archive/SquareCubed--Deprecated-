@@ -11,7 +11,7 @@
 
 namespace Server {
 	namespace Core { class WorldServer; }
-	namespace Agents { class DynamicAgent; }
+	namespace Units { class DynamicUnit; }
 
 	namespace Network {
 		class IPacketHandler;
@@ -21,11 +21,11 @@ namespace Server {
 	namespace Players {
 		struct Player final {
 			std::unique_ptr<Network::IClientID> ClientID;
-			Agents::DynamicAgent& Agent;
+			Units::DynamicUnit& Unit;
 
-			Player(const Network::IClientID &clientId, Agents::DynamicAgent &agent) :
+			Player(const Network::IClientID &clientId, Units::DynamicUnit &unit) :
 				ClientID(clientId.Clone()),
-				Agent(agent)
+				Unit(unit)
 			{}
 		};
 

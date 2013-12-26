@@ -13,7 +13,7 @@ namespace RakNetNetwork {
 
 	public: // Packet Handlers
 		Network::IPacketHandler* CreateMainMenuHandler(Network::IMainMenuCallback &callback);
-		Network::IPacketHandler* CreateAgentsHandler(Network::IAgentsCallback &callback);
+		Network::IPacketHandler* CreateUnitsHandler(Network::IUnitsCallback &callback);
 		Network::IPacketHandler* CreatePlayerHandler(Network::IPlayerCallback &callback);
 		Network::IPacketHandler* CreateWorldHandler(Network::IWorldCallback &callback);
 

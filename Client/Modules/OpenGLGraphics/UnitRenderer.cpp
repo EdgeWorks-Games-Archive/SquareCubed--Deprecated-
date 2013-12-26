@@ -1,35 +1,35 @@
-#include "AgentRenderer.h"
+#include "UnitRenderer.h"
 
 #include <ClientBase/ITileArray.h>
 #include <ClientBase/ITexture2D.h>
-#include <ClientBase/BaseAgentTypes.h>
+#include <ClientBase/BaseUnitTypes.h>
 
 #include "GLheaders.h"
 
 namespace OpenGLGraphics {
 	// Initialization/Uninitialization
 
-	AgentRenderer::AgentRenderer(Graphics::ITileArray &tileTextures) :
+	UnitRenderer::UnitRenderer(Graphics::ITileArray &tileTextures) :
 		m_TileTextures(tileTextures)
 	{}
 
 	// Rendering Functions
-	void AgentRenderer::RenderAgents(const std::list<std::unique_ptr<Tools::Agents::IAgent>> &agents) {
-		for (const std::unique_ptr<Tools::Agents::IAgent> &agent : agents) {
+	void UnitRenderer::RenderUnits(const std::list<std::unique_ptr<Tools::Units::IUnit>> &units) {
+		for (const std::unique_ptr<Tools::Units::IUnit> &unit : units) {
 			glPushMatrix();
 
-			// Render Agent Graphic
-			glTranslated(agent->GetPosition().x, agent->GetPosition().y, 0);
+			// Render Unit Graphic
+			glTranslated(unit->GetPosition().x, unit->GetPosition().y, 0);
 			glPushMatrix();
-			glRotatef(agent->GetRotation().GetDegrees(), 0, 0, 1);
-			m_TileTextures.GetTexture(agent->GraphicID).Render(-0.4f, -0.4f, 0.8f, 0.8f);
+			glRotatef(unit->GetRotation().GetDegrees(), 0, 0, 1);
+			m_TileTextures.GetTexture(unit->GraphicID).Render(-0.4f, -0.4f, 0.8f, 0.8f);
 			glPopMatrix();
 
-			if (agent->Health.Current != agent->Health.Max) {
+			if (unit->Health.Current != unit->Health.Max) {
 				// Calculate Health Bar Location and Size
 				// TODO: Precalculate inverse max health
-				float invMax = 1.0f / agent->Health.Max;
-				float w = invMax * 0.8f * agent->Health.Current;
+				float invMax = 1.0f / unit->Health.Max;
+				float w = invMax * 0.8f * unit->Health.Current;
 
 				// Prepare to Render
 				glBindTexture(GL_TEXTURE_2D, NULL);

@@ -5,11 +5,11 @@ namespace Server {
 		class IPacketHandler;
 
 		// Handler Callbacks
-		class IAgentsCallback;
+		class IUnitsCallback;
 		class IPlayerCallback;
 
 		// Packet Dispatchers
-		class IAgentsDispatcher;
+		class IUnitsDispatcher;
 		class IPlayerDispatcher;
 		class IWorldDispatcher;
 
@@ -25,7 +25,7 @@ namespace Server {
 		public: // Packet Dispatchers
 			/// <summary>Creates a new IGameDispatcher.</summary>
 			/// <returns>Returns a pointer to a new IGameDispatcher created in this function.</returns>
-			virtual IAgentsDispatcher* CreateAgentsDispatcher() = 0;
+			virtual IUnitsDispatcher* CreateUnitsDispatcher() = 0;
 
 			/// <summary>Creates a new IPlayerDispatcher.</summary>
 			/// <returns>Returns a pointer to a new IPlayerDispaycher created in this function.</returns>

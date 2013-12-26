@@ -1,4 +1,4 @@
-#include "AgentsDispatcher.h"
+#include "UnitsDispatcher.h"
 #include "RakNetNetwork.h"
 #include "RakNetClientID.h"
 
@@ -9,16 +9,16 @@
 
 namespace Server {
 	namespace RakNetNetwork {
-		AgentsDispatcher::AgentsDispatcher(RakNetNetwork &network) :
+		UnitsDispatcher::UnitsDispatcher(RakNetNetwork &network) :
 			m_Network(network)
 		{
 		}
 
-		void AgentsDispatcher::BroadcastAgentPhysics(const unsigned int agentId, const Physics::DynamicRigidBody &rigidBody, const float rotation) {
+		void UnitsDispatcher::BroadcastUnitPhysics(const unsigned int unitId, const Physics::DynamicRigidBody &rigidBody, const float rotation) {
 			// Build Packet to Send
 			RakNet::BitStream bs;
-			bs.Write(GamePacketIDType::AgentPhysicsUpdate);
-			bs.Write(agentId);
+			bs.Write(GamePacketIDType::UnitPhysicsUpdate);
+			bs.Write(unitId);
 			bs.Write(rigidBody.Position.x);
 			bs.Write(rigidBody.Position.y);
 			bs.Write(rotation);
@@ -31,34 +31,34 @@ namespace Server {
 			m_Network.GetRakPeer().Send(&bs, HIGH_PRIORITY, UNRELIABLE_SEQUENCED, 0, RakNet::UNASSIGNED_SYSTEM_ADDRESS, true);
 		}
 
-		void AgentsDispatcher::BroadcastAgentDesc(unsigned int agentId, DataTypes::Health health, unsigned int graphicId) {
+		void UnitsDispatcher::BroadcastUnitDesc(unsigned int unitId, DataTypes::Health health, unsigned int graphicId) {
 			// Call Internal Send Function
-			RakSendAgentDesc(RakNet::UNASSIGNED_RAKNET_GUID, true, std::move(agentId), std::move(health), std::move(graphicId));
+			RakSendUnitDesc(RakNet::UNASSIGNED_RAKNET_GUID, true, std::move(unitId), std::move(health), std::move(graphicId));
 		}
 
-		void AgentsDispatcher::BroadcastAgentRemove(unsigned int agentId) {
+		void UnitsDispatcher::BroadcastUnitRemove(unsigned int unitId) {
 			// Build Packet to Send
 			RakNet::BitStream bs;
-			bs.Write(GamePacketIDType::AgentRemove);
-			bs.Write(agentId);
+			bs.Write(GamePacketIDType::UnitRemove);
+			bs.Write(unitId);
 
 			// Send the Packet to all Clients
 			m_Network.GetRakPeer().Send(&bs, HIGH_PRIORITY, RELIABLE_ORDERED, 0, RakNet::UNASSIGNED_SYSTEM_ADDRESS, true);
 		}
 
-		void AgentsDispatcher::SendAgentDesc(const Network::IClientID &clientId, unsigned int agentId, DataTypes::Health health, unsigned int graphicId) {
+		void UnitsDispatcher::SendUnitDesc(const Network::IClientID &clientId, unsigned int unitId, DataTypes::Health health, unsigned int graphicId) {
 			// Cast to RakNet ID to retrieve GUID
 			const RakNetClientID &rakClientId = static_cast<const RakNetClientID&>(clientId);
 
 			// Call Internal Send Function
-			RakSendAgentDesc(rakClientId.GUID, false, std::move(agentId), std::move(health), std::move(graphicId));
+			RakSendUnitDesc(rakClientId.GUID, false, std::move(unitId), std::move(health), std::move(graphicId));
 		}
 
-		void AgentsDispatcher::RakSendAgentDesc(const RakNet::RakNetGUID &guid, bool broadcast, unsigned int agentId, DataTypes::Health health, unsigned int graphicId) {
+		void UnitsDispatcher::RakSendUnitDesc(const RakNet::RakNetGUID &guid, bool broadcast, unsigned int unitId, DataTypes::Health health, unsigned int graphicId) {
 			// Build Packet to Send
 			RakNet::BitStream bs;
-			bs.Write(GamePacketIDType::AgentDesc);
-			bs.Write(agentId);
+			bs.Write(GamePacketIDType::UnitDesc);
+			bs.Write(unitId);
 			bs.Write(health.Current);
 			bs.Write(health.Max);
 			bs.Write(graphicId);

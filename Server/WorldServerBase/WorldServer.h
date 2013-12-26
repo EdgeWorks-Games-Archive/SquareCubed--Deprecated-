@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Agents.h"
+#include "Units.h"
 #include "Players.h"
 #include "World.h"
 
@@ -24,7 +24,7 @@ namespace Server {
 			std::unique_ptr<Utils::ILoggingManager> m_LoggingManager;
 			std::unique_ptr<Network::INetwork> m_Network;
 			Physics::Physics m_Physics;
-			Agents::Agents m_Agents;
+			Units::Units m_Units;
 			Players::Players m_Players;
 			World::World m_World;
 
@@ -41,12 +41,12 @@ namespace Server {
 			/// <returns>The Physics Module</returns>
 			Physics::Physics& GetPhysics();
 
-			/// <summary>Gets the Agents Module</summary>
-			/// <returns>The Agents Module</returns>
-			Agents::Agents& GetAgents();
+			/// <summary>Gets the Units Module</summary>
+			/// <returns>The Units Module</returns>
+			Units::Units& GetUnits();
 
 			/// <summary>Gets the Players Module</summary>
-			/// <returns>The Agents Module</returns>
+			/// <returns>The Units Module</returns>
 			Players::Players& GetPlayers();
 
 			/// <summary>Gets the World Module</summary>

@@ -10,6 +10,6 @@ namespace OpenGLGraphics {
 		SelectionRenderer();
 
 	public: // Rendering Functions
-		void RenderSelectionBoxes(const std::list<std::unique_ptr<Tools::Agents::IAgent>> &agents);
+		void RenderSelectionBoxes(const std::list<std::unique_ptr<Tools::Units::IUnit>> &units);
 	};
 }

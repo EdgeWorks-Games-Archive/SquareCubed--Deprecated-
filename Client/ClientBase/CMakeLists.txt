@@ -27,7 +27,7 @@ source_group ("Graphics\\Content Types" FILES
 	ITileArray.h
 )
 source_group (Graphics\\Renderers FILES
-	IAgentRenderer.h
+	IUnitRenderer.h
 	ISelectionRenderer.h
 	ITileRenderer.h
 )
@@ -45,7 +45,7 @@ source_group (Network FILES
 	IPacketHandler.h
 )
 source_group ("Network\\Handler Callbacks" FILES
-	IAgentsCallback.h
+	IUnitsCallback.h
 	IMainMenuCallback.h
 	IPlayerCallback.h
 	IWorldCallback.h
@@ -62,13 +62,13 @@ source_group (StateEngine FILES
 	IState.h
 	StateEngine.h StateEngine.cpp
 )
-source_group (Tools\\Agents FILES
-	Agents.h Agents.cpp
-	AgentSelect.h AgentSelect.cpp
+source_group (Tools\\Units FILES
+	Units.h Units.cpp
+	UnitSelect.h UnitSelect.cpp
 )
-source_group ("Tools\\Agents\\Agent Types" FILES
-	BaseAgentTypes.h BaseAgentTypes.cpp
-	PlayerAgent.h PlayerAgent.cpp
+source_group ("Tools\\Units\\Unit Types" FILES
+	BaseUnitTypes.h BaseUnitTypes.cpp
+	PlayerUnit.h PlayerUnit.cpp
 )
 source_group (Tools\\Player FILES
 	RPGPlayer.h RPGPlayer.cpp

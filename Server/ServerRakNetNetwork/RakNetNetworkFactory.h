@@ -16,7 +16,7 @@ namespace Server {
 			Network::IPacketHandler* CreatePlayerHandler(Network::IPlayerCallback &callback);
 
 		public: // Packet Dispatchers
-			Network::IAgentsDispatcher* CreateAgentsDispatcher();
+			Network::IUnitsDispatcher* CreateUnitsDispatcher();
 			Network::IPlayerDispatcher* CreatePlayerDispatcher();
 			Network::IWorldDispatcher* CreateWorldDispatcher();
 		};

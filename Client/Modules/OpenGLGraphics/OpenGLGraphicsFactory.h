@@ -13,7 +13,7 @@ namespace OpenGLGraphics {
 
 	public: // Renderer Types
 		Graphics::ITileRenderer* CreateTileRenderer(Graphics::ITileArray &tileArray);
-		Graphics::IAgentRenderer* CreateAgentRenderer(Graphics::ITileArray &tileArray);
+		Graphics::IUnitRenderer* CreateUnitRenderer(Graphics::ITileArray &tileArray);
 		Graphics::ISelectionRenderer* CreateSelectionRenderer();
 
 	public: // Content Types

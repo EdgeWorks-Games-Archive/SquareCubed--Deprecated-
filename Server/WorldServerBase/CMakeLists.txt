@@ -7,12 +7,12 @@ file(GLOB WorldServerBase_SRC
 )
 
 # Define Source Groups
-source_group (Agents FILES
-	Agents.h Agents.cpp
-	IAgent.h IAgent.cpp
+source_group (Units FILES
+	Units.h Units.cpp
+	IUnit.h IUnit.cpp
 )
-source_group ("Agents\\Agent Types" FILES
-	BaseAgentTypes.h BaseAgentTypes.cpp
+source_group ("Units\\Unit Types" FILES
+	BaseUnitTypes.h BaseUnitTypes.cpp
 )
 source_group (Core FILES
 	WorldServer.h WorldServer.cpp
@@ -30,7 +30,7 @@ source_group ("Network\\Handler Callbacks" FILES
 	IPlayerCallback.h
 )
 source_group ("Network\\Packet Dispatchers" FILES
-	IAgentsDispatcher.h
+	IUnitsDispatcher.h
 	IPlayerDispatcher.h
 	IWorldDispatcher.h
 )

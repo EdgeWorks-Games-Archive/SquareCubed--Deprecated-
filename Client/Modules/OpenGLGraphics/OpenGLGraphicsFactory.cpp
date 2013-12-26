@@ -1,7 +1,7 @@
 #include "OpenGLGraphicsFactory.h"
 
 #include "TileRenderer.h"
-#include "AgentRenderer.h"
+#include "UnitRenderer.h"
 #include "SelectionRenderer.h"
 
 #include "Texture2D.h"
@@ -23,8 +23,8 @@ namespace OpenGLGraphics {
 		return new TileRenderer(tileArray);
 	}
 
-	Graphics::IAgentRenderer* OpenGLGraphicsFactory::CreateAgentRenderer(Graphics::ITileArray &tileArray) {
-		return new AgentRenderer(tileArray);
+	Graphics::IUnitRenderer* OpenGLGraphicsFactory::CreateUnitRenderer(Graphics::ITileArray &tileArray) {
+		return new UnitRenderer(tileArray);
 	}
 
 	Graphics::ISelectionRenderer* OpenGLGraphicsFactory::CreateSelectionRenderer() {

@@ -33,14 +33,14 @@ namespace GameState {
 			m_Engine.GetGraphics(),
 			"Content/Tiles/tiles.scta"
 		),
-		m_Agents(
+		m_Units(
 			m_Engine.GetNetwork(),
 			m_Engine.GetGraphics(),
 			m_Physics,
-			"Content/Agents/agents.scta"
+			"Content/Units/units.scta"
 		),
-		m_AgentSelect(m_Engine, m_Agents),
-		m_Player(m_Engine, m_Agents, m_Physics)
+		m_UnitSelect(m_Engine, m_Units),
+		m_Player(m_Engine, m_Units, m_Physics)
 	{
 		// Set Camera Size
 		m_Engine.GetGraphics().GetMainCamera().SetHeight(14);
@@ -70,11 +70,11 @@ namespace GameState {
 		// Render Objects
 		m_World.RenderObjects();
 
-		// Render Agents
-		m_Agents.RenderAgents();
+		// Render Units
+		m_Units.RenderUnits();
 
-		// Render Agent Selections
-		m_AgentSelect.RenderAgentSelections();
+		// Render Unit Selections
+		m_UnitSelect.RenderUnitSelections();
 
 		// Render Walls
 		m_World.RenderWalls();

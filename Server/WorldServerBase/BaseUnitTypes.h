@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IAgent.h"
+#include "IUnit.h"
 
 #include <Physics/Physics.h>
 #include <Physics/DynamicRigidBody.h>
@@ -9,9 +9,9 @@
 namespace CNetwork { struct PhysicsUpdateData; }
 
 namespace Server {
-	namespace Agents {
-		/// <summary>Base type for creating basic agents.</summary>
-		class DynamicAgent : public IAgent {
+	namespace Units {
+		/// <summary>Base type for creating basic units.</summary>
+		class DynamicUnit : public IUnit {
 			DataTypes::Health m_Health;
 
 		protected:
@@ -19,8 +19,8 @@ namespace Server {
 			Physics::DynamicRigidBody m_RigidBody;
 
 		public:
-			DynamicAgent(Physics::Physics &physics, const int health, const float mass) :
-				IAgent(),
+			DynamicUnit(Physics::Physics &physics, const int health, const float mass) :
+				IUnit(),
 				m_Health(health, health),
 				m_Physics(physics),
 				m_RigidBody(std::make_unique<Physics::CircleCollider>(0.25f), mass)
@@ -28,7 +28,7 @@ namespace Server {
 				m_Physics.AttachDynamic(m_RigidBody);
 			}
 
-			virtual ~DynamicAgent() {
+			virtual ~DynamicUnit() {
 				m_Physics.DetachDynamic(m_RigidBody);
 			}
 
@@ -40,7 +40,7 @@ namespace Server {
 			void ReceivedPhysicsUpdate(const CNetwork::PhysicsUpdateData &physicsData);
 			const Physics::DynamicRigidBody& GetDynamicRigidBody();
 
-		public: // Agent Data
+		public: // Unit Data
 			void Heal(unsigned int health);
 			void Damage(unsigned int health);
 			const DataTypes::Health& GetHealth();

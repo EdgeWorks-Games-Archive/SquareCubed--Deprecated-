@@ -12,18 +12,18 @@ namespace Graphics {
 }
 
 namespace Tools {
-	namespace Agents {
-		class Agents;
-		class AgentSelect final {
+	namespace Units {
+		class Units;
+		class UnitSelect final {
 			std::unique_ptr<Graphics::ISelectionRenderer> m_Renderer;
-			Tools::Agents::Agents &m_Agents;
+			Tools::Units::Units &m_Units;
 			Utils::EventScope m_EventScope;
 
 			void OnMouseButtonChange(const Input::MouseEventArgs &args);
 			
 		public:
-			AgentSelect(Core::Engine &engine, Tools::Agents::Agents &agents);
-			void RenderAgentSelections();
+			UnitSelect(Core::Engine &engine, Tools::Units::Units &units);
+			void RenderUnitSelections();
 		};
 	}
 }

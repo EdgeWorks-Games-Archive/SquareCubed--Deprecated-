@@ -1,6 +1,6 @@
 #include "Players.h"
-#include "Agents.h"
-#include "BaseAgentTypes.h"
+#include "Units.h"
+#include "BaseUnitTypes.h"
 #include "INetwork.h"
 #include "INetworkFactory.h"
 #include "IPacketHandler.h"
@@ -48,32 +48,32 @@ namespace Server {
 			// Log Incoming Player
 			m_Logger.LogHighlight("New Player (%s) Attempting Join", clientId.ToString().c_str());
 
-			// Send all Agent descs to the Player
-			m_Server.GetAgents().SendAllAgentDescs(clientId);
+			// Send all Unit descs to the Player
+			m_Server.GetUnits().SendAllUnitDescs(clientId);
 
-			// Create a new dummy Agent for the Player to use
-			std::unique_ptr<Agents::DynamicAgent> agent(new Agents::DynamicAgent(m_Server.GetPhysics(), 10, 2.0));
+			// Create a new dummy Unit for the Player to use
+			std::unique_ptr<Units::DynamicUnit> unit(new Units::DynamicUnit(m_Server.GetPhysics(), 10, 2.0));
 
 			// TEST: Damage the player
-			agent->Damage(2);
+			unit->Damage(2);
 
 			// Add Player to the Vector
 			Player *player = new Player(
 				clientId,
-				*agent
+				*unit
 			);
 			m_Players.push_back(std::unique_ptr<Player>(player));
 
 			// Send the Player a Player Desc packet
-			// Has to be before registering the agent
+			// Has to be before registering the unit
 			m_Dispatcher->SendPlayerDesc(
 				*player->ClientID,
-				player->Agent.GetHealth(),
-				player->Agent.ID
+				player->Unit.GetHealth(),
+				player->Unit.ID
 			);
 
-			// Pass the Agent to the Agent Manager
-			m_Server.GetAgents().AddAgent(std::move(agent));
+			// Pass the Unit to the Unit Manager
+			m_Server.GetUnits().AddUnit(std::move(unit));
 
 			// Invoke Event
 			OnPlayerJoined.Invoke(*player);
@@ -84,12 +84,12 @@ namespace Server {
 
 		void Players::RemovePlayer(const Network::IClientID &clientId) {
 			// Find and Remove Player
-			unsigned int agentId = 0;
+			unsigned int unitId = 0;
 			std::vector<std::unique_ptr<Player>>::iterator it = m_Players.begin();
 			while (it != m_Players.end()) {
 				if (*(*it)->ClientID == clientId) {
 					// Found it!
-					agentId = (*it)->Agent.ID;
+					unitId = (*it)->Unit.ID;
 					it = m_Players.erase(it);
 					break;
 				}
@@ -97,8 +97,8 @@ namespace Server {
 					++it;
 			}
 
-			// Remove Player Agent
-			m_Server.GetAgents().RemoveAgent(agentId);
+			// Remove Player Unit
+			m_Server.GetUnits().RemoveUnit(unitId);
 
 			// And Log it
 			m_Logger.LogHighlight("Player (%s) Parted World", clientId.ToString().c_str());
@@ -128,7 +128,7 @@ namespace Server {
 			}
 
 			// Set Data
-			player->Agent.ReceivedPhysicsUpdate(std::move(physicsData));
+			player->Unit.ReceivedPhysicsUpdate(std::move(physicsData));
 		}
 	}
 }

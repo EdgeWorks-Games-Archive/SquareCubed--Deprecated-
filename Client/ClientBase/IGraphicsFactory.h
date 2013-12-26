@@ -4,7 +4,7 @@
 
 namespace Graphics {
 	class ITileRenderer;
-	class IAgentRenderer;
+	class IUnitRenderer;
 	class ISelectionRenderer;
 
 	class ITexture2D;
@@ -16,7 +16,7 @@ namespace Graphics {
 
 	public: // Renderer Types
 		virtual ITileRenderer* CreateTileRenderer(ITileArray &tileArray) = 0;
-		virtual IAgentRenderer* CreateAgentRenderer(ITileArray &tileArray) = 0;
+		virtual IUnitRenderer* CreateUnitRenderer(ITileArray &tileArray) = 0;
 		virtual ISelectionRenderer* CreateSelectionRenderer() = 0;
 
 	public: // Content Types

@@ -1,6 +1,6 @@
 2
-Content/Agents/001.png
-Content/Agents/002.png
+Content/Units/001.png
+Content/Units/002.png
 
 This is a SquareCubed TileArray description file.
 First number tells the engine how many tiles to load.

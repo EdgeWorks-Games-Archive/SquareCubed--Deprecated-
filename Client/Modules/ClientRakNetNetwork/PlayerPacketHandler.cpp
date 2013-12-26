@@ -26,8 +26,8 @@ namespace RakNetNetwork {
 			bs.IgnoreBytes(sizeof(RakNet::MessageID));
 
 			// Get the Data
-			unsigned int agentId;
-			bs.Read(agentId);
+			unsigned int unitId;
+			bs.Read(unitId);
 
 			DataTypes::Health health;
 			bs.Read(health.Current);
@@ -40,7 +40,7 @@ namespace RakNetNetwork {
 			}
 
 			// Call the Callback Function
-			m_Callback.ReceivedPlayerDesc(std::move(agentId), std::move(health));
+			m_Callback.ReceivedPlayerDesc(std::move(unitId), std::move(health));
 			} return true;
 		}
 

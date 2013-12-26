@@ -18,7 +18,7 @@ source_group ("" FILES
 	metadata.h
 )
 source_group (DataTypes FILES
-	agenttypes.h
+	unittypes.h
 	postypes.h
 	worldtypes.h
 )

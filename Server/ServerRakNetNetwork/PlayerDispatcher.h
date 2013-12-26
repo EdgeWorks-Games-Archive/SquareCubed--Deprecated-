@@ -16,7 +16,7 @@ namespace Server {
 			PlayerDispatcher(RakNetNetwork &network);
 
 		public: // Send Functions
-			void SendPlayerDesc(const Network::IClientID& clientId, DataTypes::Health health, unsigned int agentId);
+			void SendPlayerDesc(const Network::IClientID& clientId, DataTypes::Health health, unsigned int unitId);
 		};
 	}
 }

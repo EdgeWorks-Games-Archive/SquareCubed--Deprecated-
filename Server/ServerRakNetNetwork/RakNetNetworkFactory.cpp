@@ -6,7 +6,7 @@
 #include "PlayerPacketHandler.h"
 
 // Packet Dispatchers
-#include "AgentsDispatcher.h"
+#include "UnitsDispatcher.h"
 #include "PlayerDispatcher.h"
 #include "WorldDispatcher.h"
 
@@ -25,7 +25,7 @@ namespace Server {
 
 		// Packet Dispatchers
 
-		Network::IAgentsDispatcher* RakNetNetworkFactory::CreateAgentsDispatcher() { return new AgentsDispatcher(m_Network); }
+		Network::IUnitsDispatcher* RakNetNetworkFactory::CreateUnitsDispatcher() { return new UnitsDispatcher(m_Network); }
 		Network::IPlayerDispatcher* RakNetNetworkFactory::CreatePlayerDispatcher() { return new PlayerDispatcher(m_Network); }
 		Network::IWorldDispatcher* RakNetNetworkFactory::CreateWorldDispatcher() { return new WorldDispatcher(m_Network); }
 	}

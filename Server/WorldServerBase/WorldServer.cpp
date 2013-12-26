@@ -18,7 +18,7 @@ namespace Server {
 			m_LoggingManager(loggingManager),
 			m_Network(network),
 			m_Physics(*m_LoggingManager, std::make_unique<Physics::AABBBroadphase>(), 0.01f),
-			m_Agents(*this),
+			m_Units(*this),
 			m_Players(*this),
 			m_World(*this)
 		{
@@ -33,7 +33,7 @@ namespace Server {
 		Utils::ILoggingManager& WorldServer::GetLoggingManager() { return *m_LoggingManager; }
 		Network::INetwork& WorldServer::GetNetwork() { return *m_Network; }
 		Physics::Physics& WorldServer::GetPhysics() { return m_Physics; }
-		Agents::Agents& WorldServer::GetAgents() { return m_Agents; }
+		Units::Units& WorldServer::GetUnits() { return m_Units; }
 		Players::Players& WorldServer::GetPlayers() { return m_Players; }
 		World::World& WorldServer::GetWorld() { return m_World; }
 
@@ -55,13 +55,13 @@ namespace Server {
 				m_Network->HandlePackets();
 
 				// Update Everything
-				m_Agents.Update(delta);
+				m_Units.Update(delta);
 
 				// Update Physics
 				m_Physics.UpdatePhysics(delta);
 
 				// Send all Packets
-				m_Agents.SendPackets();
+				m_Units.SendPackets();
 
 				// Sleep rest of the tick to lock to 50ms per tick
 				// Note: weird cast needed because of VC++ bug

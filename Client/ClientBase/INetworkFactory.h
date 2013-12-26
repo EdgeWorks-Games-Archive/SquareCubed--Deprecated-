@@ -5,7 +5,7 @@ namespace Network {
 
 	// Handler Callbacks
 	class IMainMenuCallback;
-	class IAgentsCallback;
+	class IUnitsCallback;
 	class IPlayerCallback;
 	class IWorldCallback;
 
@@ -24,7 +24,7 @@ namespace Network {
 
 		/// <summary>Creates a new IPacketHandler.</summary>
 		/// <returns>Returns a pointer to a new IPacketHandler created in this function.</returns>
-		virtual IPacketHandler* CreateAgentsHandler(IAgentsCallback &callback) = 0;
+		virtual IPacketHandler* CreateUnitsHandler(IUnitsCallback &callback) = 0;
 
 		/// <summary>Creates a new IPacketHandler.</summary>
 		/// <returns>Returns a pointer to a new IPacketHandler created in this function.</returns>
