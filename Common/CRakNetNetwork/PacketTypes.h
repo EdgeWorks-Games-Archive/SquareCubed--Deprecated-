@@ -19,7 +19,7 @@ enum class GamePacketIDType : RakNet::MessageID {
 	UnitRemove,
 
 #ifdef _DEBUG
-	UnitTestSpawn,
+	DebugUnitSpawn,
 #endif
 
 	WorldChunk

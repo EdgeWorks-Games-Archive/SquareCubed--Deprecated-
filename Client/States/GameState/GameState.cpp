@@ -34,8 +34,7 @@ namespace GameState {
 			"Content/Tiles/tiles.scta"
 		),
 		m_Units(
-			m_Engine.GetNetwork(),
-			m_Engine.GetGraphics(),
+			m_Engine,
 			m_Physics,
 			"Content/Units/units.scta"
 		),

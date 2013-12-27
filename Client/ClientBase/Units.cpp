@@ -1,22 +1,23 @@
 #include "Units.h"
 
-#include <ClientBase/IGraphics.h>
-#include <ClientBase/IGraphicsFactory.h>
-#include <ClientBase/IUnitRenderer.h>
-#include <ClientBase/INetwork.h>
-#include <ClientBase/INetworkFactory.h>
-#include <ClientBase/IPacketHandler.h>
+#include "Engine.h"
+#include "IGraphics.h"
+#include "IGraphicsFactory.h"
+#include "IUnitRenderer.h"
+#include "INetwork.h"
+#include "INetworkFactory.h"
+#include "IPacketHandler.h"
 
 namespace Tools {
 	namespace Units {
 		// Initialization/Uninitialization
 
-		Units::Units(Network::INetwork &networkFactory, Graphics::IGraphics &graphics, Physics::Physics &physics, std::string tileArrayPath) :
-			m_Renderer(graphics.GetFactory().CreateUnitRenderer(
-				graphics.GetFactory().GetTileArray(tileArrayPath)
+		Units::Units(Core::Engine &engine, Physics::Physics &physics, std::string tileArrayPath) :
+			m_Renderer(engine.GetGraphics().GetFactory().CreateUnitRenderer(
+				engine.GetGraphics().GetFactory().GetTileArray(tileArrayPath)
 			)),
 
-			m_Network(networkFactory),
+			m_Network(engine.GetNetwork()),
 			m_Handler(m_Network.GetFactory().CreateUnitsHandler(*this)),
 
 			m_Units(),
@@ -30,7 +31,7 @@ namespace Tools {
 			m_Network.Detach(*m_Handler);
 		}
 
-		// Units Management Utility Functions
+		// Internal Unit Management Helpers
 
 		void Units::AddUnit(IUnit *unit) {
 			m_Units.push_front(std::unique_ptr<IUnit>(unit));
@@ -62,6 +63,8 @@ namespace Tools {
 			// Not found, throw Exception
 			throw std::exception("Unit not Found");
 		}
+
+		// Units Management Utility Functions
 
 		bool Units::UnitExists(UnitID unitId) {
 			for (std::unique_ptr<IUnit> &unit : m_Units) {

@@ -7,6 +7,9 @@ file(GLOB ClientBase_SRC
 )
 
 # Define Source Groups
+source_group ("" FILES
+	Types.h
+)
 source_group (Content FILES
 	Content.h Content.cpp
 	IContentBase.h

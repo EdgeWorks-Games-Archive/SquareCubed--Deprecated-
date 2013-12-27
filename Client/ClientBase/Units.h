@@ -1,22 +1,12 @@
 #pragma once
 
+#include "Types.h"
+
 #include <ClientBase/IUnitsCallback.h>
 #include <ClientBase/BaseUnitTypes.h>
 
 #include <memory>
 #include <list>
-#include <functional>
-
-namespace Graphics {
-	class IGraphics;
-	class IUnitRenderer;
-	class ITileArray;
-}
-
-namespace Network {
-	class INetwork;
-	class IPacketHandler;
-}
 
 namespace Physics {
 	class Physics;
@@ -24,6 +14,7 @@ namespace Physics {
 
 namespace Tools {
 	namespace Units {
+		/** Client-side representation of server object by the same name. */
 		class Units final : public Network::IUnitsCallback {
 			// Renderer
 			std::unique_ptr<Graphics::IUnitRenderer> m_Renderer;
@@ -39,14 +30,16 @@ namespace Tools {
 			Physics::Physics &m_Physics;
 
 		public: // Initialization/Uninitialization
-			Units(Network::INetwork &networkFactory, Graphics::IGraphics &graphics, Physics::Physics &physics, std::string tileArrayPath);
+			Units(Core::Engine &engine, Physics::Physics &physics, std::string tileArrayPath);
 			~Units();
 
-		public: // Units Management Utility Functions
+		protected: // Internal Unit Management Helpers
+			friend class Player::RPGPlayer; // < This class knows what it's doing
 			void AddUnit(IUnit *unit);
 			void RemoveUnit(UnitID unitId);
 			void UpdateUnit(UnitID unitId, DataTypes::Health health, unsigned int graphicId);
 
+		public: // Unit Management Utility Functions
 			bool UnitExists(UnitID unitId);
 			const std::list<std::unique_ptr<IUnit>>& GetAllUnits();
 
