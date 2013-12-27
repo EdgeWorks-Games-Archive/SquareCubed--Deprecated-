@@ -20,7 +20,9 @@ namespace Physics {
 					if (rigidBodyAit != rigidBodyBit) {
 						// Check if Broadphase AABBs intersect
 						if (rigidBodyAit->get().BroadphaseAABB.Intersects(rigidBodyBit->get().BroadphaseAABB)) {
-							printf("Intersection!\n");
+							// Commenting this out probably nukes the
+							// entire thing in optimization.
+							//printf("Intersection!\n");
 						}
 					}
 				}

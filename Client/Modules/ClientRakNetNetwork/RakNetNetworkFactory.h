@@ -20,5 +20,8 @@ namespace RakNetNetwork {
 	public: // Packet Dispatchers
 		Network::IGameDispatcher* CreateGameDispatcher();
 		Network::IPlayerDispatcher* CreatePlayerDispatcher();
+#ifdef _DEBUG
+		std::unique_ptr<Network::IDebugDispatcher> CreateDebugDispatcher();
+#endif
 	};
 }

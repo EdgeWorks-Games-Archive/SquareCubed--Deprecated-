@@ -54,6 +54,7 @@ source_group ("Network\\Handler Callbacks" FILES
 	IWorldCallback.h
 )
 source_group ("Network\\Packet Dispatchers" FILES
+	IDebugDispatcher.h
 	IGameDispatcher.h
 	IPlayerDispatcher.h
 )

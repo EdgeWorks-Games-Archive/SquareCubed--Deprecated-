@@ -6,6 +6,25 @@ file(GLOB ClientRakNetNetwork_SRC
 	"*.cpp.in"
 )
 
+# Define Source Groups
+source_group ("" FILES
+	IRakNetPacketHandler.h
+	RakNetNetwork.h RakNetNetwork.cpp
+	RakNetNetworkFactory.h RakNetNetworkFactory.cpp
+	RakNetNetworkLoader.h
+)
+source_group ("Packet Dispatchers" FILES
+	DebugDispatcher.h DebugDispatcher.cpp
+	GameDispatcher.h GameDispatcher.cpp
+	PlayerDispatcher.h PlayerDispatcher.cpp
+)
+source_group ("Packet Handlers" FILES
+	UnitsPacketHandler.h UnitsPacketHandler.cpp
+	MainMenuPacketHandler.h MainMenuPacketHandler.cpp
+	PlayerPacketHandler.h PlayerPacketHandler.cpp
+	WorldPacketHandler.h WorldPacketHandler.cpp
+)
+
 # Add Library Build Output
 add_library (ClientRakNetNetwork ${ClientRakNetNetwork_SRC})
 

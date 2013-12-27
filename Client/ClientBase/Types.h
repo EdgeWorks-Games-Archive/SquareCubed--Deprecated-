@@ -18,6 +18,19 @@ namespace Graphics {
 namespace Network {
 	class INetwork;
 	class IPacketHandler;
+
+	// Handler Callbacks
+	class IMainMenuCallback;
+	class IUnitsCallback;
+	class IPlayerCallback;
+	class IWorldCallback;
+
+	// Packet Dispatchers
+	class IGameDispatcher;
+	class IPlayerDispatcher;
+#ifdef _DEBUG
+	class IDebugDispatcher;
+#endif
 }
 
 namespace Tools {
