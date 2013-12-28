@@ -14,6 +14,7 @@ namespace Server {
 
 		public: // Packet Handlers
 			Network::IPacketHandler* CreatePlayerHandler(Network::IPlayerCallback &callback);
+			std::unique_ptr<Network::IPacketHandler> CreateDebugHandler(Network::IDebugCallback &callback);
 
 		public: // Packet Dispatchers
 			Network::IUnitsDispatcher* CreateUnitsDispatcher();

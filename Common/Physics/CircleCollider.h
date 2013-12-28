@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Collider.h"
+#include "ICollider.h"
 #include "DataTypes.h"
 
 namespace Physics {
-	class CircleCollider : public Collider {
+	class CircleCollider : public ICollider {
 	public:
 		float Radius;
 

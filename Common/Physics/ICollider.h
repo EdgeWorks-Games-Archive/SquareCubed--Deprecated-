@@ -5,9 +5,9 @@ namespace Physics {
 	class Physics;
 	class IRigidBody;
 
-	class Collider {
+	class ICollider {
 	public:
-		virtual ~Collider() {}
+		virtual ~ICollider() {}
 	
 	protected: // Protected Broadphase Data Helpers
 		friend class IRigidBody;

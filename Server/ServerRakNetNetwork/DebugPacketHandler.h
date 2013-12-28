@@ -6,12 +6,12 @@
 
 namespace Server {
 	namespace RakNetNetwork {
-		class PlayerPacketHandler final : public IRakNetPacketHandler {
+		class DebugPacketHandler final : public IRakNetPacketHandler {
 			Network::INetwork &m_Network;
-			Network::IPlayerCallback &m_Callback;
+			Network::IDebugCallback &m_Callback;
 
 		public: // Initialization/Uninitialization
-			PlayerPacketHandler(Network::INetwork &network, Network::IPlayerCallback &callback);
+			DebugPacketHandler(Network::INetwork &network, Network::IDebugCallback &callback);
 
 		public: // Game Loop
 			bool HandlePacket(RakNet::Packet &packet);

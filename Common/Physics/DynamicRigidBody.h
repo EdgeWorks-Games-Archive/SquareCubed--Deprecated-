@@ -10,7 +10,7 @@ namespace Physics {
 		glm::vec2 Force;
 
 	public:
-		DynamicRigidBody(std::unique_ptr<Collider> collider, const float mass) :
+		DynamicRigidBody(std::unique_ptr<ICollider> collider, const float mass) :
 			IRigidBody(std::move(collider)),
 			m_MassData(mass),
 			Velocity(),

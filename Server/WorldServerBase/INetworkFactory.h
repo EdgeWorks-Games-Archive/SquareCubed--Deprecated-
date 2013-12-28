@@ -1,18 +1,11 @@
 #pragma once
 
+#include "Types.h"
+
+#include <memory>
+
 namespace Server {
 	namespace Network {
-		class IPacketHandler;
-
-		// Handler Callbacks
-		class IUnitsCallback;
-		class IPlayerCallback;
-
-		// Packet Dispatchers
-		class IUnitsDispatcher;
-		class IPlayerDispatcher;
-		class IWorldDispatcher;
-
 		class INetworkFactory {
 		public: // Initialization/Uninitialization
 			virtual ~INetworkFactory() {}
@@ -21,6 +14,11 @@ namespace Server {
 			/// <summary>Creates a new IPacketHandler.</summary>
 			/// <returns>Returns a pointer to a new IPacketHandler created in this function.</returns>
 			virtual IPacketHandler* CreatePlayerHandler(IPlayerCallback &callback) = 0;
+
+			/** Creates a new IPacketHandler.
+			 * \return A pointer to a new IPacketHandler created in this function.
+			 */
+			virtual std::unique_ptr<IPacketHandler> CreateDebugHandler(IDebugCallback &callback) = 0;
 
 		public: // Packet Dispatchers
 			/// <summary>Creates a new IGameDispatcher.</summary>

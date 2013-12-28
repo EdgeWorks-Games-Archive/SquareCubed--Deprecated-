@@ -1,7 +1,7 @@
 #pragma once
 
 #include "DataTypes.h"
-#include "Collider.h"
+#include "ICollider.h"
 
 #include <memory>
 
@@ -15,13 +15,13 @@ namespace Physics {
 
 	protected: // Protected Common Physics Data
 		friend class Physics;
-		std::unique_ptr<Collider> pm_Collider;
+		std::unique_ptr<ICollider> pm_Collider;
 
 	protected: // Internal Protected Wrappers
 		void UpdateBroadphase();
 
 	public:
-		IRigidBody(std::unique_ptr<Collider> collider) :
+		IRigidBody(std::unique_ptr<ICollider> collider) :
 			Position(),
 			Material(),
 			pm_Collider(std::move(collider))

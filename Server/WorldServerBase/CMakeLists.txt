@@ -7,6 +7,9 @@ file(GLOB WorldServerBase_SRC
 )
 
 # Define Source Groups
+source_group ("" FILES
+	Types.h
+)
 source_group (Units FILES
 	Units.h Units.cpp
 	IUnit.h IUnit.cpp
@@ -27,6 +30,7 @@ source_group (Network FILES
 	IPacketHandler.h
 )
 source_group ("Network\\Handler Callbacks" FILES
+	IDebugCallback.h
 	IPlayerCallback.h
 )
 source_group ("Network\\Packet Dispatchers" FILES

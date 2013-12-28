@@ -4,6 +4,7 @@
 
 // Packet Handlers
 #include "PlayerPacketHandler.h"
+#include "DebugPacketHandler.h"
 
 // Packet Dispatchers
 #include "UnitsDispatcher.h"
@@ -22,6 +23,7 @@ namespace Server {
 		// Packet Handlers
 
 		Network::IPacketHandler* RakNetNetworkFactory::CreatePlayerHandler(Network::IPlayerCallback &callback) { return new PlayerPacketHandler(m_Network, callback); }
+		std::unique_ptr<Network::IPacketHandler> RakNetNetworkFactory::CreateDebugHandler(Network::IDebugCallback &callback) { return std::make_unique<DebugPacketHandler>(m_Network, callback); }
 
 		// Packet Dispatchers
 
