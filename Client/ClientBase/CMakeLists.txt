@@ -81,6 +81,9 @@ source_group (Tools\\World FILES
 	World.h World.cpp
 	WorldProvider.h WorldProvider.cpp
 )
+source_group (Tools\\Debug FILES
+	DebugMenu.h DebugMenu.cpp
+)
 
 # Add Library Build Output
 add_library (ClientBase ${ClientBase_SRC})

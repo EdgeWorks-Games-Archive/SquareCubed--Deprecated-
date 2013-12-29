@@ -14,7 +14,7 @@
 #endif
 
 // Application Information
-#ifndef _FULL_RELEASE
+#ifdef _FULL_RELEASE
 #define APP_NAME "SquareCubed World Server"
 #define APP_VERSION RAW_APP_VERSION
 #define APP_AUTHOR "EdgeWorks Games™"
