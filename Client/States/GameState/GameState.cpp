@@ -32,6 +32,9 @@ namespace GameState {
 		m_Units(m_Engine, m_Physics, "Content/Units/units.scta"),
 		m_UnitSelect(m_Engine, m_Units),
 		m_Player(m_Engine, m_Units, m_Physics)
+#ifdef _DEBUG
+		,m_DebugMenu(m_Engine)
+#endif
 	{
 		// Set Camera Size
 		m_Engine.GetGraphics().GetMainCamera().SetHeight(14);

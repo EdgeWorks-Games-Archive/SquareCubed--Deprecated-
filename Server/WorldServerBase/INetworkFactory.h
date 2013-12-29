@@ -15,10 +15,12 @@ namespace Server {
 			/// <returns>Returns a pointer to a new IPacketHandler created in this function.</returns>
 			virtual IPacketHandler* CreatePlayerHandler(IPlayerCallback &callback) = 0;
 
+#ifdef _DEBUG
 			/** Creates a new IPacketHandler.
 			 * \return A pointer to a new IPacketHandler created in this function.
 			 */
 			virtual std::unique_ptr<IPacketHandler> CreateDebugHandler(IDebugCallback &callback) = 0;
+#endif
 
 		public: // Packet Dispatchers
 			/// <summary>Creates a new IGameDispatcher.</summary>

@@ -12,7 +12,9 @@ namespace Server {
 
 		// Handler Callbacks
 		class IPlayerCallback;
+#ifdef _DEBUG
 		class IDebugCallback;
+#endif
 
 		// Packet Dispatchers
 		class IUnitsDispatcher;

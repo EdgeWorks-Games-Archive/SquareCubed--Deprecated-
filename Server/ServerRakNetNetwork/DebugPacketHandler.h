@@ -1,5 +1,7 @@
 #pragma once
 
+#ifdef _DEBUG
+
 #include "IRakNetPacketHandler.h"
 
 #include <WorldServerBase/Types.h>
@@ -18,3 +20,5 @@ namespace Server {
 		};
 	}
 }
+
+#endif

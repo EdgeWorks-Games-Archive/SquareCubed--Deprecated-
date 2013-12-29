@@ -1,5 +1,7 @@
 // Actually, this currently isn't a debug menu, but it will be later.
 
+#ifdef _DEBUG
+
 #include "DebugMenu.h"
 #include "Engine.h"
 #include "INetwork.h"
@@ -9,13 +11,13 @@
 
 namespace Tools {
 	namespace Debug {
-		DebugMenu::DebugMenu(Core::Engine &engine, Input::Input &input) :
+		DebugMenu::DebugMenu(Core::Engine &engine) :
 			m_Dispatcher(engine.GetNetwork().GetFactory().CreateDebugDispatcher()),
-			m_Input(input),
+			m_Input(engine.GetInput()),
 			m_EventScope()
 		{
-			engine.GetInput().OnKeyChange.AttachMember(this, &DebugMenu::OnKeyChange, m_EventScope);
-			Q = input.GetKeyId('Q');
+			m_Input.OnKeyChange.AttachMember(this, &DebugMenu::OnKeyChange, m_EventScope);
+			Q = m_Input.GetKeyId('Q');
 		}
 
 		DebugMenu::~DebugMenu() {}
@@ -26,3 +28,5 @@ namespace Tools {
 		}
 	}
 }
+
+#endif

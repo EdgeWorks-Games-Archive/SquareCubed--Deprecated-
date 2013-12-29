@@ -1,3 +1,5 @@
+#ifdef _DEBUG
+
 #include "DebugPacketHandler.h"
 #include "RakNetClientID.h"
 
@@ -49,3 +51,5 @@ namespace Server {
 		}
 	}
 }
+
+#endif

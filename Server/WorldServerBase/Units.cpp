@@ -14,9 +14,6 @@ namespace Server {
 			m_Dispatcher(server.GetNetwork().GetFactory().CreateUnitsDispatcher()),
 			m_Units()
 		{
-			std::unique_ptr<IUnit> unit = std::make_unique<DynamicUnit>(m_Server.GetPhysics(), 10, 2.0f);
-			unit->SetPosition(glm::vec2(2, 1));
-			AddUnit(std::move(unit));
 		}
 
 		Units::~Units() {

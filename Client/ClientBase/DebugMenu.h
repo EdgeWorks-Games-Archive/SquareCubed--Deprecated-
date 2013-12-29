@@ -1,5 +1,7 @@
 #pragma once
 
+#ifdef _DEBUG
+
 #include "Types.h"
 
 #include <CommonLib/Events.h>
@@ -16,9 +18,10 @@ namespace Tools {
 
 			void OnKeyChange(const Input::KeyChangeEventArgs &args);
 		public:
-			DebugMenu(Core::Engine &engine, Input::Input &input);
-			~DebugMenu();
-			
+			DebugMenu(Core::Engine &engine);
+			~DebugMenu();			
 		};
 	}
 }
+
+#endif

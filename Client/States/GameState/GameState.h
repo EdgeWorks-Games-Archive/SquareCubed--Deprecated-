@@ -5,6 +5,7 @@
 #include <ClientBase/Units.h>
 #include <ClientBase/UnitSelect.h>
 #include <ClientBase/RPGPlayer.h>
+#include <ClientBase/DebugMenu.h>
 
 namespace Network {
 	class IPacketHandler;
@@ -27,6 +28,9 @@ namespace GameState {
 		Tools::Units::Units m_Units;
 		Tools::Units::UnitSelect m_UnitSelect;
 		Tools::Player::RPGPlayer m_Player;
+#ifdef _DEBUG
+		Tools::Debug::DebugMenu m_DebugMenu;
+#endif
 
 	public: // Initialization/Uninitialization
 		GameState(Core::Engine &engine);

@@ -21,6 +21,9 @@ namespace Server {
 			m_Units(*this),
 			m_Players(*this),
 			m_World(*this)
+#ifdef _DEBUG
+			,m_Debug(*this, m_Units)
+#endif
 		{
 			m_Logger.LogInfo("WSCore::WorldServer Initialized");
 		}

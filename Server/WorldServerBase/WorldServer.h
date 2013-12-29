@@ -3,6 +3,7 @@
 #include "Units.h"
 #include "Players.h"
 #include "World.h"
+#include "Debug.h"
 
 #include <CommonLib/Logger.h>
 #include <Physics/Physics.h>
@@ -27,6 +28,9 @@ namespace Server {
 			Units::Units m_Units;
 			Players::Players m_Players;
 			World::World m_World;
+#ifdef _DEBUG
+			Debug::Debug m_Debug;
+#endif
 
 		public: // Module Accessors
 			/// <summary>Gets the Logging Manager</summary>
