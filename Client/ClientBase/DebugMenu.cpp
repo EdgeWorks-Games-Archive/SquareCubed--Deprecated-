@@ -23,8 +23,8 @@ namespace Tools {
 		DebugMenu::~DebugMenu() {}
 
 		void DebugMenu::OnKeyChange(const Input::KeyChangeEventArgs &args) {
-			if (args.KeyId == Q)
-				m_Dispatcher->SpawnUnit(m_Input.GetCursorPosition().Absolute);
+			if (args.KeyId == Q && args.Down)
+				m_Dispatcher->SpawnUnit(m_Input.GetCursorPosition().World);
 		}
 	}
 }
