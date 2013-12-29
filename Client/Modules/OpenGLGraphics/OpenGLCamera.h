@@ -9,14 +9,14 @@ namespace OpenGLGraphics {
 		float m_AspectRatio;
 		glm::vec3 m_Position;
 		glm::vec2 m_Size;
-		glm::vec3 m_Rotation;
+		glm::ivec2 m_Resolution;
 
 	public:
 		OpenGLCamera() :
 			// Default Values
 			m_Position(),
 			m_Size(),
-			m_Rotation(),
+			m_Resolution(),
 			// Can't have the aspect ratio at weird values, might cause problems
 			m_AspectRatio(1)
 		{}
@@ -24,12 +24,13 @@ namespace OpenGLGraphics {
 		OpenGLCamera(glm::ivec2 resolution)
 			: OpenGLCamera()
 		{
-			SetAspectRatioByResolution(resolution);
+			SetResolution(resolution);
 		}
 
 		void SetAspectRatio(float aspectRatio) { m_AspectRatio = aspectRatio; }
-		void SetAspectRatioByResolution(glm::ivec2 resolution) {
-			m_AspectRatio = (float) resolution.x / (float) resolution.y;
+		void SetResolution(glm::ivec2 resolution) {
+			m_Resolution = std::move(resolution);
+			m_AspectRatio = (float) m_Resolution.x / (float) m_Resolution.y;
 		}
 		double GetAspectRatio() { return m_AspectRatio; }
 
@@ -51,8 +52,12 @@ namespace OpenGLGraphics {
 		}
 		glm::vec2& GetSize() { return m_Size; }
 
-		void SetRotation(float x, float y, float z) { m_Rotation.x = x; m_Rotation.y = y; m_Rotation.z = z; }
-		void SetRotation(glm::vec3 rotation) { m_Rotation = rotation; }
-		glm::vec3& GetRotation() { return m_Rotation; }
+		glm::vec2 ResolveWorldPosition(const glm::vec2 &absolute) {
+			glm::vec2 retVal = glm::vec2(m_Position.x, m_Position.y);
+			// TODO: improve to not divide every time used
+			retVal.x += m_Size.x * (absolute.x / m_Resolution.x);
+			retVal.y += m_Size.y * (absolute.y / m_Resolution.y);
+			return retVal;
+		}
 	};
 }

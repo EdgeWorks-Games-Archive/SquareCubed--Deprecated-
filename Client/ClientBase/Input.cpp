@@ -2,6 +2,8 @@
 
 #include <ClientBase/IContext.h>
 #include <ClientBase/IWindow.h>
+#include <ClientBase/IGraphics.h>
+#include <ClientBase/ICamera.h>
 
 namespace Input {
 	// Key Accessors
@@ -55,8 +57,10 @@ namespace Input {
 
 	// Initialization/Uninitialization
 
-	Input::Input(Context::IContext &context) :
+	Input::Input(Context::IContext &context, Graphics::IGraphics &graphics) :
 		m_Context(context),
+		m_Graphics(graphics),
+
 		m_ForwardKey(m_Context.GetKeyId('W')),
 		m_BackwardKey(m_Context.GetKeyId('S')),
 		m_LeftKey(m_Context.GetKeyId('A')),
@@ -133,6 +137,7 @@ namespace Input {
 		// Invoke Event
 		m_LastMouse.CursorPosition.Absolute.x = (float)x;
 		m_LastMouse.CursorPosition.Absolute.y = (float)y;
+		m_LastMouse.CursorPosition.World = m_Graphics.GetMainCamera().ResolveWorldPosition(m_LastMouse.CursorPosition.Absolute);
 		OnCursorPosChange.Invoke(m_LastMouse);
 	}
 

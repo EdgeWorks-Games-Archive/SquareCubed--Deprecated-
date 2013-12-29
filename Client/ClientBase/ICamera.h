@@ -40,7 +40,7 @@ namespace Graphics {
 		/// <returns>Reference to the Size</returns>
 		virtual glm::vec2& GetSize() = 0;
 
-	public: // Size Helper Functions
+	public: // Helper Functions
 		/// <summary>Sets the height and calculates the width using the aspect ratio.</summary>
 		/// <param name="height">The new Height</param>
 		virtual void SetHeight(float height) = 0;
@@ -48,5 +48,8 @@ namespace Graphics {
 		/// <summary>Sets the width and calculates the height using the aspect ratio.</summary>
 		/// <param name="width">The new Width</param>
 		virtual void SetWidth(float width) = 0;
+
+		/** Resolves an absolute position to world position. */
+		virtual glm::vec2 ResolveWorldPosition(const glm::vec2 &absolute) = 0;
 	};
 }

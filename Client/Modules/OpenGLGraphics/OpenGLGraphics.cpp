@@ -102,11 +102,7 @@ namespace OpenGLGraphics {
 			0.0, 10.0); // Make sure everything behind the cam clips away
 		// Note: zFar goes in the negative z direction
 
-		// Translate and Rotate the Camera
-		glm::vec3 rot = m_MainCamera.GetRotation();
-		glRotated(-rot.x, 1, 0, 0);
-		glRotated(-rot.y, 0, 1, 0);
-		glRotated(-rot.z, 0, 0, 1);
+		// Translate the Camera
 		glm::vec3 pos = m_MainCamera.GetPosition();
 		glTranslated(-pos.x, -pos.y, -pos.z);
 

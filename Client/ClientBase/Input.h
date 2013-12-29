@@ -1,10 +1,9 @@
 #pragma once
 
 #include "InputData.h"
+#include "Types.h"
 
 #include <CommonLib/Events.h>
-
-namespace Context { class IContext; }
 
 namespace Input {
 	// Generic Data //
@@ -39,9 +38,10 @@ namespace Input {
 
 	class Input final {
 		Context::IContext &m_Context;
+		Graphics::IGraphics &m_Graphics;
 
 	public: // Initialization/Uninitialization
-		Input(Context::IContext &context);
+		Input(Context::IContext &context, Graphics::IGraphics &graphics);
 		~Input();
 
 	public: // Events

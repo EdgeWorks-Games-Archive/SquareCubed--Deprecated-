@@ -52,7 +52,7 @@ namespace Server {
 			m_Server.GetUnits().SendAllUnitDescs(clientId);
 
 			// Create a new dummy Unit for the Player to use
-			std::unique_ptr<Units::DynamicUnit> unit(new Units::DynamicUnit(m_Server.GetPhysics(), 10, 2.0));
+			std::unique_ptr<Units::DynamicUnit> unit = std::make_unique<Units::DynamicUnit>(m_Server.GetPhysics(), 10, 2.0f);
 
 			// TEST: Damage the player
 			unit->Damage(2);

@@ -36,7 +36,7 @@ int main(int argc, char* args []) {
 	engine.SetGraphics(graphics);
 
 	// Set up Input Module
-	Input::Input *input = new Input::Input(*context);
+	Input::Input *input = new Input::Input(*context, *graphics);
 	engine.SetInput(input);
 
 	// Set up Network Module

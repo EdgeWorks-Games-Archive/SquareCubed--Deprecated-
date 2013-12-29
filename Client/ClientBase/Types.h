@@ -9,6 +9,10 @@ namespace Core {
 	class Engine;
 }
 
+namespace Context {
+	class IContext;
+}
+
 namespace Graphics {
 	class IGraphics;
 	class ICamera;
