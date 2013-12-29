@@ -23,6 +23,9 @@ namespace Graphics {
 
 namespace Input {
 	class Input;
+	struct KeyChangeEventArgs;
+
+	typedef unsigned int KeyID;
 }
 
 namespace Network {
