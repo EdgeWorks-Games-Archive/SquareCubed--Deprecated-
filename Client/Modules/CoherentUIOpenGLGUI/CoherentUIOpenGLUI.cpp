@@ -148,8 +148,8 @@ namespace CoherentUIOpenGLUI {
 	void CoherentUIOpenGLUI::OnCursorPosChange(const Input::MouseEventArgs &args) {
 		Coherent::UI::MouseEventData mouseData;
 
-		mouseData.X = (int)args.X;
-		mouseData.Y = (int)args.Y;
+		mouseData.X = (int) args.CursorPosition.Absolute.x;
+		mouseData.Y = (int) args.CursorPosition.Absolute.y;
 
 		if (args.MouseButton == Input::MouseButton::None)
 			mouseData.Button = Coherent::UI::MouseEventData::ButtonNone;
@@ -173,8 +173,8 @@ namespace CoherentUIOpenGLUI {
 	void CoherentUIOpenGLUI::OnMouseButtonChange(const Input::MouseEventArgs &args) {
 		Coherent::UI::MouseEventData mouseData;
 
-		mouseData.X = (int) args.X;
-		mouseData.Y = (int) args.Y;
+		mouseData.X = (int) args.CursorPosition.Absolute.x;
+		mouseData.Y = (int) args.CursorPosition.Absolute.y;
 
 		if (args.MouseButton == Input::MouseButton::None)
 			mouseData.Button = Coherent::UI::MouseEventData::ButtonNone;

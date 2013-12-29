@@ -7,7 +7,16 @@
 namespace Context { class IContext; }
 
 namespace Input {
+	// Generic Data //
+
 	enum class MouseButton { None, Left, Right, Middle };
+
+	struct CursorPosition {
+		glm::vec2 Absolute;
+		glm::vec2 World; // < !Not implemented!
+	};
+
+	// Event Structs //
 
 	struct KeyChangeEventArgs final {
 		KeyID KeyId;
@@ -20,7 +29,7 @@ namespace Input {
 	};
 
 	struct MouseEventArgs final {
-		double X, Y;
+		CursorPosition CursorPosition;
 		MouseButton MouseButton;
 		bool IsPressed;
 
@@ -55,6 +64,9 @@ namespace Input {
 
 	public: // Complex Input Accessors
 		AxisDesc GetMovementAxis();
+
+	public: // Mouse/Cursor Accessors
+		const CursorPosition& GetCursorPosition();
 
 	public: // Utilities
 		Input::KeyID GetKeyId(unsigned char key);

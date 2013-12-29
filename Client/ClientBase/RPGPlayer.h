@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Types.h"
 #include "IPlayerCallback.h"
 #include "PlayerUnit.h"
 
@@ -7,24 +8,7 @@
 
 #include <memory>
 
-namespace Core { class Engine; }
-
-namespace Network {
-	class INetwork;
-	class IPacketHandler;
-	class IPlayerDispatcher;
-}
-
-namespace Input { class Input; }
-
-namespace Graphics {
-	class IGraphics;
-	class ICamera;
-}
-
 namespace Tools {
-	namespace Units { class Units; }
-
 	namespace Player {
 		class RPGPlayer final : public Network::IPlayerCallback {
 			// Logger

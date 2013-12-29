@@ -44,9 +44,13 @@ namespace Input {
 		return retVal;
 	}
 
-	// Utilities
-	KeyID Input::GetKeyId(unsigned char key) { return m_Context.GetKeyId(key); }
+	// Mouse/Cursor Accessors
 
+	const CursorPosition& Input::GetCursorPosition() { return m_LastMouse.CursorPosition; }
+
+	// Utilities
+
+	KeyID Input::GetKeyId(unsigned char key) { return m_Context.GetKeyId(key); }
 	const SpecialKeyIDs& Input::GetSpecialKeyIds() { return m_Context.GetSpecialKeyIds(); }
 
 	// Initialization/Uninitialization
@@ -127,8 +131,8 @@ namespace Input {
 
 	void Input::CursorPosCallback(double x, double y) {
 		// Invoke Event
-		m_LastMouse.X = std::move(x);
-		m_LastMouse.Y = std::move(y);
+		m_LastMouse.CursorPosition.Absolute.x = (float)x;
+		m_LastMouse.CursorPosition.Absolute.y = (float)y;
 		OnCursorPosChange.Invoke(m_LastMouse);
 	}
 

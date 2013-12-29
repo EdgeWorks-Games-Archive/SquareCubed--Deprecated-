@@ -1,8 +1,8 @@
+/** Contains global metadata defines in addition to CommonLib/metadata.h */
+
 #pragma once
 
 #include <CommonLib/metadata.h>
-
-// This file is for extra gloabl defines, think before you add something because you probably don't need to.
 
 /** Used instead of _DEBUG because a pre-release test could be built with release target. */
 //#define _FULL_RELEASE

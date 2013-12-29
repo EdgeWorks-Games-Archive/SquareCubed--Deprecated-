@@ -11,8 +11,18 @@ namespace Core {
 
 namespace Graphics {
 	class IGraphics;
+	class ICamera;
+
+	// Renderers
 	class IUnitRenderer;
+	class ITileRenderer;
+
+	// Content Types
 	class ITileArray;
+}
+
+namespace Input {
+	class Input;
 }
 
 namespace Network {
@@ -36,5 +46,8 @@ namespace Network {
 namespace Tools {
 	namespace Player {
 		class RPGPlayer;
+	}
+	namespace Units {
+		class Units;
 	}
 }
