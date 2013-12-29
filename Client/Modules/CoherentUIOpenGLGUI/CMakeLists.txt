@@ -6,6 +6,26 @@ file(GLOB CoherentUIOpenGLGUI_SRC
 	"*.cpp.in"
 )
 
+# Define Source Groups
+source_group ("" FILES
+	CoherentUIOpenGLUI.h CoherentUIOpenGLUI.cpp
+	CoherentUIOpenGLUILoader.h
+	LogHandler.h LogHandler.cpp
+	Renderer.h Renderer.cpp
+	SharedMemoryHelper.h SharedMemoryHelperWin.cpp
+)
+source_group (Bindings FILES
+	GUIBindings.h GUIBindings.cpp
+)
+source_group ("Event Listeners" FILES
+	SystemEventListener.h SystemEventListener.cpp
+	ViewEventListener.h ViewEventListener.cpp
+)
+source_group ("Header Wrappers" FILES
+	CoherentUI.h
+	GLheaders.h
+)
+
 # Add Library Build Output
 add_library (CoherentUIOpenGLGUI ${CoherentUIOpenGLGUI_SRC})
 
