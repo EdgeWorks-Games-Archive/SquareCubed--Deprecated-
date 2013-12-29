@@ -4,9 +4,9 @@
 
 namespace Tools {
 	namespace Units {
-		class PlayerUnit final : public PhysicsUnit {
+		class PlayerUnit final : public DynamicUnit {
 		public:
-			PlayerUnit(UnitID id, DataTypes::Health health, Physics::Physics &physics) : PhysicsUnit(id, std::move(health), physics) {}
+			PlayerUnit(UnitID id, DataTypes::Health health, Physics::Physics &physics) : DynamicUnit(id, std::move(health), physics) {}
 			void ReceivedUpdatePhysics(const CNetwork::PhysicsUpdateData &data);
 		};
 	}

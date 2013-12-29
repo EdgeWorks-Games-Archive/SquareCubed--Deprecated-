@@ -122,6 +122,7 @@ namespace Input {
 		evtArgs.KeyId = key;
 		// action can be numbers other then 1 or 0
 		evtArgs.Down = !(action == 0);
+		evtArgs.Repeat = action == 2;
 		evtArgs.ShiftMod = false;
 		OnKeyChange.Invoke(evtArgs);
 	}

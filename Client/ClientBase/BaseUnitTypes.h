@@ -46,21 +46,21 @@ namespace Tools {
 			virtual Anglef& GetRotation() = 0;
 		};
 
-		class PhysicsUnit : public IUnit {
+		class DynamicUnit : public IUnit {
 			Physics::Physics &m_Physics;
 
 		public:
 			Physics::DynamicRigidBody RigidBody;
 
 		public:
-			PhysicsUnit(UnitID id, DataTypes::Health health, Physics::Physics &physics) :
+			DynamicUnit(UnitID id, DataTypes::Health health, Physics::Physics &physics) :
 				m_Physics(physics),
 				IUnit(id, std::move(health)),
 				RigidBody(std::make_unique<Physics::CircleCollider>(0.25f), 2.0f)
 			{
 				m_Physics.AttachDynamic(RigidBody);
 			}
-			virtual ~PhysicsUnit() {
+			virtual ~DynamicUnit() {
 				m_Physics.DetachDynamic(RigidBody);
 			}
 

@@ -102,7 +102,7 @@ namespace Tools {
 			// Add new Unit if it doesn't exist
 			// TODO: change this to GetPlayer returning a pointer instead that can be nullptr
 			if (!UnitExists(unitId))
-				AddUnit(new PhysicsUnit(unitId, health, m_Physics));
+				AddUnit(new DynamicUnit(unitId, health, m_Physics));
 
 			// Update the (newly created?) Unit
 			UpdateUnit(unitId, std::move(health), graphicId);

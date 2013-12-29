@@ -20,6 +20,7 @@ namespace Input {
 	struct KeyChangeEventArgs final {
 		KeyID KeyId;
 		bool Down;
+		bool Repeat;
 		bool ShiftMod;
 	};
 
