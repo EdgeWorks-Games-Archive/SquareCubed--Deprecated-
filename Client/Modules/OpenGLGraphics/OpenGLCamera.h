@@ -55,8 +55,8 @@ namespace OpenGLGraphics {
 		glm::vec2 ResolveWorldPosition(const glm::vec2 &absolute) {
 			glm::vec2 retVal = glm::vec2(m_Position.x, m_Position.y);
 			// TODO: improve to not divide every time used
-			retVal.x += m_Size.x * (absolute.x / m_Resolution.x);
-			retVal.y += m_Size.y * (absolute.y / m_Resolution.y);
+			retVal.x += m_Size.x * (absolute.x / (float) m_Resolution.x) - m_Size.x / 2;
+			retVal.y += m_Size.y * (absolute.y / (float) m_Resolution.y) - m_Size.x / 2;
 			return retVal;
 		}
 	};

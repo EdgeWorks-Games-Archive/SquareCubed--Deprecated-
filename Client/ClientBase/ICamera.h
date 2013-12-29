@@ -49,7 +49,9 @@ namespace Graphics {
 		/// <param name="width">The new Width</param>
 		virtual void SetWidth(float width) = 0;
 
-		/** Resolves an absolute position to world position. */
+		/** Resolves an absolute position to world position.
+		 * \par[in] absolute	Absolute position to resolve.
+		 */
 		virtual glm::vec2 ResolveWorldPosition(const glm::vec2 &absolute) = 0;
 	};
 }

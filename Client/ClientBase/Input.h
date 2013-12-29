@@ -12,7 +12,7 @@ namespace Input {
 
 	struct CursorPosition {
 		glm::vec2 Absolute;
-		glm::vec2 World; // < !Not implemented!
+		glm::vec2 World;
 	};
 
 	// Event Structs //
