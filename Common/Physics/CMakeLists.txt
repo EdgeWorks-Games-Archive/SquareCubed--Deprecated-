@@ -18,7 +18,7 @@ source_group (Broadphase FILES
 )
 source_group (Colliders FILES
 	CircleCollider.h CircleCollider.cpp
-	Collider.h
+	ICollider.h
 )
 source_group (RigidBodies FILES
 	DynamicRigidBody.h DynamicRigidBody.cpp

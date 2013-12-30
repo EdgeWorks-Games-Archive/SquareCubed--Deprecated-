@@ -35,13 +35,13 @@ namespace Tools {
 
 		protected: // Internal Unit Management Helpers
 			friend class Player::RPGPlayer; // < This class knows what it's doing
-			void AddUnit(IUnit *unit);
-			void RemoveUnit(UnitID unitId);
-			void UpdateUnit(UnitID unitId, DataTypes::Health health, unsigned int graphicId);
+			void Add(IUnit *unit);
+			void Remove(UnitID unitId);
+			void Update(UnitID unitId, DataTypes::Health health, unsigned int graphicId);
 
 		public: // Unit Management Utility Functions
 			bool UnitExists(UnitID unitId);
-			const std::list<std::unique_ptr<IUnit>>& GetAllUnits();
+			const std::list<std::unique_ptr<IUnit>>& GetAll();
 
 		public: // Game Loop
 			void RenderUnits();

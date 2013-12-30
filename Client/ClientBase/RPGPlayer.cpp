@@ -49,7 +49,7 @@ namespace Tools {
 
 		void RPGPlayer::ReceivedPlayerDesc(unsigned int unitId, DataTypes::Health health) {
 			m_Unit = new Tools::Units::PlayerUnit(std::move(unitId), std::move(health), m_Physics);
-			m_Units.AddUnit(m_Unit);
+			m_Units.Add(m_Unit);
 			m_Logger.LogInfo("Player Spawned");
 		}
 

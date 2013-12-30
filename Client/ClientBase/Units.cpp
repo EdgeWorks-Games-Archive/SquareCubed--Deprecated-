@@ -33,11 +33,11 @@ namespace Tools {
 
 		// Internal Unit Management Helpers
 
-		void Units::AddUnit(IUnit *unit) {
+		void Units::Add(IUnit *unit) {
 			m_Units.push_front(std::unique_ptr<IUnit>(unit));
 		}
 
-		void Units::RemoveUnit(UnitID unitId) {
+		void Units::Remove(UnitID unitId) {
 			auto it = m_Units.begin();
 			while (it != m_Units.end()) {
 				if ((*it)->ID == unitId) {
@@ -50,7 +50,7 @@ namespace Tools {
 			}
 		}
 
-		void Units::UpdateUnit(UnitID unitId, DataTypes::Health health, unsigned int graphicId) {
+		void Units::Update(UnitID unitId, DataTypes::Health health, unsigned int graphicId) {
 			for (std::unique_ptr<IUnit> &unit : m_Units) {
 				if (unit->ID == unitId) {
 					// Update Unit Data
@@ -76,7 +76,7 @@ namespace Tools {
 			return false;
 		}
 
-		const std::list<std::unique_ptr<IUnit>>& Units::GetAllUnits() {
+		const std::list<std::unique_ptr<IUnit>>& Units::GetAll() {
 			return m_Units;
 		}
 
@@ -102,15 +102,15 @@ namespace Tools {
 			// Add new Unit if it doesn't exist
 			// TODO: change this to GetPlayer returning a pointer instead that can be nullptr
 			if (!UnitExists(unitId))
-				AddUnit(new DynamicUnit(unitId, health, m_Physics));
+				Add(new DynamicUnit(unitId, health, m_Physics));
 
 			// Update the (newly created?) Unit
-			UpdateUnit(unitId, std::move(health), graphicId);
+			Update(unitId, std::move(health), graphicId);
 		}
 
 		void Units::ReceivedRemoveUnit(unsigned int unitId) {
 			// Remove the Unit
-			RemoveUnit(unitId);
+			Remove(unitId);
 		}
 	}
 }
