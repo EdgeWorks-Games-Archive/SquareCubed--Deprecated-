@@ -11,20 +11,33 @@ namespace Tools {
 		UnitSelect::UnitSelect(Core::Engine &engine, Tools::Units::Units &units) :
 			m_Renderer(engine.GetGraphics().GetFactory().CreateSelectionRenderer()),
 			m_Units(units),
-			m_EventScope()
+			m_EventScope(),
+			m_Input(engine.GetInput()),
+			m_SelectedUnits()
 		{
 			engine.GetInput().OnMouseButtonChange.AttachMember(this, &UnitSelect::OnMouseButtonChange, m_EventScope);
 		}
 
 		void UnitSelect::RenderUnitSelections()
 		{
-			//m_Renderer->RenderUnitSelection(m_Units.GetAll());
-			//m_Renderer->RenderSelectionBox(glm::vec2(2, 2), glm::vec2(3, 2));
+			m_Renderer->RenderUnitSelection(m_SelectedUnits);
 		}
 
 		void UnitSelect::OnMouseButtonChange(const Input::MouseEventArgs &args) {
-			if (args.MouseButton == Input::MouseButton::Left && args.IsPressed)
-				printf("wow you pressed the left mouse button well done\n");
+			if (args.MouseButton == Input::MouseButton::Left && args.IsPressed) {
+				const std::list<std::unique_ptr<IUnit>>& unitList = m_Units.GetAll();
+
+				for (const std::unique_ptr<IUnit> &unit : unitList) {
+					auto dUnit = static_cast<const DynamicUnit*>(unit.get());
+					if (dUnit->RigidBody.BroadphaseAABB.Contains(m_Input.GetCursorPosition().World)) {
+						m_SelectedUnits.push_back(*unit);
+					}
+					else {
+						m_SelectedUnits.clear();
+					}
+				}
+			}
+			
 			if (args.MouseButton == Input::MouseButton::Right && args.IsPressed)
 				printf("wow you pressed the right mouse button well done\n");
 		}

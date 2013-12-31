@@ -18,6 +18,8 @@ namespace Tools {
 			std::unique_ptr<Graphics::ISelectionRenderer> m_Renderer;
 			Tools::Units::Units &m_Units;
 			Utils::EventScope m_EventScope;
+			Input::Input &m_Input;
+			std::list<std::reference_wrapper<IUnit>> m_SelectedUnits;
 
 			void OnMouseButtonChange(const Input::MouseEventArgs &args);
 			
