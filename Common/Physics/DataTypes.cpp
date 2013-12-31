@@ -25,7 +25,7 @@ namespace Physics {
 
 	bool AABBData::Contains(const glm::vec2 &point) const {
 		if (Max.x < point.x || Min.x > point.x) return false;
-		if (Max.y < point.y || Min.x > point.y) return false;
+		if (Max.y < point.y || Min.y > point.y) return false;
 
 		// No out of bounds found, therefor it's within the bounding box
 		return true;

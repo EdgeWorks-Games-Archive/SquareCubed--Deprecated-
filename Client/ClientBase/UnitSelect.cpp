@@ -26,16 +26,18 @@ namespace Tools {
 		void UnitSelect::OnMouseButtonChange(const Input::MouseEventArgs &args) {
 			if (args.MouseButton == Input::MouseButton::Left && args.IsPressed) {
 				const std::list<std::unique_ptr<IUnit>>& unitList = m_Units.GetAll();
+				bool noHit = true;
 
 				for (const std::unique_ptr<IUnit> &unit : unitList) {
 					auto dUnit = static_cast<const DynamicUnit*>(unit.get());
 					if (dUnit->RigidBody.BroadphaseAABB.Contains(m_Input.GetCursorPosition().World)) {
 						m_SelectedUnits.push_back(*unit);
-					}
-					else {
-						m_SelectedUnits.clear();
+						noHit = false;
 					}
 				}
+
+				if (noHit)
+					m_SelectedUnits.clear();
 			}
 			
 			if (args.MouseButton == Input::MouseButton::Right && args.IsPressed)
