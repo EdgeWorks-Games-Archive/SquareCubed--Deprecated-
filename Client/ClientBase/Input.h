@@ -82,5 +82,8 @@ namespace Input {
 		void CharCallback(unsigned int ch);
 		void CursorPosCallback(double x, double y);
 		void MouseButtonCallback(int button, int action, int mods);
+
+	public: // Game Loop
+		void Update();
 	};
 }

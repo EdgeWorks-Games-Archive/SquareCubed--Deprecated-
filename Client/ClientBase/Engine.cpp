@@ -115,6 +115,10 @@ namespace Core {
 			m_StateEngine->Update(delta);
 			m_GUI->Update();
 			
+			// Update input afterwards since camera position
+			// might change during other update functions.
+			m_Input->Update();
+			
 			// Render the State Engine
 			m_Graphics->BeginRender();
 			m_StateEngine->Render(delta);

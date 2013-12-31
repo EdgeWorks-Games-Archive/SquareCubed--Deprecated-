@@ -138,7 +138,8 @@ namespace Input {
 		// Invoke Event
 		m_LastMouse.CursorPosition.Absolute.x = (float)x;
 		m_LastMouse.CursorPosition.Absolute.y = (float)y;
-		m_LastMouse.CursorPosition.World = m_Graphics.GetMainCamera().ResolveWorldPosition(m_LastMouse.CursorPosition.Absolute);
+		// Might need to update immediately? Not sure, let's not.
+		//m_LastMouse.CursorPosition.World = m_Graphics.GetMainCamera().ResolveWorldPosition(m_LastMouse.CursorPosition.Absolute);
 		OnCursorPosChange.Invoke(m_LastMouse);
 	}
 
@@ -162,5 +163,11 @@ namespace Input {
 
 		// Invoke Event
 		OnMouseButtonChange.Invoke(m_LastMouse);
+	}
+
+	// Game Loop
+
+	void Input::Update() {
+		m_LastMouse.CursorPosition.World = m_Graphics.GetMainCamera().ResolveWorldPosition(m_LastMouse.CursorPosition.Absolute);
 	}
 }
