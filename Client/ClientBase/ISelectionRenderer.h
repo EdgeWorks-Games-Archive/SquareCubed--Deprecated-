@@ -15,7 +15,7 @@ namespace Graphics {
 		virtual ~ISelectionRenderer() {}
 
 	public: // Rendering Functions
-		virtual void RenderUnitSelection(const std::list<std::unique_ptr<Tools::Units::IUnit>> &units) = 0;
+		virtual void RenderUnitSelection(const std::list<std::reference_wrapper<Tools::Units::IUnit>> &units) = 0;
 		virtual void RenderSelectionBox(const glm::vec2 &bottomLeft, const glm::vec2 &size) = 0;
 	};
 }

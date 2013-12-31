@@ -18,7 +18,7 @@ namespace Tools {
 
 		void UnitSelect::RenderUnitSelections()
 		{
-			m_Renderer->RenderUnitSelection(m_Units.GetAll());
+			//m_Renderer->RenderUnitSelection(m_Units.GetAll());
 			//m_Renderer->RenderSelectionBox(glm::vec2(2, 2), glm::vec2(3, 2));
 		}
 

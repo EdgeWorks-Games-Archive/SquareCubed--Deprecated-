@@ -14,12 +14,12 @@ namespace OpenGLGraphics {
 
 	// Rendering Functions
 
-	void SelectionRenderer::RenderUnitSelection(const std::list<std::unique_ptr<Tools::Units::IUnit>> &units) {
-		for (const std::unique_ptr<Tools::Units::IUnit> &unit : units) {
+	void SelectionRenderer::RenderUnitSelection(const std::list<std::reference_wrapper<Tools::Units::IUnit>> &units) {
+		for (Tools::Units::IUnit &unit : units) {
 			glPushMatrix();
 
 			// Translate to Position
-			glTranslatef(unit->GetPosition().x, unit->GetPosition().y, 0);
+			glTranslatef(unit.GetPosition().x, unit.GetPosition().y, 0);
 
 			// Prepare for Rendering
 			glBindTexture(GL_TEXTURE_2D, NULL);
