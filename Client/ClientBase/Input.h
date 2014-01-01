@@ -18,6 +18,11 @@ namespace Input {
 	struct KeyMods {
 		bool Shift;
 		bool Control;
+
+		KeyMods() :
+			Shift(),
+			Control()
+		{}
 	};
 
 	// Event Structs //
