@@ -20,6 +20,7 @@ namespace Graphics {
 	// Renderers
 	class IUnitRenderer;
 	class ITileRenderer;
+	class ISelectionRenderer;
 
 	// Content Types
 	class ITileArray;
@@ -55,6 +56,7 @@ namespace Tools {
 		class RPGPlayer;
 	}
 	namespace Units {
+		typedef unsigned int UnitID;
 		class Units;
 	}
 }

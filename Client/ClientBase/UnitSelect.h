@@ -1,15 +1,10 @@
 #pragma once
 
+#include "Types.h"
+#include "ISelectionRenderer.h"
+#include "Input.h"
+
 #include <memory>
-#include <ClientBase/ISelectionRenderer.h>
-#include <ClientBase/Input.h>
-
-namespace Core { class Engine; }
-
-namespace Graphics {
-	class IGraphics;
-	class ISelectionRenderer;
-}
 
 namespace Tools {
 	namespace Units {
@@ -21,11 +16,17 @@ namespace Tools {
 			Input::Input &m_Input;
 			std::list<std::reference_wrapper<IUnit>> m_SelectedUnits;
 
-			void OnMouseButtonChange(const Input::MouseEventArgs &args);
-			
-		public:
+		public: // Initialization/Uninitialization
 			UnitSelect(Core::Engine &engine, Tools::Units::Units &units);
-			void RenderUnitSelections();
+
+		private: // Internal Helper Functions
+			bool IsUnitSelected(const UnitID unitId);
+
+		private: // Event Callbacks
+			void OnMouseButtonChange(const Input::MouseEventArgs &args);
+
+		public: // Game Loop
+			void Render();
 		};
 	}
 }

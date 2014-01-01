@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Types.h"
+
 #include <CommonLib/postypes.h>
 #include <CommonLib/unittypes.h>
 #include <Physics/Physics.h>
@@ -12,8 +14,6 @@ namespace CNetwork { struct PhysicsUpdateData; }
 
 namespace Tools {
 	namespace Units {
-		typedef unsigned int UnitID;
-
 		class IUnit {
 		public:
 			const UnitID ID;

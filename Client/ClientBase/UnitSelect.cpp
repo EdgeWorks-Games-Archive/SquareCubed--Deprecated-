@@ -1,10 +1,9 @@
 #include "UnitSelect.h"
 
-#include <ClientBase/Units.h>
-#include <ClientBase/Engine.h>
-
-#include <ClientBase/IGraphics.h>
-#include <ClientBase/IGraphicsFactory.h>
+#include "Units.h"
+#include "Engine.h"
+#include "IGraphics.h"
+#include "IGraphicsFactory.h"
 
 namespace Tools {
 	namespace Units {
@@ -18,10 +17,29 @@ namespace Tools {
 			engine.GetInput().OnMouseButtonChange.AttachMember(this, &UnitSelect::OnMouseButtonChange, m_EventScope);
 		}
 
-		void UnitSelect::RenderUnitSelections()
+		void UnitSelect::Render()
 		{
 			m_Renderer->RenderUnitSelection(m_SelectedUnits);
 		}
+
+		// Internal Helper Functions
+
+		bool UnitSelect::IsUnitSelected(const UnitID unitId) {
+			auto it = m_SelectedUnits.begin();
+			while (it != m_SelectedUnits.end()) {
+				if (it->get().ID == unitId) {
+					// Found it!
+					return true;
+				}
+				else
+					++it;
+			}
+
+			// Didn't find it
+			return false;
+		}
+
+		// Event Callbacks
 
 		void UnitSelect::OnMouseButtonChange(const Input::MouseEventArgs &args) {
 			if (args.MouseButton == Input::MouseButton::Left && args.IsPressed) {
@@ -36,24 +54,12 @@ namespace Tools {
 					// TODO: Needs common rigidbody interface but for now this works
 					auto dUnit = static_cast<const DynamicUnit*>(unit.get());
 					if (dUnit->RigidBody.BroadphaseAABB.Contains(m_Input.GetCursorPosition().World)) {
-						// If it's already in the list then selecting it twice is kindof pointless
-						bool inList = false;
-						auto it = m_SelectedUnits.begin();
-						while (it != m_SelectedUnits.end()) {
-							if (it->get().ID == unit->ID) {
-								// Found it!
-								inList = true;
-								noHit = false;
-								break;
-							}
-							else
-								++it;
-						}
-						// However - if it isn't, we do want to select it.
-						if (!inList) {
+						// Either way, we need to make sure the selection list isn't cleared
+						noHit = false;
+
+						// Only select the unit if it isn't selected already
+						if (!IsUnitSelected(unit.get()->ID))
 							m_SelectedUnits.push_back(*unit);
-							noHit = false;
-						}
 					}
 				}
 				// If no unit was hit at all during the click, that is a call for a selection clear.

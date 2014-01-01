@@ -68,7 +68,7 @@ namespace GameState {
 		m_Units.RenderUnits();
 
 		// Render Unit Selections
-		m_UnitSelect.RenderUnitSelections();
+		m_UnitSelect.Render();
 
 		// Render Walls
 		m_World.RenderWalls();
