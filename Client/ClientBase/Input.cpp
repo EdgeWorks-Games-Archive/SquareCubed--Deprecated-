@@ -46,6 +46,8 @@ namespace Input {
 		return retVal;
 	}
 
+	KeyMods& Input::GetKeyMods() { return m_KeyMods; }
+
 	// Mouse/Cursor Accessors
 
 	const CursorPosition& Input::GetCursorPosition() { return m_LastMouse.CursorPosition; }
@@ -116,6 +118,12 @@ namespace Input {
 			else if (action == 1)
 				m_Keys[key] = true;
 		}
+
+		// Set Key Mods (right now hardcoded values)
+		else if (key == 257) // Shift
+			m_KeyMods.Shift = !(action == 0);
+		else if (key == 341) // Left Control
+			m_KeyMods.Control = !(action == 0);
 
 		// Invoke Event
 		KeyChangeEventArgs evtArgs;

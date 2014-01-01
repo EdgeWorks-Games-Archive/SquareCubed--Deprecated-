@@ -18,12 +18,12 @@ namespace Server {
 			Physics::Physics &m_Physics;
 			Physics::DynamicRigidBody m_RigidBody;
 
-		public:
-			DynamicUnit(Physics::Physics &physics, const int health, const float mass) :
+		public: // Initialization/Uninitialization
+			DynamicUnit(Physics::Physics &physics, const int health) :
 				IUnit(),
 				m_Health(health, health),
 				m_Physics(physics),
-				m_RigidBody(std::make_unique<Physics::CircleCollider>(0.25f), mass)
+				m_RigidBody(std::make_unique<Physics::CircleCollider>(0.3f), 2.0f)
 			{
 				m_Physics.AttachDynamic(m_RigidBody);
 			}
@@ -44,6 +44,23 @@ namespace Server {
 			void Heal(unsigned int health);
 			void Damage(unsigned int health);
 			const DataTypes::Health& GetHealth();
+		};
+
+		class DummyUnit final : public DynamicUnit {
+		public: // Initialization/Uninitialization
+			DummyUnit(Physics::Physics &physics, const int health) :
+				DynamicUnit(physics, health)
+			{}
+
+		public: // Game Loop
+			virtual void Update(const float delta) {}
+		};
+
+		class NPCUnit final : public DynamicUnit {
+		public: // Initialization/Uninitialization
+			NPCUnit(Physics::Physics &physics, const int health) :
+				DynamicUnit(physics, health)
+			{}
 
 		public: // Game Loop
 			virtual void Update(const float delta) {}

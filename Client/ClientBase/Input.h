@@ -15,6 +15,11 @@ namespace Input {
 		glm::vec2 World;
 	};
 
+	struct KeyMods {
+		bool Shift;
+		bool Control;
+	};
+
 	// Event Structs //
 
 	struct KeyChangeEventArgs final {
@@ -65,6 +70,7 @@ namespace Input {
 
 	public: // Complex Input Accessors
 		AxisDesc GetMovementAxis();
+		KeyMods& GetKeyMods();
 
 	public: // Mouse/Cursor Accessors
 		const CursorPosition& GetCursorPosition();
@@ -75,7 +81,8 @@ namespace Input {
 
 	private: // Input Storing
 		bool m_Keys[100];
-		Input::MouseEventArgs m_LastMouse;
+		KeyMods m_KeyMods;
+		MouseEventArgs m_LastMouse;
 
 	private: // Key Callback
 		void KeyCallback(int key, int scancode, int action, int mods);

@@ -56,7 +56,7 @@ namespace Tools {
 			DynamicUnit(UnitID id, DataTypes::Health health, Physics::Physics &physics) :
 				m_Physics(physics),
 				IUnit(id, std::move(health)),
-				RigidBody(std::make_unique<Physics::CircleCollider>(0.25f), 2.0f)
+				RigidBody(std::make_unique<Physics::CircleCollider>(0.3f), 2.0f)
 			{
 				m_Physics.AttachDynamic(RigidBody);
 			}
