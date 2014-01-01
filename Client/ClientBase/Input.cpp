@@ -120,7 +120,7 @@ namespace Input {
 		}
 
 		// Set Key Mods (right now hardcoded values)
-		else if (key == 257) // Shift
+		else if (key == 340) // Left Shift
 			m_KeyMods.Shift = !(action == 0);
 		else if (key == 341) // Left Control
 			m_KeyMods.Control = !(action == 0);
