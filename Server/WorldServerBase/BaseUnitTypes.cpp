@@ -2,10 +2,22 @@
 
 #include <CommonLib/PhysicsPacketDataTypes.h>
 
-#include <algorithm>
-
 namespace Server {
 	namespace Units {
+		// Initialization/Uninitialization
+
+		DynamicUnit::DynamicUnit(Physics::Physics &physics, const int health) :
+			Unit(health),
+			m_Physics(physics),
+			m_RigidBody(std::make_unique<Physics::CircleCollider>(0.3f), 2.0f)
+		{
+			m_Physics.AttachDynamic(m_RigidBody);
+		}
+
+		DynamicUnit::~DynamicUnit() {
+			m_Physics.DetachDynamic(m_RigidBody);
+		}
+
 		// Basic Getters and Setters
 
 		glm::vec2& DynamicUnit::GetPosition() { return m_RigidBody.Position; }
@@ -21,17 +33,5 @@ namespace Server {
 		}
 
 		const Physics::DynamicRigidBody& DynamicUnit::GetDynamicRigidBody() { return m_RigidBody; }
-
-		// Unit Data
-
-		void DynamicUnit::Heal(unsigned int health) {
-			m_Health.Current = std::min(m_Health.Max, m_Health.Current + health);
-		}
-
-		void DynamicUnit::Damage(unsigned int health) {
-			m_Health.Current = std::max(0, static_cast<int>(m_Health.Current) - static_cast<int>(health));
-		}
-
-		const DataTypes::Health& DynamicUnit::GetHealth() { return m_Health;}
 	}
 }

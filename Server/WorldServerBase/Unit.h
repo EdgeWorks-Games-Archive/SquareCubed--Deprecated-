@@ -12,7 +12,7 @@ namespace Server {
 		 * Most likely you don't want to extend the interface.
 		 * Instead extend DynamicUnit to get the physics functionality.
 		 */
-		class IUnit {
+		class Unit {
 			static unsigned int nextId;
 
 		public:
@@ -21,8 +21,8 @@ namespace Server {
 			 */
 			const int ID;
 
-			IUnit();
-			virtual ~IUnit() {}
+			Unit(const int health);
+			virtual ~Unit();
 
 		public: // Position/Rotation
 			/** Returns the position of the unit.
@@ -41,24 +41,27 @@ namespace Server {
 			 */
 			const virtual Physics::DynamicRigidBody& GetDynamicRigidBody() = 0;
 
-		public: // Unit Data
+		private: // Unit Data
+			DataTypes::Health m_Health;
+
+		public: // Unit Data Accessors
 			/** Heals the unit for given amount of health.
 			 * Heals the amount given or till max health is reached.
 			 * Unit may ignore this if it does not keep track of health.
 			 */
-			virtual void Heal(unsigned int health) = 0;
+			void Heal(unsigned int health);
 
 			/** Damages the unit for given amount of health.
 			 * Unit may ignore this if it does not keep track of health.
 			 */
-			virtual void Damage(unsigned int health) = 0;
+			void Damage(unsigned int health);
 
 			/** Returns the health of the unit.
 			 * Using the reference to alter the unit's health results in
 			 * undefined behavior. Instead use Heal and Damage for that.
 			 * \return A constant reference to the unit's health.
 			 */
-			virtual const DataTypes::Health& GetHealth() = 0;
+			const DataTypes::Health& GetHealth();
 
 			unsigned int GraphicId;
 

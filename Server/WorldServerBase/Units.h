@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IUnit.h"
+#include "Unit.h"
 #include "IClientID.h"
 
 #include <list>
@@ -15,7 +15,7 @@ namespace Server {
 			Core::WorldServer &m_Server;
 			std::unique_ptr<Network::IUnitsDispatcher> m_Dispatcher;
 
-			std::list<std::unique_ptr<IUnit>> m_Units;
+			std::list<std::unique_ptr<Unit>> m_Units;
 
 		public: // Initialization/Uninitialization
 			Units(Core::WorldServer &server);
@@ -25,7 +25,7 @@ namespace Server {
 			/** Adds an unit to the class.
 			 * Adding an unit means it gets updated and synced.
 			 */
-			void AddUnit(std::unique_ptr<IUnit> unit);
+			void AddUnit(std::unique_ptr<Unit> unit);
 
 			/** Removes an unit from the class.
 			 * Also deconstructs the unit.

@@ -19,13 +19,13 @@ namespace Server {
 		Units::~Units() {
 		}
 
-		void Units::AddUnit(std::unique_ptr<IUnit> unit) {
+		void Units::AddUnit(std::unique_ptr<Unit> unit) {
 			m_Dispatcher->BroadcastUnitDesc(unit->ID, unit->GetHealth(), unit->GraphicId);
 			m_Units.push_front(std::move(unit));
 		}
 
 		void Units::RemoveUnit(unsigned int unitId) {
-			std::list<std::unique_ptr<IUnit>>::iterator it = m_Units.begin();
+			std::list<std::unique_ptr<Unit>>::iterator it = m_Units.begin();
 			while (it != m_Units.end()) {
 				if ((*it)->ID == unitId) {
 					// Found it!
@@ -43,7 +43,7 @@ namespace Server {
 		}
 
 		void Units::SendAllUnitDescs(const Network::IClientID &clientId) {
-			for (std::unique_ptr<IUnit> &unit : m_Units) {
+			for (std::unique_ptr<Unit> &unit : m_Units) {
 				m_Dispatcher->SendUnitDesc(
 					clientId,
 					unit->ID,
@@ -56,12 +56,12 @@ namespace Server {
 		// Game Loop
 
 		void Units::Update(const float delta) {
-			for (std::unique_ptr<IUnit> &unit : m_Units)
+			for (std::unique_ptr<Unit> &unit : m_Units)
 				unit->Update(delta);
 		}
 
 		void Units::SendPackets() {
-			for (std::unique_ptr<IUnit> &unit : m_Units) {
+			for (std::unique_ptr<Unit> &unit : m_Units) {
 				m_Dispatcher->BroadcastUnitPhysics(
 					unit->ID,
 					unit->GetDynamicRigidBody(),
