@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Types.h"
+
 #include <CommonLib/unittypes.h>
 
 #include <glm/glm.hpp>
@@ -19,10 +21,16 @@ namespace Server {
 			/** Unique Unit ID.
 			 * Gets uniquely assigned on unit construction, used to identify the unit.
 			 */
-			const int ID;
+			const unsigned int ID;
 
+		protected: // Initialization/Uninitialization
 			Unit(const int health);
+		public:
 			virtual ~Unit();
+
+		public: // Disallow Copy/Assign
+			Unit& operator=(const Unit&) = delete;
+			Unit(const Unit&) = delete;
 
 		public: // Position/Rotation
 			/** Returns the position of the unit.
@@ -64,6 +72,9 @@ namespace Server {
 			const DataTypes::Health& GetHealth();
 
 			unsigned int GraphicId;
+
+		public: // Tasks
+			virtual void SetTask(std::unique_ptr<AI::ITask> task) = 0;
 
 		public: // Game Loop
 			virtual void Update(const float delta) = 0;

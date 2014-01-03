@@ -21,4 +21,10 @@ namespace Server {
 		class IPlayerDispatcher;
 		class IWorldDispatcher;
 	}
+
+	namespace Units {
+		namespace AI {
+			class ITask;
+		}
+	}
 }

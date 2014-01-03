@@ -16,6 +16,7 @@ namespace Server {
 	namespace Core {
 		class WorldServer final {
 			Utils::Logger m_Logger;
+			bool m_KeepRunning;
 
 		public: // Initialization/Uninitialization
 			WorldServer(Utils::ILoggingManager *loggingManager, Network::INetwork *network);

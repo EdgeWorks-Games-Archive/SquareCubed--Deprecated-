@@ -44,8 +44,8 @@ namespace Physics {
 		AABBData BroadphaseAABB;
 	};
 
-	class FixedRigidBody final : public IRigidBody {
+	/*class FixedRigidBody final : public IRigidBody {
 		void UpdatePhysics(const float delta) {}
 		void ResolveCollisions() {}
-	};
+	};*/
 }

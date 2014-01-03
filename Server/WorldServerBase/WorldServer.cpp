@@ -14,6 +14,7 @@ namespace Server {
 
 		WorldServer::WorldServer(Utils::ILoggingManager *loggingManager, Network::INetwork *network) :
 			m_Logger(loggingManager->CreateLogger("Server")),
+			m_KeepRunning(false),
 
 			m_LoggingManager(loggingManager),
 			m_Network(network),
@@ -50,7 +51,8 @@ namespace Server {
 			float delta = 0.05f;
 
 			// Run Server Loop
-			while (true) {
+			m_KeepRunning = true;
+			while (m_KeepRunning) {
 				// Start Timepoint
 				tickStart = std::chrono::steady_clock::now();
 

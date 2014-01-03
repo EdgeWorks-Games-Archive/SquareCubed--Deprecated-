@@ -60,6 +60,9 @@ namespace Utils {
 				CallbackFunc(callback),
 				Scope(scope)
 			{}
+			
+			// Disallow Assign (TODO: Also disable copy and get that working)
+			CallbackEntry& operator=(const CallbackEntry&) = delete;
 		};
 
 		std::list<CallbackEntry> m_Callbacks;

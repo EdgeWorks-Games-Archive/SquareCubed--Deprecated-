@@ -12,10 +12,14 @@ source_group ("" FILES
 )
 source_group (Units FILES
 	Units.h Units.cpp
-	IUnit.h IUnit.cpp
+)
+source_group ("Units\\AI\\Tasks" FILES
+	ITask.h
+	StandAtTask.h StandAtTask.cpp
 )
 source_group ("Units\\Unit Types" FILES
 	BaseUnitTypes.h BaseUnitTypes.cpp
+	Unit.h Unit.cpp
 )
 source_group (Core FILES
 	WorldServer.h WorldServer.cpp

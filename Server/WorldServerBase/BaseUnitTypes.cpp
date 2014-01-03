@@ -1,9 +1,13 @@
 #include "BaseUnitTypes.h"
 
+#include "ITask.h"
+
 #include <CommonLib/PhysicsPacketDataTypes.h>
 
 namespace Server {
 	namespace Units {
+		/// Dynamic Unit ///
+
 		// Initialization/Uninitialization
 
 		DynamicUnit::DynamicUnit(Physics::Physics &physics, const int health) :
@@ -33,5 +37,40 @@ namespace Server {
 		}
 
 		const Physics::DynamicRigidBody& DynamicUnit::GetDynamicRigidBody() { return m_RigidBody; }
+
+		/// DummyUnit ///
+
+		// Initialization/Uninitialization
+
+		DummyUnit::DummyUnit(Physics::Physics &physics, const int health) :
+			DynamicUnit(physics, health)
+		{}
+
+		// Tasks
+
+		void DummyUnit::SetTask(std::unique_ptr<AI::ITask> task) {
+		}
+
+		// Game Loop
+
+		void DummyUnit::Update(const float) {}
+
+		/// NPCUnit ///
+
+		// Initialization/Uninitialization
+
+		NPCUnit::NPCUnit(Physics::Physics &physics, const int health) :
+			DynamicUnit(physics, health)
+		{}
+
+		// Tasks
+
+		void NPCUnit::SetTask(std::unique_ptr<AI::ITask> task) {
+		}
+
+		// Game Loop
+
+		void NPCUnit::Update(const float) {
+		}
 	}
 }

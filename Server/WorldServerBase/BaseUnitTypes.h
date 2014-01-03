@@ -10,7 +10,7 @@ namespace CNetwork { struct PhysicsUpdateData; }
 
 namespace Server {
 	namespace Units {
-		/// <summary>Base type for creating basic units.</summary>
+		/** Base type for creating basic units. */
 		class DynamicUnit : public Unit {
 		protected:
 			Physics::Physics &m_Physics;
@@ -31,22 +31,24 @@ namespace Server {
 
 		class DummyUnit final : public DynamicUnit {
 		public: // Initialization/Uninitialization
-			DummyUnit(Physics::Physics &physics, const int health) :
-				DynamicUnit(physics, health)
-			{}
+			DummyUnit(Physics::Physics &physics, const int health);
+
+		public: // Tasks
+			void SetTask(std::unique_ptr<AI::ITask> task);
 
 		public: // Game Loop
-			virtual void Update(const float delta) {}
+			void Update(const float delta);
 		};
 
 		class NPCUnit final : public DynamicUnit {
 		public: // Initialization/Uninitialization
-			NPCUnit(Physics::Physics &physics, const int health) :
-				DynamicUnit(physics, health)
-			{}
+			NPCUnit(Physics::Physics &physics, const int health);
+
+		public: // Tasks
+			void SetTask(std::unique_ptr<AI::ITask> task);
 
 		public: // Game Loop
-			virtual void Update(const float delta) {}
+			void Update(const float delta);
 		};
 	}
 }
