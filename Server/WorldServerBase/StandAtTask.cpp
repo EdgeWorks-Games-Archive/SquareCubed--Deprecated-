@@ -15,6 +15,8 @@ namespace Server {
 			{}
 
 			void StandAtTask::Update(const float, AIUnit &unit) {
+				// This whole function needs a lot of optimization, for now it's
+				// written like this because this bit is still a work in progress.
 				glm::vec2 posDiff(m_Target.x - unit.RigidBody.Position.x, m_Target.y - unit.RigidBody.Position.y);
 				if (fabs(posDiff.x) > Deadzone || fabs(posDiff.y) > Deadzone) {
 					// Calculate Angle
@@ -25,15 +27,15 @@ namespace Server {
 
 					// Make sure Unit Slows down a bit in Advance
 					// TODO: Improve so rather than doing it on an axis by axis basis it's done with the real distance.
-					if (fabs(posDiff.x) < SlowdownDistance)
-						tarVel.x = angle.GetSin() * Speed * fabs(posDiff.x) / SlowdownDistance;
-					else
+					float distance = sqrtf(pow(fabs(posDiff.x), 2) + pow(fabs(posDiff.y), 2));
+					if (distance < SlowdownDistance) {
+						tarVel.x = angle.GetSin() * Speed * distance / SlowdownDistance;
+						tarVel.y = angle.GetCos() * Speed * distance / SlowdownDistance;
+					}
+					else {
 						tarVel.x = angle.GetSin() * Speed;
-
-					if (fabs(posDiff.y) < SlowdownDistance)
-						tarVel.y = angle.GetCos() * Speed * fabs(posDiff.y) / SlowdownDistance;
-					else
 						tarVel.y = angle.GetCos() * Speed;
+					}
 
 					// Set the Target Velocity
 					unit.RigidBody.TargetVelocity = tarVel;
