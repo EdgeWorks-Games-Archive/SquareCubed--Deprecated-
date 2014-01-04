@@ -46,6 +46,7 @@ namespace Network {
 	// Packet Dispatchers
 	class IGameDispatcher;
 	class IPlayerDispatcher;
+	class IUnitSelectDispatcher;
 #ifdef _DEBUG
 	class IDebugDispatcher;
 #endif

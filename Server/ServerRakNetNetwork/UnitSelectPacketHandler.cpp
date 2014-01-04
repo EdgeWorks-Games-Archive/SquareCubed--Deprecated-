@@ -1,18 +1,19 @@
-#include "DebugPacketHandler.h"
-#include "RakNetClientID.h"
+#include "UnitSelectPacketHandler.h"
 
 #include <WorldServerBase/INetwork.h>
-#include <WorldServerBase/IDebugCallback.h>
+#include <WorldServerBase/IUnitSelectCallback.h>
 
 #include <CRakNetNetwork/PacketTypes.h>
 
 #include <BitStream.h>
 
+#include <memory>
+
 namespace Server {
 	namespace RakNetNetwork {
 		// Initialization/Uninitialization
 
-		DebugPacketHandler::DebugPacketHandler(Network::INetwork &network, Network::IDebugCallback &callback) :
+		UnitSelectPacketHandler::UnitSelectPacketHandler(Network::INetwork &network, Network::IUnitSelectCallback &callback) :
 			m_Network(network),
 			m_Callback(callback)
 		{
@@ -20,17 +21,20 @@ namespace Server {
 
 		// Game Loop
 
-		bool DebugPacketHandler::HandlePacket(RakNet::Packet &packet) {
+		bool UnitSelectPacketHandler::HandlePacket(RakNet::Packet &packet) {
 			switch (packet.data[0]) {
-			case (int) GamePacketIDType::DebugUnitSpawn: {
+			
+			case (int)GamePacketIDType::UnitOrder: {
 				// Set up BitStream
 				RakNet::BitStream bs(packet.data, packet.length, false);
 				bs.IgnoreBytes(sizeof(RakNet::MessageID));
 
 				// Get the Data
-				glm::vec2 data;
-				bs.Read(data.x);
-				bool s = bs.Read(data.y);
+				unsigned int unitId;
+				bs.Read(unitId);
+				glm::vec2 pos;
+				bs.Read(pos.x);
+				bool s = bs.Read(pos.y);
 
 				// Make sure the packet is correctly received
 				if (!s) {
@@ -39,7 +43,7 @@ namespace Server {
 				}
 
 				// Call Callback
-				m_Callback.ReceivedSpawnUnit(std::move(data));
+				m_Callback.ReceivedUnitOrder(unitId, std::move(pos));
 
 				return true;
 			}

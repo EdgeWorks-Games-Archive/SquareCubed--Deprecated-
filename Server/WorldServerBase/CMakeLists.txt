@@ -12,6 +12,7 @@ source_group ("" FILES
 )
 source_group (Units FILES
 	Units.h Units.cpp
+	UnitSelect.h UnitSelect.cpp
 )
 source_group ("Units\\AI\\Tasks" FILES
 	ITask.h
@@ -36,6 +37,7 @@ source_group (Network FILES
 source_group ("Network\\Handler Callbacks" FILES
 	IDebugCallback.h
 	IPlayerCallback.h
+	IUnitSelectCallback.h
 )
 source_group ("Network\\Packet Dispatchers" FILES
 	IUnitsDispatcher.h

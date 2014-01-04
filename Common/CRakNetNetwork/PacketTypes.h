@@ -8,7 +8,7 @@ enum class GamePacketIDType : RakNet::MessageID {
 
 	// Client to Server Player Packets
 	PlayerSpawn,
-	PlayerPhysicsUpdate,
+	PlayerPhysicsUpdate,	
 
 	// Server to Client Player Packets
 	PlayerDesc,
@@ -17,6 +17,7 @@ enum class GamePacketIDType : RakNet::MessageID {
 	UnitPhysicsUpdate,
 	UnitDesc,
 	UnitRemove,
+	UnitOrder,
 
 #ifdef _DEBUG
 	DebugUnitSpawn,

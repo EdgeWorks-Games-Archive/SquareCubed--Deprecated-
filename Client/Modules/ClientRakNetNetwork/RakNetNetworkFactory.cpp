@@ -12,6 +12,7 @@
 #include "GameDispatcher.h"
 #include "PlayerDispatcher.h"
 #include "DebugDispatcher.h"
+#include "UnitSelectDispatcher.h"
 
 namespace RakNetNetwork {
 	// Initialization/Uninitialization
@@ -32,6 +33,7 @@ namespace RakNetNetwork {
 
 	Network::IGameDispatcher* RakNetNetworkFactory::CreateGameDispatcher() { return new GameDispatcher(m_Network); }
 	Network::IPlayerDispatcher* RakNetNetworkFactory::CreatePlayerDispatcher() { return new PlayerDispatcher(m_Network); }
+	Network::IUnitSelectDispatcher* RakNetNetworkFactory::CreateUnitSelectDispatcher() { return new UnitSelectDispatcher(m_Network); }
 #ifdef _DEBUG
 	std::unique_ptr<Network::IDebugDispatcher> RakNetNetworkFactory::CreateDebugDispatcher() { return std::make_unique<DebugDispatcher>(m_Network); }
 #endif

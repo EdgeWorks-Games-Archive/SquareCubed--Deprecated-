@@ -57,6 +57,7 @@ source_group ("Network\\Packet Dispatchers" FILES
 	IDebugDispatcher.h
 	IGameDispatcher.h
 	IPlayerDispatcher.h
+	IUnitSelectDispatcher.h
 )
 source_group (StateEngine FILES
 	IState.h

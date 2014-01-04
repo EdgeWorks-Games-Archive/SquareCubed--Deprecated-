@@ -22,6 +22,7 @@ source_group ("Packet Dispatchers" FILES
 source_group ("Packet Handlers" FILES
 	DebugPacketHandler.h DebugPacketHandler.cpp
 	PlayerPacketHandler.h PlayerPacketHandler.cpp
+	UnitSelectPacketHandler.h UnitSelectPacketHandler.cpp
 )
 
 # Add Library Build Output

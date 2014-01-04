@@ -37,6 +37,11 @@ namespace Network {
 		 */
 		virtual IPlayerDispatcher* CreatePlayerDispatcher() = 0;
 
+		/** Creates a new IUnitSelectDispatcher.
+		 * \return A pointer to a new IPlayerDispatcher created in this function.
+		 */
+		virtual IUnitSelectDispatcher* CreateUnitSelectDispatcher() = 0;
+
 #ifdef _DEBUG
 		/** Creates a new IDebugDispatcher.
 		 * \return A pointer to a new IDebugDispatcher created in this function.

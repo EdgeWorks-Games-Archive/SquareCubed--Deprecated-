@@ -15,9 +15,11 @@ namespace Tools {
 			Utils::EventScope m_EventScope;
 			Input::Input &m_Input;
 			std::list<std::reference_wrapper<IUnit>> m_SelectedUnits;
+			std::unique_ptr<Network::IUnitSelectDispatcher> m_Dispatcher;
 
 		public: // Initialization/Uninitialization
 			UnitSelect(Core::Engine &engine, Tools::Units::Units &units);
+			~UnitSelect();
 
 		private: // Internal Helper Functions
 			bool IsUnitSelected(const UnitID unitId);

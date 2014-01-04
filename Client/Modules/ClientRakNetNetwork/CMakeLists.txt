@@ -17,6 +17,7 @@ source_group ("Packet Dispatchers" FILES
 	DebugDispatcher.h DebugDispatcher.cpp
 	GameDispatcher.h GameDispatcher.cpp
 	PlayerDispatcher.h PlayerDispatcher.cpp
+	UnitSelectDispatcher.h UnitSelectDispatcher.cpp
 )
 source_group ("Packet Handlers" FILES
 	UnitsPacketHandler.h UnitsPacketHandler.cpp

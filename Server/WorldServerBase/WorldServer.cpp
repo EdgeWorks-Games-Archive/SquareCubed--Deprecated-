@@ -20,6 +20,7 @@ namespace Server {
 			m_Network(network),
 			m_Physics(*m_LoggingManager, std::make_unique<Physics::AABBBroadphase>()),
 			m_Units(*this),
+			m_UnitSelect(*this, m_Units),
 			m_Players(*this),
 			m_World(*this)
 #ifdef _DEBUG

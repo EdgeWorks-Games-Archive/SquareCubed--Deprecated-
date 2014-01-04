@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Units.h"
+#include "UnitSelect.h"
 #include "Players.h"
 #include "World.h"
 #include "Debug.h"
@@ -27,6 +28,7 @@ namespace Server {
 			std::unique_ptr<Network::INetwork> m_Network;
 			Physics::Physics m_Physics;
 			Units::Units m_Units;
+			Units::UnitSelect m_UnitSelect;
 			Players::Players m_Players;
 			World::World m_World;
 #ifdef _DEBUG

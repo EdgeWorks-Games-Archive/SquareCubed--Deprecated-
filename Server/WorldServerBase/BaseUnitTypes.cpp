@@ -56,8 +56,8 @@ namespace Server {
 		// Initialization/Uninitialization
 
 		AIUnit::AIUnit(Physics::Physics &physics, const int health) :
-			DynamicUnit(physics, health),
-			m_ActiveTask(std::make_unique<AI::StandAtTask>(glm::vec2(0, 0), 2.0f))
+			DynamicUnit(physics, health)
+			// m_ActiveTask(std::make_unique<AI::StandAtTask>(glm::vec2(0, 0), 2.0f))
 		{}
 
 		AIUnit::~AIUnit() {}

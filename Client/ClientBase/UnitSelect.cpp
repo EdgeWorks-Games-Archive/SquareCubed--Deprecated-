@@ -4,6 +4,9 @@
 #include "Engine.h"
 #include "IGraphics.h"
 #include "IGraphicsFactory.h"
+#include "INetwork.h"
+#include "INetworkFactory.h"
+#include "IUnitSelectDispatcher.h"
 
 namespace Tools {
 	namespace Units {
@@ -12,10 +15,13 @@ namespace Tools {
 			m_Units(units),
 			m_EventScope(),
 			m_Input(engine.GetInput()),
-			m_SelectedUnits()
+			m_SelectedUnits(),
+			m_Dispatcher(engine.GetNetwork().GetFactory().CreateUnitSelectDispatcher())
 		{
 			engine.GetInput().OnMouseButtonChange.AttachMember(this, &UnitSelect::OnMouseButtonChange, m_EventScope);
 		}
+
+		UnitSelect::~UnitSelect() {}
 
 		void UnitSelect::Render()
 		{
@@ -60,12 +66,14 @@ namespace Tools {
 					}
 				}
 				// If no unit was hit at all during the click, that is a call for a selection clear.
-				if (noHit)
+				if (noHit && !m_Input.GetKeyMods().Shift)
 					m_SelectedUnits.clear();
 			}
 
 			if (args.MouseButton == Input::MouseButton::Right && args.IsPressed) {
-				printf("wow you pressed the right mouse button well done\n");
+				for (auto unit : m_SelectedUnits) {
+					m_Dispatcher->SendMoveOrder(unit.get().ID, m_Input.GetCursorPosition().World);
+				}
 			}
 		}
 	}
