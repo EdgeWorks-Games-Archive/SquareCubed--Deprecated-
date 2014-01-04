@@ -24,8 +24,21 @@ namespace Server {
 		}
 
 		void UnitSelect::ReceivedUnitOrder(unsigned int unitId, glm::vec2 pos) {
+			// Get the Unit associated with the ID
 			Unit *unit = m_Units.GetUnit(unitId);
+			if (unit == nullptr) {
+				// TODO: Log invalid ID
+				return;
+			}
+
+			// Cast the Unit to the Required Type
 			AIUnit *aiUnit = dynamic_cast<AIUnit*>(unit);
+			if (aiUnit == nullptr) {
+				// TODO: Log invalid Unit Type
+				return;
+			}
+
+			// Do the actual task
 			aiUnit->SetTask(std::make_unique<AI::StandAtTask>(pos, 2.0f));
 		}
 	}
