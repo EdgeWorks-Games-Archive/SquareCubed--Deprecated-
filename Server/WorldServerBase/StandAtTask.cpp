@@ -25,6 +25,9 @@ namespace Server {
 
 					// TODO: Hack to get this working for now
 					unit.RigidBody.Velocity = glm::vec2(m_Velocity.x, m_Velocity.y);
+
+					// Calculate what Rotation to face
+					unit.Rotation = -angle.Radians;
 				}
 				else
 					unit.RigidBody.Velocity = glm::vec2(0, 0);
