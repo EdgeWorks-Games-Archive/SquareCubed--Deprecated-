@@ -18,7 +18,7 @@ namespace Server {
 
 			m_LoggingManager(loggingManager),
 			m_Network(network),
-			m_Physics(*m_LoggingManager, std::make_unique<Physics::AABBBroadphase>(), 0.01f),
+			m_Physics(*m_LoggingManager, std::make_unique<Physics::AABBBroadphase>()),
 			m_Units(*this),
 			m_Players(*this),
 			m_World(*this)

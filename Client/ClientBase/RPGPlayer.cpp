@@ -28,7 +28,7 @@ namespace Tools {
 			m_PacketHandler(m_Network.GetFactory().CreatePlayerHandler(*this)),
 			m_Dispatcher(m_Network.GetFactory().CreatePlayerDispatcher()),
 
-			m_Speed(25),
+			m_Speed(2.0f),
 			m_Deadzone(0.4f),
 
 			m_Camera(engine.GetGraphics().GetMainCamera()),
@@ -60,25 +60,25 @@ namespace Tools {
 				Input::AxisDesc inpVal = m_Input.GetMovementAxis();
 				if (inpVal.Any) {
 					// Change Character Force
-					m_Unit->RigidBody.Force.x = inpVal.Scaled.x * m_Speed;
-					m_Unit->RigidBody.Force.y = inpVal.Scaled.y * m_Speed;
+					m_Unit->RigidBody.TargetVelocity.x = inpVal.Scaled.x * m_Speed;
+					m_Unit->RigidBody.TargetVelocity.y = inpVal.Scaled.y * m_Speed;
 
 					// Rotate Character
 					m_Unit->Rotation = inpVal.Angle;
 				}
 				else {
 					// Reset Character Force
-					m_Unit->RigidBody.Force.x = 0;
-					m_Unit->RigidBody.Force.y = 0;
+					m_Unit->RigidBody.TargetVelocity.x = 0;
+					m_Unit->RigidBody.TargetVelocity.y = 0;
 				}
 
 				// Check if Force Changed
-				if (m_PreviousForce != m_Unit->RigidBody.Force) {
+				if (m_PreviousForce != m_Unit->RigidBody.TargetVelocity) {
 					// Send Updated Physics to Server
 					m_Dispatcher->SendPlayerPhysics(m_Unit->RigidBody, m_Unit->Rotation.Radians);
 
 					// Update Previous Force
-					m_PreviousForce = m_Unit->RigidBody.Force;
+					m_PreviousForce = m_Unit->RigidBody.TargetVelocity;
 				}
 
 				// Set Camera Position

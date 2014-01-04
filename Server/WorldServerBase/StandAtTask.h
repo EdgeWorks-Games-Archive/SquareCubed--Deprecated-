@@ -9,12 +9,14 @@ namespace Server {
 		namespace AI {
 			class StandAtTask final : public ITask {
 				glm::vec2 m_Target;
-				glm::vec2 m_Velocity;
 
 			public:
 				float Deadzone;
+				float Speed;
+				/** The unit will start slowing down if the unit is this far away from the target. */
+				float SlowdownDistance;
 
-				StandAtTask(glm::vec2 target);
+				StandAtTask(glm::vec2 target, float speed);
 				void Update(const float delta, AIUnit &unit);
 			};
 		}

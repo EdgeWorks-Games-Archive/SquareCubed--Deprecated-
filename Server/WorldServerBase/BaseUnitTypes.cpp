@@ -14,7 +14,7 @@ namespace Server {
 		DynamicUnit::DynamicUnit(Physics::Physics &physics, const int health) :
 			Unit(health),
 			m_Physics(physics),
-			RigidBody(std::make_unique<Physics::CircleCollider>(0.3f), 2.0f)
+			RigidBody(std::make_unique<Physics::CircleCollider>(0.3f), 10.0f)
 		{
 			m_Physics.AttachDynamic(RigidBody);
 		}
@@ -31,10 +31,10 @@ namespace Server {
 		// Physics Sync
 
 		void DynamicUnit::ReceivedPhysicsUpdate(const CNetwork::PhysicsUpdateData &physicsData) {
-			RigidBody.Position = std::move(physicsData.Position);
-			RigidBody.Force = std::move(physicsData.Force);
-			RigidBody.Velocity = std::move(physicsData.Velocity);
-			Rotation = std::move(physicsData.Rotation);
+			RigidBody.Position = physicsData.Position;
+			Rotation = physicsData.Rotation;
+			RigidBody.Velocity = physicsData.Velocity;
+			RigidBody.TargetVelocity = physicsData.TargetVelocity;
 		}
 
 		const Physics::DynamicRigidBody& DynamicUnit::GetDynamicRigidBody() { return RigidBody; }
@@ -57,7 +57,7 @@ namespace Server {
 
 		AIUnit::AIUnit(Physics::Physics &physics, const int health) :
 			DynamicUnit(physics, health),
-			m_ActiveTask(std::make_unique<AI::StandAtTask>(glm::vec2(0, 0)))
+			m_ActiveTask(std::make_unique<AI::StandAtTask>(glm::vec2(0, 0), 2.0f))
 		{}
 
 		AIUnit::~AIUnit() {}

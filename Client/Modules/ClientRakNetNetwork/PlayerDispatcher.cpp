@@ -31,10 +31,10 @@ namespace RakNetNetwork {
 		bs.Write(rotation);
 
 		// Add Force and Velocity Data
-		bs.Write(rigidBody.Force.x);
-		bs.Write(rigidBody.Force.y);
 		bs.Write(rigidBody.Velocity.x);
 		bs.Write(rigidBody.Velocity.y);
+		bs.Write(rigidBody.TargetVelocity.x);
+		bs.Write(rigidBody.TargetVelocity.y);
 
 		// Send the Packet to the World Server
 		// UNRELIABLE_SEQUENCED might not be good enough for this, if

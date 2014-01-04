@@ -27,7 +27,7 @@ namespace GameState {
 		m_Dispatcher(m_Engine.GetNetwork().GetFactory().CreateGameDispatcher()),
 		
 		// Internal Components
-		m_Physics(m_Engine.GetLoggingManager(), std::make_unique<Physics::AABBBroadphase>(), 0.01f),
+		m_Physics(m_Engine.GetLoggingManager(), std::make_unique<Physics::AABBBroadphase>()),
 		m_World(m_Engine, "Content/Tiles/tiles.scta"),
 		m_Units(m_Engine, m_Physics, "Content/Units/units.scta"),
 		m_UnitSelect(m_Engine, m_Units),

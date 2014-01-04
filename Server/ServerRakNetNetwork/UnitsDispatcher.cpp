@@ -22,10 +22,10 @@ namespace Server {
 			bs.Write(rigidBody.Position.x);
 			bs.Write(rigidBody.Position.y);
 			bs.Write(rotation);
-			bs.Write(rigidBody.Force.x);
-			bs.Write(rigidBody.Force.y);
 			bs.Write(rigidBody.Velocity.x);
 			bs.Write(rigidBody.Velocity.y);
+			bs.Write(rigidBody.TargetVelocity.x);
+			bs.Write(rigidBody.TargetVelocity.y);
 
 			// Send the Packet to all Clients
 			m_Network.GetRakPeer().Send(&bs, HIGH_PRIORITY, UNRELIABLE_SEQUENCED, 0, RakNet::UNASSIGNED_SYSTEM_ADDRESS, true);

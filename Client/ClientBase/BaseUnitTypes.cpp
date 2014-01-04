@@ -6,9 +6,9 @@ namespace Tools {
 	namespace Units {
 		void DynamicUnit::ReceivedUpdatePhysics(const CNetwork::PhysicsUpdateData &data) {
 			RigidBody.Position = data.Position;
-			RigidBody.Force = data.Force;
-			RigidBody.Velocity = data.Velocity;
 			Rotation.Radians = data.Rotation;
+			RigidBody.Velocity = data.Velocity;
+			RigidBody.TargetVelocity = data.TargetVelocity;
 		}
 	}
 }

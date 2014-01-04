@@ -34,10 +34,10 @@ namespace RakNetNetwork {
 			bs.Read(data.Position.x);
 			bs.Read(data.Position.y);
 			bs.Read(data.Rotation);
-			bs.Read(data.Force.x);
-			bs.Read(data.Force.y);
 			bs.Read(data.Velocity.x);
-			bool s = bs.Read(data.Velocity.y);
+			bs.Read(data.Velocity.y);
+			bs.Read(data.TargetVelocity.x);
+			bool s = bs.Read(data.TargetVelocity.y);
 
 			// Make sure the packet is correctly received
 			if (!s) {

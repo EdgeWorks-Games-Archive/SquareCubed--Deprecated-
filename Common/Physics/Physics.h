@@ -21,13 +21,10 @@ namespace Physics {
 		std::unique_ptr<IBroadphase> m_Broadphase;
 		CollisionResolver m_CollisionResolver;
 
-		const float m_TickInterval;
-		float m_Accumelator;
-
 		std::list<std::reference_wrapper<DynamicRigidBody>> m_DynamicRigidBodies;
 
 	public: // Initialization/Uninitialization
-		Physics(Utils::ILoggingManager &logManager, std::unique_ptr<IBroadphase> broadphase, const float tickInterval);
+		Physics(Utils::ILoggingManager &logManager, std::unique_ptr<IBroadphase> broadphase);
 		~Physics();
 
 	public: // Attach/Detach Rigidbodies

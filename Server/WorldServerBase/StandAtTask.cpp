@@ -7,30 +7,42 @@
 namespace Server {
 	namespace Units {
 		namespace AI {
-			StandAtTask::StandAtTask(glm::vec2 target) :
+			StandAtTask::StandAtTask(glm::vec2 target, float speed) :
 				m_Target(std::move(target)),
-				m_Velocity(),
-				Deadzone(0.1f)
+				Speed(speed),
+				Deadzone(0.1f),
+				SlowdownDistance(0.5f)
 			{}
 
 			void StandAtTask::Update(const float, AIUnit &unit) {
-				if (fabs(unit.RigidBody.Position.x - m_Target.x) > Deadzone ||
-					fabs(unit.RigidBody.Position.y - m_Target.y) > Deadzone) {
+				glm::vec2 posDiff(m_Target.x - unit.RigidBody.Position.x, m_Target.y - unit.RigidBody.Position.y);
+				if (fabs(posDiff.x) > Deadzone || fabs(posDiff.y) > Deadzone) {
 					// Calculate Angle
-					Anglef angle = atan2f(m_Target.x - unit.RigidBody.Position.x, m_Target.y - unit.RigidBody.Position.y);
+					Anglef angle = atan2f(posDiff.x, posDiff.y);
 
-					// Scale Input
-					m_Velocity.x = angle.GetSin();
-					m_Velocity.y = angle.GetCos();
+					// Prepare to Resolve Target Velocity
+					glm::vec2 tarVel;
 
-					// TODO: Hack to get this working for now
-					unit.RigidBody.Velocity = glm::vec2(m_Velocity.x, m_Velocity.y);
+					// Make sure Unit Slows down a bit in Advance
+					// TODO: Improve so rather than doing it on an axis by axis basis it's done with the real distance.
+					if (fabs(posDiff.x) < SlowdownDistance)
+						tarVel.x = angle.GetSin() * Speed * fabs(posDiff.x) / SlowdownDistance;
+					else
+						tarVel.x = angle.GetSin() * Speed;
+
+					if (fabs(posDiff.y) < SlowdownDistance)
+						tarVel.y = angle.GetCos() * Speed * fabs(posDiff.y) / SlowdownDistance;
+					else
+						tarVel.y = angle.GetCos() * Speed;
+
+					// Set the Target Velocity
+					unit.RigidBody.TargetVelocity = tarVel;
 
 					// Calculate what Rotation to face
 					unit.Rotation = -angle.Radians;
 				}
 				else
-					unit.RigidBody.Velocity = glm::vec2(0, 0);
+					unit.RigidBody.TargetVelocity = glm::vec2(0, 0);
 			}
 		}
 	}

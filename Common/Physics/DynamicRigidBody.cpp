@@ -1,21 +1,30 @@
 #include "DynamicRigidBody.h"
 
+#include <algorithm>
+
 namespace Physics {
 	void DynamicRigidBody::UpdatePhysics(const float delta) {
-		// Calculate velocity change
-		glm::vec2 velocityChange = m_MassData.GetInverseMass() * Force * delta;
+		// Calculate Velocity Per Second Change Needed
+		glm::vec2 velocityChange = TargetVelocity - Velocity;
 
-		// Calculate friction and apply to velocity change
-		// 8.0f is just a random picked constant that ended up well.
-		// If you want the physics to be less 'floaty', increase it.
-		// Increasing this constant severely impacts the effect of forces.
-		velocityChange -= Velocity * 8.0f * delta;
+		// Clamp Velocity Change Per Second
+		// TODO: Calculate for both axis total rather than the two separate
+		float maxVelChange = MaxVelocityChange * delta;
+		if (velocityChange.x > maxVelChange)
+			velocityChange.x = maxVelChange;
+		else if (velocityChange.x < -maxVelChange)
+			velocityChange.x = -maxVelChange;
 
-		// Calculate new position
-		Position += (Velocity + (velocityChange * 0.5f)) * delta;
+		if (velocityChange.y > maxVelChange)
+			velocityChange.y = maxVelChange;
+		else if (velocityChange.y < -maxVelChange)
+			velocityChange.y = -maxVelChange;
 
-		// Set increased velocity
+		// Increase Velocity
 		Velocity += std::move(velocityChange);
+
+		// Calculate new Position
+		Position += Velocity * delta;
 
 		// Update Broadphase Data
 		UpdateBroadphase();

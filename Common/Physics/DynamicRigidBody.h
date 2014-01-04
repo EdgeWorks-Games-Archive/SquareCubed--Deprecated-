@@ -5,16 +5,16 @@
 namespace Physics {
 	class DynamicRigidBody final : public IRigidBody {
 	public:
-		MassData m_MassData;
+		float MaxVelocityChange;
 		glm::vec2 Velocity;
-		glm::vec2 Force;
+		glm::vec2 TargetVelocity;
 
 	public:
-		DynamicRigidBody(std::unique_ptr<ICollider> collider, const float mass) :
+		DynamicRigidBody(std::unique_ptr<ICollider> collider, const float maxVelocityChange) :
 			IRigidBody(std::move(collider)),
-			m_MassData(mass),
+			MaxVelocityChange(maxVelocityChange),
 			Velocity(),
-			Force()
+			TargetVelocity()
 		{}
 
 	public:
