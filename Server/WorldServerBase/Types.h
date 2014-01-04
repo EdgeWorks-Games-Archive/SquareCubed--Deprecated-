@@ -23,6 +23,9 @@ namespace Server {
 	}
 
 	namespace Units {
+		class Unit;
+		class AIUnit;
+
 		namespace AI {
 			class ITask;
 		}

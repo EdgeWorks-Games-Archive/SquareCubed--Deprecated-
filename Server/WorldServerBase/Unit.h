@@ -73,9 +73,6 @@ namespace Server {
 
 			unsigned int GraphicId;
 
-		public: // Tasks
-			virtual void SetTask(std::unique_ptr<AI::ITask> task) = 0;
-
 		public: // Game Loop
 			virtual void Update(const float delta) = 0;
 		};

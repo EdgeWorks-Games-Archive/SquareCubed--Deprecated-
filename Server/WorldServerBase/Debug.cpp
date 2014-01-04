@@ -25,7 +25,7 @@ namespace Server {
 		}
 
 		void Debug::ReceivedSpawnUnit(glm::vec2 pos) {
-			std::unique_ptr<Units::DynamicUnit> unit = std::make_unique<Units::NPCUnit>(m_Server.GetPhysics(), 10);
+			std::unique_ptr<Units::DynamicUnit> unit = std::make_unique<Units::AIUnit>(m_Server.GetPhysics(), 10);
 			unit->SetPosition(pos);
 			m_Units.AddUnit(std::move(unit));
 			m_Logger.LogInfo("Spawning unit at %f, %f.", pos.x, pos.y);

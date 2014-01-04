@@ -1,6 +1,7 @@
 #include "BaseUnitTypes.h"
 
 #include "ITask.h"
+#include "StandAtTask.h"
 
 #include <CommonLib/PhysicsPacketDataTypes.h>
 
@@ -13,30 +14,30 @@ namespace Server {
 		DynamicUnit::DynamicUnit(Physics::Physics &physics, const int health) :
 			Unit(health),
 			m_Physics(physics),
-			m_RigidBody(std::make_unique<Physics::CircleCollider>(0.3f), 2.0f)
+			RigidBody(std::make_unique<Physics::CircleCollider>(0.3f), 2.0f)
 		{
-			m_Physics.AttachDynamic(m_RigidBody);
+			m_Physics.AttachDynamic(RigidBody);
 		}
 
 		DynamicUnit::~DynamicUnit() {
-			m_Physics.DetachDynamic(m_RigidBody);
+			m_Physics.DetachDynamic(RigidBody);
 		}
 
 		// Basic Getters and Setters
 
-		glm::vec2& DynamicUnit::GetPosition() { return m_RigidBody.Position; }
-		void DynamicUnit::SetPosition(glm::vec2 position) { m_RigidBody.Position = std::move(position); }
+		glm::vec2& DynamicUnit::GetPosition() { return RigidBody.Position; }
+		void DynamicUnit::SetPosition(glm::vec2 position) { RigidBody.Position = std::move(position); }
 
 		// Physics Sync
 
 		void DynamicUnit::ReceivedPhysicsUpdate(const CNetwork::PhysicsUpdateData &physicsData) {
-			m_RigidBody.Position = std::move(physicsData.Position);
-			m_RigidBody.Force = std::move(physicsData.Force);
-			m_RigidBody.Velocity = std::move(physicsData.Velocity);
+			RigidBody.Position = std::move(physicsData.Position);
+			RigidBody.Force = std::move(physicsData.Force);
+			RigidBody.Velocity = std::move(physicsData.Velocity);
 			Rotation = std::move(physicsData.Rotation);
 		}
 
-		const Physics::DynamicRigidBody& DynamicUnit::GetDynamicRigidBody() { return m_RigidBody; }
+		const Physics::DynamicRigidBody& DynamicUnit::GetDynamicRigidBody() { return RigidBody; }
 
 		/// DummyUnit ///
 
@@ -46,11 +47,6 @@ namespace Server {
 			DynamicUnit(physics, health)
 		{}
 
-		// Tasks
-
-		void DummyUnit::SetTask(std::unique_ptr<AI::ITask> task) {
-		}
-
 		// Game Loop
 
 		void DummyUnit::Update(const float) {}
@@ -59,18 +55,24 @@ namespace Server {
 
 		// Initialization/Uninitialization
 
-		NPCUnit::NPCUnit(Physics::Physics &physics, const int health) :
-			DynamicUnit(physics, health)
+		AIUnit::AIUnit(Physics::Physics &physics, const int health) :
+			DynamicUnit(physics, health),
+			m_ActiveTask(std::make_unique<AI::StandAtTask>(glm::vec2(0, 0)))
 		{}
+
+		AIUnit::~AIUnit() {}
 
 		// Tasks
 
-		void NPCUnit::SetTask(std::unique_ptr<AI::ITask> task) {
+		void AIUnit::SetTask(std::unique_ptr<AI::ITask> task) {
+			m_ActiveTask = std::move(task);
 		}
 
 		// Game Loop
 
-		void NPCUnit::Update(const float) {
+		void AIUnit::Update(const float delta) {
+			if (m_ActiveTask != nullptr)
+				m_ActiveTask->Update(delta, *this);
 		}
 	}
 }

@@ -25,7 +25,7 @@ namespace Server {
 		}
 
 		void Unit::Damage(unsigned int health) {
-			m_Health.Current = std::max(0, static_cast<int>(m_Health.Current) - static_cast<int>(health));
+			m_Health.Current = std::max(0, int(m_Health.Current) - int(health));
 		}
 
 		const DataTypes::Health& Unit::GetHealth() { return m_Health; }
