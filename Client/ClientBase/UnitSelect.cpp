@@ -25,14 +25,11 @@ namespace Tools {
 		// Internal Helper Functions
 
 		bool UnitSelect::IsUnitSelected(const UnitID unitId) {
-			auto it = m_SelectedUnits.begin();
-			while (it != m_SelectedUnits.end()) {
-				if (it->get().ID == unitId) {
+			for (auto unit : m_SelectedUnits) {
+				if (unit.get().ID == unitId) {
 					// Found it!
 					return true;
 				}
-				else
-					++it;
 			}
 
 			// Didn't find it
