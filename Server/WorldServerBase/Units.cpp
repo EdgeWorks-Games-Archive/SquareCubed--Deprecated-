@@ -14,11 +14,9 @@ namespace Server {
 			m_Server(server),
 			m_Dispatcher(server.GetNetwork().GetFactory().CreateUnitsDispatcher()),
 			m_Units()
-		{
-		}
+		{}
 
-		Units::~Units() {
-		}
+		Units::~Units() {}
 
 		void Units::AddUnit(std::unique_ptr<Unit> unit) {
 			m_Dispatcher->BroadcastUnitDesc(unit->ID, unit->GetHealth(), unit->GraphicId);
