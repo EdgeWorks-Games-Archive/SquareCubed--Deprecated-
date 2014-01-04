@@ -24,13 +24,21 @@ namespace Server {
 		public: // Unit Management Functions
 			/** Adds an unit to the class.
 			 * Adding an unit means it gets updated and synced.
+			 * \param[in]	unit	The unit to add.
 			 */
 			void AddUnit(std::unique_ptr<Unit> unit);
 
 			/** Removes an unit from the class.
 			 * Also deconstructs the unit.
+			 * \param[in]	unitId	The ID of the unit to delete.
 			 */
 			void RemoveUnit(unsigned int unitId);
+
+			/** Looks up the unit with the specified ID.
+			 * \param[in]	unitId	The unit ID to look up.
+			 * \return		The requested unit or nullptr if not found.
+			 */
+			Unit* GetUnit(unsigned int unitId);
 
 		public: // Networking Functions
 			/** Sends all unit descriptors to the client. */

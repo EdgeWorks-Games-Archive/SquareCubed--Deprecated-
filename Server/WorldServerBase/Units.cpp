@@ -1,4 +1,5 @@
 #include "Units.h"
+
 #include "INetwork.h"
 #include "INetworkFactory.h"
 #include "IUnitsDispatcher.h"
@@ -51,6 +52,18 @@ namespace Server {
 					unit->GraphicId
 				);
 			}
+		}
+
+		Unit* Units::GetUnit(unsigned int unitId) {
+			for (std::unique_ptr<Unit> &unit : m_Units) {
+				if (unit->ID == unitId) {
+					// Found it!
+					return unit.get();
+				}
+			}
+
+			// Didn't find it, return nullptr instead
+			return nullptr;
 		}
 
 		// Game Loop
