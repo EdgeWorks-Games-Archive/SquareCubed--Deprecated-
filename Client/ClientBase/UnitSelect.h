@@ -14,8 +14,10 @@ namespace Tools {
 			Tools::Units::Units &m_Units;
 			Utils::EventScope m_EventScope;
 			Input::Input &m_Input;
-			std::list<std::reference_wrapper<IUnit>> m_SelectedUnits;
+			std::list<std::reference_wrapper<IUnit>> m_SelectedUnits, m_ControlGroup[9];
 			std::unique_ptr<Network::IUnitSelectDispatcher> m_Dispatcher;
+
+			Input::KeyID Key[9];
 
 		public: // Initialization/Uninitialization
 			UnitSelect(Core::Engine &engine, Tools::Units::Units &units);
@@ -26,6 +28,7 @@ namespace Tools {
 
 		private: // Event Callbacks
 			void OnMouseButtonChange(const Input::MouseEventArgs &args);
+			void OnKeyChange(const Input::KeyChangeEventArgs &args);
 
 		public: // Game Loop
 			void Render();

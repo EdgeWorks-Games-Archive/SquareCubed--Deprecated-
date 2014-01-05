@@ -16,9 +16,14 @@ namespace Tools {
 			m_EventScope(),
 			m_Input(engine.GetInput()),
 			m_SelectedUnits(),
-			m_Dispatcher(engine.GetNetwork().GetFactory().CreateUnitSelectDispatcher())
+			m_Dispatcher(engine.GetNetwork().GetFactory().CreateUnitSelectDispatcher()),
+			m_ControlGroup()
 		{
 			engine.GetInput().OnMouseButtonChange.AttachMember(this, &UnitSelect::OnMouseButtonChange, m_EventScope);
+			engine.GetInput().OnKeyChange.AttachMember(this, &UnitSelect::OnKeyChange, m_EventScope);
+
+			for (int i = 0; i < 9; i++)
+				Key[i] = m_Input.GetKeyId('1' + i);
 		}
 
 		UnitSelect::~UnitSelect() {}
@@ -89,6 +94,15 @@ namespace Tools {
 				for (auto unit : m_SelectedUnits) {
 					m_Dispatcher->SendMoveOrder(unit.get().ID, m_Input.GetCursorPosition().World);
 				}
+			}
+		}
+		
+		void UnitSelect::OnKeyChange(const Input::KeyChangeEventArgs &args) {
+			for (int i = 0; i < 9; i++) {			
+				if (args.KeyId == Key[i] && m_Input.GetKeyMods().Control)
+					m_ControlGroup[i] = m_SelectedUnits;
+				if (args.KeyId == Key[i] && !m_Input.GetKeyMods().Control)
+					m_SelectedUnits = m_ControlGroup[i];
 			}
 		}
 	}
