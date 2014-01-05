@@ -37,11 +37,12 @@ namespace Physics {
 		/// Updates the physics state of the IRigidBody with time delta.
 		/// </summary>
 		/// <param name="delta">The delta time.</param>
-		virtual void UpdatePhysics(const float delta) = 0;
+		virtual void UpdateVelocity(const float delta, Physics &physics) = 0;
 		virtual void ResolveCollisions() = 0;
 
 	public: // Public Broadphase Data
 		AABBData BroadphaseAABB;
+		float BroadphaseRadius;
 	};
 
 	/*class FixedRigidBody final : public IRigidBody {

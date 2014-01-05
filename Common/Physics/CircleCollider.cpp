@@ -8,5 +8,6 @@ namespace Physics {
 		rigidBody.BroadphaseAABB.Min.y = rigidBody.Position.y - Radius;
 		rigidBody.BroadphaseAABB.Max.x = rigidBody.Position.x + Radius;
 		rigidBody.BroadphaseAABB.Max.y = rigidBody.Position.y + Radius;
+		rigidBody.BroadphaseRadius = Radius;
 	}
 }

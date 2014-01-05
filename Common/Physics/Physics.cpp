@@ -10,7 +10,6 @@ namespace Physics {
 		m_Logger(logManager.CreateLogger("Physics")),
 
 		m_Broadphase(std::move(broadphase)),
-		m_CollisionResolver(),
 
 		m_DynamicRigidBodies()
 	{
@@ -25,6 +24,11 @@ namespace Physics {
 		}
 #endif
 	}
+
+	// Accessors
+
+	const std::list<std::reference_wrapper<DynamicRigidBody>>& Physics::GetAllDynamic() { return m_DynamicRigidBodies; }
+	IBroadphase& Physics::GetBroadphase() { return *m_Broadphase; }
 
 	// Attach/Detach Rigidbodies
 
@@ -48,12 +52,14 @@ namespace Physics {
 	// Game Loop
 
 	void Physics::UpdatePhysics(const float delta) {
-		// Update all rigidbody positions
+		// Update all rigidbody velocities
 		for (DynamicRigidBody &rigidBody : m_DynamicRigidBodies) {
-			rigidBody.UpdatePhysics(delta);
+			rigidBody.UpdateVelocity(delta, *this);
 		}
 
-		// Run Collision Detection
-		m_Broadphase->DetectCollision(m_DynamicRigidBodies, m_CollisionResolver);
+		// Update all rigidbody positions
+		for (DynamicRigidBody &rigidBody : m_DynamicRigidBodies) {
+			rigidBody.UpdatePosition(delta);
+		}
 	}
 }

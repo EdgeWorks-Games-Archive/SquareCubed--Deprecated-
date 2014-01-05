@@ -9,7 +9,7 @@ namespace Physics {
 	 * boxes to find potential collisions.
 	 */
 	class AABBBroadphase final : public IBroadphase {
-	protected: // Broadphase Collection
-		void DetectCollision(const std::list<std::reference_wrapper<DynamicRigidBody>> &dynamicRigidBodies, const CollisionResolver &resolver);
+	public: // Broadphase Collection
+		std::list<std::reference_wrapper<DynamicRigidBody>> DetectCollisions(const DynamicRigidBody &dynamicRigidBody, Physics &physics);
 	};
 }

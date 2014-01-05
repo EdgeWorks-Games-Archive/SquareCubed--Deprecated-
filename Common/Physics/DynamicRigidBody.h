@@ -18,7 +18,8 @@ namespace Physics {
 		{}
 
 	public:
-		void UpdatePhysics(const float delta);
+		void UpdateVelocity(const float delta, Physics &physics);
+		void UpdatePosition(const float delta);
 		void ResolveCollisions();
 	};
 }

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "CollisionResolver.h"
-
 #include <CommonLib/Logger.h>
 
 #include <memory>
@@ -19,13 +17,16 @@ namespace Physics {
 		Utils::Logger m_Logger;
 
 		std::unique_ptr<IBroadphase> m_Broadphase;
-		CollisionResolver m_CollisionResolver;
 
 		std::list<std::reference_wrapper<DynamicRigidBody>> m_DynamicRigidBodies;
 
 	public: // Initialization/Uninitialization
 		Physics(Utils::ILoggingManager &logManager, std::unique_ptr<IBroadphase> broadphase);
 		~Physics();
+
+	public: // Accessors
+		const std::list<std::reference_wrapper<DynamicRigidBody>>& GetAllDynamic();
+		IBroadphase& GetBroadphase();
 
 	public: // Attach/Detach Rigidbodies
 		/** Attaches a dynamic rigidbody to the physics engine.

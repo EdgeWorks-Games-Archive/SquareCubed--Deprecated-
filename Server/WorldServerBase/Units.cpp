@@ -24,7 +24,7 @@ namespace Server {
 		}
 
 		void Units::RemoveUnit(unsigned int unitId) {
-			std::list<std::unique_ptr<Unit>>::iterator it = m_Units.begin();
+			auto it = m_Units.begin();
 			while (it != m_Units.end()) {
 				if ((*it)->ID == unitId) {
 					// Found it!

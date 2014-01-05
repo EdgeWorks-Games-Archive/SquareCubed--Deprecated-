@@ -8,7 +8,6 @@ file (GLOB Physics_SRC
 
 # Define Source Groups
 source_group ("" FILES
-	CollisionResolver.h CollisionResolver.cpp
 	DataTypes.h DataTypes.cpp
 	Physics.h Physics.cpp
 )
