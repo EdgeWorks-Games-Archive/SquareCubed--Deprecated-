@@ -10,7 +10,7 @@ namespace Server {
 			class StandAtTask final : public ITask {
 				glm::vec2 m_Target;
 				float m_SqrSlowdownDistance; // < Square Slowdown Distance
-				float m_InvSqrSlowdownDistance; // < Inverse Square Slowdown Distance
+				float m_InvSlowdownDistance; // < Inverse Slowdown Distance
 
 			public:
 				float Deadzone;

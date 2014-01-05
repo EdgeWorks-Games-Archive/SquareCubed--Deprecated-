@@ -7,18 +7,13 @@ namespace Physics {
 		// Calculate Velocity Per Second Change Needed
 		glm::vec2 velocityChange = TargetVelocity - Velocity;
 
-		// Clamp Velocity Change Per Second
-		// TODO: Calculate for both axis total rather than the two separate
+		// Clamp Velocity Change per Current Delta
+		float sqVelChange = (velocityChange.x * velocityChange.x) + (velocityChange.y * velocityChange.y);
 		float maxVelChange = MaxVelocityChange * delta;
-		if (velocityChange.x > maxVelChange)
-			velocityChange.x = maxVelChange;
-		else if (velocityChange.x < -maxVelChange)
-			velocityChange.x = -maxVelChange;
-
-		if (velocityChange.y > maxVelChange)
-			velocityChange.y = maxVelChange;
-		else if (velocityChange.y < -maxVelChange)
-			velocityChange.y = -maxVelChange;
+		if (sqVelChange > (maxVelChange * maxVelChange)) {
+			// Exceeds, Calculate new Velocity in same Direction
+			velocityChange = glm::normalize(velocityChange) * maxVelChange;
+		}
 
 		// Increase Velocity
 		Velocity += std::move(velocityChange);
