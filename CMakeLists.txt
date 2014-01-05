@@ -9,6 +9,9 @@ set (VERSION_MAJOR 0 CACHE STRING "Major engine version.")
 set (VERSION_MINOR 3 CACHE STRING "Minor engine version.")
 set (VERSION_PATCH 0 CACHE STRING "Patch engine version.")
 
+# Add Temp Game Data Variables
+set (GAME_TEMP_CONTROLS_SETTING 0 CACHE STRING "0 for RPG controls, 1 for RTS controls")
+
 # Add Game Root Variable (for installer generation and debugging)
 set (GAME_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/GameRoot" CACHE PATH "Root of the game content for use in installer generation. This won't set working directory, you have to do that manually.")
 
