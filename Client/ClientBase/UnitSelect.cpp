@@ -49,7 +49,7 @@ namespace Tools {
 				const std::list<std::unique_ptr<IUnit>>& unitList = m_Units.GetAll();
 				bool noHit = true;
 
-				// Something already selected, not holding shift for multi-selection
+				// Something already selected, not holding shift for multiselection
 				if (!m_Input.GetKeyMods().Shift && !m_SelectedUnits.empty())
 					m_SelectedUnits.clear();
 
@@ -57,12 +57,26 @@ namespace Tools {
 					// TODO: Needs common rigidbody interface but for now this works
 					auto dUnit = static_cast<const DynamicUnit*>(unit.get());
 					if (dUnit->RigidBody.BroadphaseAABB.Contains(m_Input.GetCursorPosition().World)) {
-						// Either way, we need to make sure the selection list isn't cleared
+						// Either way, we need to make sure the selection list isn't cleared.
 						noHit = false;
 
-						// Only select the unit if it isn't selected already
+						// Only select the unit if it isn't selected already..
 						if (!IsUnitSelected(unit.get()->ID))
 							m_SelectedUnits.push_back(*unit);
+						
+						/* Unless of course we're multiselecting,
+						   for which we might just want to be removing one of the units. */
+						else if (m_Input.GetKeyMods().Shift) {
+							auto it = m_SelectedUnits.begin();
+							while (it != m_SelectedUnits.end()) {
+								if ((it)->get().ID == dUnit->ID) {
+									// Unit is no longer one of The Selected.
+									it = m_SelectedUnits.erase(it);
+								}
+								else
+									++it;
+							}
+						}
 					}
 				}
 				// If no unit was hit at all during the click, that is a call for a selection clear.
@@ -71,6 +85,7 @@ namespace Tools {
 			}
 
 			if (args.MouseButton == Input::MouseButton::Right && args.IsPressed) {
+				// Simple move order.
 				for (auto unit : m_SelectedUnits) {
 					m_Dispatcher->SendMoveOrder(unit.get().ID, m_Input.GetCursorPosition().World);
 				}
