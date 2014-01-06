@@ -10,7 +10,7 @@ namespace Server {
 			StandAtTask::StandAtTask(glm::vec2 target, float speed) :
 				m_Target(std::move(target)),
 				Speed(speed),
-				Deadzone(0.1f),
+				Deadzone(0.01f),
 				m_SqrSlowdownDistance(0.5f * 0.5f),
 				m_InvSlowdownDistance(1.0f / 0.5f)
 			{}

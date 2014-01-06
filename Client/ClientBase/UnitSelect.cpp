@@ -91,8 +91,11 @@ namespace Tools {
 
 			if (args.MouseButton == Input::MouseButton::Right && args.IsPressed) {
 				// Simple move order.
+				glm::vec2 pos = m_Input.GetCursorPosition().World;
+				pos.x += 0.7;
 				for (auto unit : m_SelectedUnits) {
-					m_Dispatcher->SendMoveOrder(unit.get().ID, m_Input.GetCursorPosition().World);
+					pos.x -= 0.7;
+					m_Dispatcher->SendMoveOrder(unit.get().ID, pos);
 				}
 			}
 		}
