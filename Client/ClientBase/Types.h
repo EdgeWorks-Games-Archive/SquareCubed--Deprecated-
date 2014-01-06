@@ -59,5 +59,7 @@ namespace Tools {
 	namespace Units {
 		typedef unsigned int UnitID;
 		class Units;
+
+		class DynamicUnit;
 	}
 }
