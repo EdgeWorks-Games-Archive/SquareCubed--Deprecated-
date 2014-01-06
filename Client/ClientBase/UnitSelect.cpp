@@ -28,9 +28,20 @@ namespace Tools {
 
 		UnitSelect::~UnitSelect() {}
 
-		void UnitSelect::Render()
-		{
+		void UnitSelect::Render() {
 			m_Renderer->RenderUnitSelection(m_SelectedUnits);
+			if (m_Input.GetCursorPosition().World != m_OriginalCursorPos && m_CurrentlyHolding) {
+				glm::vec2 currentCursorPos = m_Input.GetCursorPosition().World;
+				glm::vec2 bottomLeft;
+				glm::vec2 size;
+				
+				bottomLeft.x = glm::min(currentCursorPos.x, m_OriginalCursorPos.x);				
+				bottomLeft.y = glm::min(currentCursorPos.y, m_OriginalCursorPos.y);
+				size.x = fabs(currentCursorPos.x - m_OriginalCursorPos.x);
+				size.y = fabs(currentCursorPos.y - m_OriginalCursorPos.y);
+
+				m_Renderer->RenderSelectionBox(bottomLeft, size);
+			}
 		}
 
 		// Internal Helper Functions
@@ -51,9 +62,26 @@ namespace Tools {
 
 		void UnitSelect::OnMouseButtonChange(const Input::MouseEventArgs &args) {
 			if (args.MouseButton == Input::MouseButton::Left && args.IsPressed) {
+				m_OriginalCursorPos = args.CursorPosition.World;
+				m_CurrentlyHolding = true;
+			}
+
+			if (args.MouseButton == Input::MouseButton::Left && !args.IsPressed) {
+				bool boxWasDragged = false;
+				m_CurrentlyHolding = false;
+				glm::vec2 endCursorPos = m_Input.GetCursorPosition().World;
+				Physics::AABBData box;
+				if (m_OriginalCursorPos != endCursorPos) {
+					box.Min.x = glm::min(m_OriginalCursorPos.x, endCursorPos.x);
+					box.Min.y = glm::min(m_OriginalCursorPos.y, endCursorPos.y);
+					box.Max.x = glm::max(m_OriginalCursorPos.x, endCursorPos.x);
+					box.Max.y = glm::max(m_OriginalCursorPos.y, endCursorPos.y);
+					boxWasDragged = true;
+				}
+
 				const std::list<std::unique_ptr<IUnit>>& unitList = m_Units.GetAll();
 				bool noHit = true;
-
+				
 				// Something already selected, not holding shift for multiselection
 				if (!m_Input.GetKeyMods().Shift && !m_SelectedUnits.empty())
 					m_SelectedUnits.clear();
@@ -61,7 +89,7 @@ namespace Tools {
 				for (const std::unique_ptr<IUnit> &unit : unitList) {
 					// TODO: Needs common rigidbody interface but for now this works
 					auto dUnit = static_cast<const DynamicUnit*>(unit.get());
-					if (dUnit->RigidBody.BroadphaseAABB.Contains(m_Input.GetCursorPosition().World)) {
+					if (dUnit->RigidBody.BroadphaseAABB.Contains(m_Input.GetCursorPosition().World) || (boxWasDragged && dUnit->RigidBody.BroadphaseAABB.Intersects(box))) {
 						// Either way, we need to make sure the selection list isn't cleared.
 						noHit = false;
 
@@ -90,12 +118,11 @@ namespace Tools {
 			}
 
 			if (args.MouseButton == Input::MouseButton::Right && args.IsPressed) {
-				// Simple move order.
+				// Simple move order (now featuring a really lazily implemented line formation.)
 				glm::vec2 pos = m_Input.GetCursorPosition().World;
-				pos.x += 0.7;
 				for (auto unit : m_SelectedUnits) {
-					pos.x -= 0.7;
 					m_Dispatcher->SendMoveOrder(unit.get().ID, pos);
+					pos.x -= 0.7f;
 				}
 			}
 		}

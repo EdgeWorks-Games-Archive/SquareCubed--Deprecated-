@@ -16,6 +16,8 @@ namespace Tools {
 			Input::Input &m_Input;
 			std::list<std::reference_wrapper<IUnit>> m_SelectedUnits, m_ControlGroup[9];
 			std::unique_ptr<Network::IUnitSelectDispatcher> m_Dispatcher;
+			glm::vec2 m_OriginalCursorPos;
+			bool m_CurrentlyHolding = false;
 
 			Input::KeyID Key[9];
 
