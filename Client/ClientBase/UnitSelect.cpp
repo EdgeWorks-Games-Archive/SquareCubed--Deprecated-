@@ -8,6 +8,8 @@
 #include "INetworkFactory.h"
 #include "IUnitSelectDispatcher.h"
 
+#include <algorithm>
+
 namespace Tools {
 	namespace Units {
 		UnitSelect::UnitSelect(Core::Engine &engine, Tools::Units::Units &units) :
@@ -35,8 +37,8 @@ namespace Tools {
 				glm::vec2 bottomLeft;
 				glm::vec2 size;
 				
-				bottomLeft.x = glm::min(currentCursorPos.x, m_OriginalCursorPos.x);				
-				bottomLeft.y = glm::min(currentCursorPos.y, m_OriginalCursorPos.y);
+				bottomLeft.x = std::min(currentCursorPos.x, m_OriginalCursorPos.x);
+				bottomLeft.y = std::min(currentCursorPos.y, m_OriginalCursorPos.y);
 				size.x = fabs(currentCursorPos.x - m_OriginalCursorPos.x);
 				size.y = fabs(currentCursorPos.y - m_OriginalCursorPos.y);
 
@@ -72,10 +74,10 @@ namespace Tools {
 				glm::vec2 endCursorPos = m_Input.GetCursorPosition().World;
 				Physics::AABBData box;
 				if (m_OriginalCursorPos != endCursorPos) {
-					box.Min.x = glm::min(m_OriginalCursorPos.x, endCursorPos.x);
-					box.Min.y = glm::min(m_OriginalCursorPos.y, endCursorPos.y);
-					box.Max.x = glm::max(m_OriginalCursorPos.x, endCursorPos.x);
-					box.Max.y = glm::max(m_OriginalCursorPos.y, endCursorPos.y);
+					box.Min.x = std::min(m_OriginalCursorPos.x, endCursorPos.x);
+					box.Min.y = std::min(m_OriginalCursorPos.y, endCursorPos.y);
+					box.Max.x = std::max(m_OriginalCursorPos.x, endCursorPos.x);
+					box.Max.y = std::max(m_OriginalCursorPos.y, endCursorPos.y);
 					boxWasDragged = true;
 				}
 

@@ -71,35 +71,25 @@ namespace Input {
 		m_Keys()
 	{
 		// Bind Key Callback
-		m_Context.GetMainWindow().SetKeyCallback(std::bind(
-			&Input::KeyCallback,
-			this,
-			std::placeholders::_1,
-			std::placeholders::_2,
-			std::placeholders::_3,
-			std::placeholders::_4));
+		m_Context.GetMainWindow().SetKeyCallback([this](int key, int scancode, int action, int mods) {
+			KeyCallback(key, scancode, action, mods);
+		});
 
 		// Bind Char Callback
-		m_Context.GetMainWindow().SetCharCallback(std::bind(
-			&Input::CharCallback,
-			this,
-			std::placeholders::_1));
-
+		m_Context.GetMainWindow().SetCharCallback([this](unsigned int ch) {
+			CharCallback(ch);
+		});
+		
 		// Bind Cursor Pos Callback
-		m_Context.GetMainWindow().SetCursorPosCallback(std::bind(
-			&Input::CursorPosCallback,
-			this,
-			std::placeholders::_1,
-			std::placeholders::_2));
-
+		m_Context.GetMainWindow().SetCursorPosCallback([this](double x, double y) {
+			CursorPosCallback(x, y);
+		});
+		
 		// Bind Mouse Button Callback
-		m_Context.GetMainWindow().SetMouseButtonCallback(std::bind(
-			&Input::MouseButtonCallback,
-			this,
-			std::placeholders::_1,
-			std::placeholders::_2,
-			std::placeholders::_3));
-
+		m_Context.GetMainWindow().SetMouseButtonCallback([this](int button, int action, int mods) {
+			MouseButtonCallback(button, action, mods);
+		});
+		
 		// Log Initialization
 		//m_Logger.LogInfo("Input Initialized");
 	}
