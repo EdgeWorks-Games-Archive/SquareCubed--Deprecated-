@@ -98,11 +98,46 @@ namespace Tools {
 		}
 		
 		void UnitSelect::OnKeyChange(const Input::KeyChangeEventArgs &args) {
-			for (int i = 0; i < 9; i++) {			
+			for (int i = 0; i < 9; i++) {
+				// Control + 1-9 pressed, assign controlgroup from current selection.
 				if (args.KeyId == Key[i] && m_Input.GetKeyMods().Control)
 					m_ControlGroup[i] = m_SelectedUnits;
-				if (args.KeyId == Key[i] && !m_Input.GetKeyMods().Control)
-					m_SelectedUnits = m_ControlGroup[i];
+
+				if (args.KeyId == Key[i] && !m_Input.GetKeyMods().Control) {
+					/* Control not held, Shift + 1-9 pressed,
+					   indicating wanting to add that controlgroup's contents to the current selection. */
+					if (m_Input.GetKeyMods().Shift) {
+						std::list<std::reference_wrapper<IUnit>> tempList;
+						bool isSelected;
+						/* Check if the current selection contains any unit in the controlgroup,
+						   so that it is not selected twice. */
+						for (auto unit : m_ControlGroup[i]) {
+							isSelected = false;
+							for (auto sUnit : m_SelectedUnits) {
+								if (unit.get().ID == sUnit.get().ID) {
+									// Guess who isn't getting selected again..
+									isSelected = true;
+									// Yep, that's you.
+									break;
+								}
+							}
+							// The unit wasn't already selected, so we add it to the temporary list.
+							if (!isSelected)
+								tempList.push_back(unit);
+						}
+						/* When all checking is done, go to the end of the selection list, and add
+						   the contents of the temporary list there. */
+						auto it = m_SelectedUnits.end();
+						m_SelectedUnits.splice(it, tempList);
+
+						// Done and done.
+					}
+					/* This else is referring to the check for if shift was held.
+					   If shift was not held, you are simply clicking the button of the controlgroup,
+					   and this just selects the controlgroup. */
+					else
+						m_SelectedUnits = m_ControlGroup[i];
+				}
 			}
 		}
 	}
