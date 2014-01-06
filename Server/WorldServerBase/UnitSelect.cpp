@@ -2,7 +2,7 @@
 
 #include "Units.h"
 #include "BaseUnitTypes.h"
-#include "StandAtTask.h"
+#include "MoveTask.h"
 
 #include "WorldServer.h"
 #include "INetwork.h"
@@ -39,7 +39,7 @@ namespace Server {
 			}
 
 			// Do the actual task
-			aiUnit->SetTask(std::make_unique<AI::StandAtTask>(pos, 2.0f));
+			aiUnit->SetTask(std::make_unique<AI::MoveTask>(pos, 2.0f));
 		}
 	}
 }

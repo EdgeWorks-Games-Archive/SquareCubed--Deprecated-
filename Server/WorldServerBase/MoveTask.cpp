@@ -1,4 +1,4 @@
-#include "StandAtTask.h"
+#include "MoveTask.h"
 
 #include "BaseUnitTypes.h"
 
@@ -7,7 +7,7 @@
 namespace Server {
 	namespace Units {
 		namespace AI {
-			StandAtTask::StandAtTask(glm::vec2 target, float speed) :
+			MoveTask::MoveTask(glm::vec2 target, float speed) :
 				m_Target(std::move(target)),
 				Speed(speed),
 				Deadzone(0.01f),
@@ -15,12 +15,12 @@ namespace Server {
 				m_InvSlowdownDistance(1.0f / 0.5f)
 			{}
 
-			void StandAtTask::SetSlowdownDistance(float slowdownDistance) {
+			void MoveTask::SetSlowdownDistance(float slowdownDistance) {
 				m_SqrSlowdownDistance = slowdownDistance * slowdownDistance;
 				m_InvSlowdownDistance = 1.0f / slowdownDistance;
 			}
 
-			void StandAtTask::Update(const float, AIUnit &unit) {
+			void MoveTask::Update(const float, AIUnit &unit) {
 				// Calculate Position Difference Data
 				glm::vec2 posDiff(m_Target.x - unit.RigidBody.Position.x, m_Target.y - unit.RigidBody.Position.y);
 
@@ -39,8 +39,10 @@ namespace Server {
 					// Face Towards the Target
 					unit.Rotation = -atan2f(posDiff.x, posDiff.y);
 				}
-				else
+				else {
 					unit.RigidBody.TargetVelocity = glm::vec2(0, 0);
+					unit.SetTask(nullptr);
+				}
 			}
 		}
 	}

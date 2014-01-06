@@ -1,7 +1,6 @@
 #include "BaseUnitTypes.h"
 
 #include "ITask.h"
-#include "StandAtTask.h"
 
 #include <CommonLib/PhysicsPacketDataTypes.h>
 

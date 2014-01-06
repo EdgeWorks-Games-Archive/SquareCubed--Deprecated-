@@ -7,7 +7,7 @@
 namespace Server {
 	namespace Units {
 		namespace AI {
-			class StandAtTask final : public ITask {
+			class MoveTask final : public ITask {
 				glm::vec2 m_Target;
 				float m_SqrSlowdownDistance; // < Square Slowdown Distance
 				float m_InvSlowdownDistance; // < Inverse Slowdown Distance
@@ -16,7 +16,7 @@ namespace Server {
 				float Deadzone;
 				float Speed;
 				
-				StandAtTask(glm::vec2 target, float speed);
+				MoveTask(glm::vec2 target, float speed);
 
 				void SetSlowdownDistance(float slowdownDistance);
 
