@@ -27,6 +27,7 @@ namespace Tools {
 
 		private: // Internal Helper Functions
 			bool IsUnitSelected(const UnitID unitId);
+			void Deselect(const UnitID unitId);
 
 		private: // Event Callbacks
 			void OnMouseButtonChange(const Input::MouseEventArgs &args);
