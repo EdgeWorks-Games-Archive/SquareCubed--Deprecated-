@@ -7,22 +7,28 @@
 #include <algorithm>
 
 namespace Physics {
-	DynamicRigidBody::DynamicRigidBody(std::unique_ptr<ICollider> collider, const float maxVelocityChange) :
+	DynamicRigidBody::DynamicRigidBody(Physics &physics, std::unique_ptr<ICollider> collider, const float maxVelocityChange) :
 		IRigidBody(std::move(collider)),
+		m_Physics(physics),
+
 		Velocity(),
 		TargetVelocity(),
 		MaxVelocityChange(maxVelocityChange)
-	{}
+	{
+		m_Physics.AttachDynamic(*this);
+	}
 
-	DynamicRigidBody::~DynamicRigidBody() {}
+	DynamicRigidBody::~DynamicRigidBody() {
+		m_Physics.DetachDynamic(*this);
+	}
 
-	void DynamicRigidBody::UpdateVelocity(const float delta, Physics &physics) {
+	void DynamicRigidBody::UpdateVelocity(const float delta) {
 		// Calculate Velocity Per Second Change Needed
 		glm::vec2 velocityChange = TargetVelocity - Velocity;
 
 		// Add Velocity Caused by Nearby Pushing Rigidbodies
 		// Note: this might cause some problems with the player rigidbody
-		for (DynamicRigidBody &rigidBody : physics.GetBroadphase().DetectDynamicCollisions(*this, physics)) {
+		for (DynamicRigidBody &rigidBody : m_Physics.GetBroadphase().DetectDynamicCollisions(*this, m_Physics)) {
 			// Check if the Distance is smaller than the two radii combined
 			glm::vec2 diff = Position - rigidBody.Position;
 			if ((diff.x * diff.x) + (diff.y * diff.y) < (Collider->BroadphaseRadius + rigidBody.Collider->BroadphaseRadius) * (Collider->BroadphaseRadius + rigidBody.Collider->BroadphaseRadius)) {

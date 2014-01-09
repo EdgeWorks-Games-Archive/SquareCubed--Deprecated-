@@ -54,7 +54,7 @@ namespace Physics {
 	void Physics::UpdatePhysics(const float delta) {
 		// Update all velocities and collisions
 		for (DynamicRigidBody &rigidBody : m_DynamicRigidBodies) {
-			rigidBody.UpdateVelocity(delta, *this);
+			rigidBody.UpdateVelocity(delta);
 		}
 
 		// Update all positions, UpdateVelocity and UpdateCollisions

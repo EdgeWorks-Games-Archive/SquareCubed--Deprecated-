@@ -13,14 +13,11 @@ namespace Server {
 		DynamicUnit::DynamicUnit(Physics::Physics &physics, const int health) :
 			Unit(health),
 			m_Physics(physics),
-			RigidBody(std::make_unique<Physics::CircleCollider>(0.3f), 10.0f)
+			RigidBody(m_Physics, std::make_unique<Physics::CircleCollider>(0.3f), 10.0f)
 		{
-			m_Physics.AttachDynamic(RigidBody);
 		}
 
-		DynamicUnit::~DynamicUnit() {
-			m_Physics.DetachDynamic(RigidBody);
-		}
+		DynamicUnit::~DynamicUnit() {}
 
 		// Basic Getters and Setters
 

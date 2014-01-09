@@ -28,7 +28,8 @@ namespace Physics {
 		const std::list<std::reference_wrapper<DynamicRigidBody>>& GetAllDynamic();
 		IBroadphase& GetBroadphase();
 
-	public: // Attach/Detach Rigidbodies
+	protected: // Attach/Detach Rigidbodies
+		friend DynamicRigidBody;
 		/** Attaches a dynamic rigidbody to the physics engine.
 		 * This will update the rigidbody when the physics state is updated.
 		 * \param[in, out]	rigidBody	A reference to the rigidbody.

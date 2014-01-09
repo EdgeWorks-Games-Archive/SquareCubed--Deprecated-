@@ -56,13 +56,10 @@ namespace Tools {
 			DynamicUnit(UnitID id, DataTypes::Health health, Physics::Physics &physics) :
 				m_Physics(physics),
 				IUnit(id, std::move(health)),
-				RigidBody(std::make_unique<Physics::CircleCollider>(0.3f), 10.0f)
+				RigidBody(m_Physics, std::make_unique<Physics::CircleCollider>(0.3f), 10.0f)
 			{
-				m_Physics.AttachDynamic(RigidBody);
 			}
-			virtual ~DynamicUnit() {
-				m_Physics.DetachDynamic(RigidBody);
-			}
+			virtual ~DynamicUnit() {}
 
 		public:
 			virtual void ReceivedUpdatePhysics(const CNetwork::PhysicsUpdateData &data);
