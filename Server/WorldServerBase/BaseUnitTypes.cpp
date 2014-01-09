@@ -1,7 +1,5 @@
 #include "BaseUnitTypes.h"
 
-#include "ITask.h"
-
 #include <CommonLib/PhysicsPacketDataTypes.h>
 
 namespace Server {
@@ -53,22 +51,15 @@ namespace Server {
 
 		AIUnit::AIUnit(Physics::Physics &physics, const int health) :
 			DynamicUnit(physics, health),
-			m_ActiveTask(nullptr)
+			MoveBehavior(2.0f)
 		{}
 
 		AIUnit::~AIUnit() {}
 
-		// Tasks
-
-		void AIUnit::SetTask(std::unique_ptr<AI::ITask> task) {
-			m_ActiveTask = std::move(task);
-		}
-
 		// Game Loop
 
 		void AIUnit::Update(const float delta) {
-			if (m_ActiveTask != nullptr)
-				m_ActiveTask->Update(delta, *this);
+			MoveBehavior.Update(delta, *this);
 		}
 	}
 }

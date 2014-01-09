@@ -14,9 +14,8 @@ source_group (Units FILES
 	Units.h Units.cpp
 	UnitSelect.h UnitSelect.cpp
 )
-source_group ("Units\\AI\\Tasks" FILES
-	ITask.h
-	StandAtTask.h StandAtTask.cpp
+source_group ("Units\\AI\\Behaviors" FILES
+	MoveBehavior.h MoveBehavior.cpp
 )
 source_group ("Units\\Unit Types" FILES
 	BaseUnitTypes.h BaseUnitTypes.cpp

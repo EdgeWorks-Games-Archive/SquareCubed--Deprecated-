@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Unit.h"
+#include "MoveBehavior.h"
 
 #include <Physics/Physics.h>
 #include <Physics/DynamicRigidBody.h>
@@ -39,15 +40,13 @@ namespace Server {
 		};
 
 		class AIUnit final : public DynamicUnit {
-			std::unique_ptr<AI::ITask> m_ActiveTask;
+		public: // Behaviors
+			AI::MoveBehavior MoveBehavior;
 
 		public: // Initialization/Uninitialization
 			AIUnit(Physics::Physics &physics, const int health);
 			~AIUnit();
 			
-		public: // Tasks
-			void SetTask(std::unique_ptr<AI::ITask> task);
-
 		public: // Game Loop
 			void Update(const float delta);
 		};

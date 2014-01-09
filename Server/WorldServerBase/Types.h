@@ -28,7 +28,7 @@ namespace Server {
 		class AIUnit;
 
 		namespace AI {
-			class ITask;
+			class MoveBehavior;
 		}
 	}
 }
