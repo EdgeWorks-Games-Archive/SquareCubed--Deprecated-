@@ -2,20 +2,30 @@
 
 #include "Physics.h"
 #include "IBroadphase.h"
+#include "ICollider.h"
 
 #include <algorithm>
 
 namespace Physics {
+	DynamicRigidBody::DynamicRigidBody(std::unique_ptr<ICollider> collider, const float maxVelocityChange) :
+		IRigidBody(std::move(collider)),
+		Velocity(),
+		TargetVelocity(),
+		MaxVelocityChange(maxVelocityChange)
+	{}
+
+	DynamicRigidBody::~DynamicRigidBody() {}
+
 	void DynamicRigidBody::UpdateVelocity(const float delta, Physics &physics) {
 		// Calculate Velocity Per Second Change Needed
 		glm::vec2 velocityChange = TargetVelocity - Velocity;
 
 		// Add Velocity Caused by Nearby Pushing Rigidbodies
 		// Note: this might cause some problems with the player rigidbody
-		for (DynamicRigidBody &rigidBody : physics.GetBroadphase().DetectCollisions(*this, physics)) {
+		for (DynamicRigidBody &rigidBody : physics.GetBroadphase().DetectDynamicCollisions(*this, physics)) {
 			// Check if the Distance is smaller than the two radii combined
 			glm::vec2 diff = Position - rigidBody.Position;
-			if ((diff.x * diff.x) + (diff.y * diff.y) < (BroadphaseRadius + rigidBody.BroadphaseRadius) * (BroadphaseRadius + rigidBody.BroadphaseRadius)) {
+			if ((diff.x * diff.x) + (diff.y * diff.y) < (Collider->BroadphaseRadius + rigidBody.Collider->BroadphaseRadius) * (Collider->BroadphaseRadius + rigidBody.Collider->BroadphaseRadius)) {
 				// If diff is 0, glm::normalize will crash
 				if (diff.x == 0.0f && diff.y == 0.0f)
 					diff.x = this > &rigidBody ? 1.0f : -1.0f;
@@ -37,7 +47,7 @@ namespace Physics {
 		Velocity += std::move(velocityChange);
 		
 		// Update Broadphase Data
-		UpdateBroadphase();
+		Collider->UpdateBroadphaseData(*this);
 	}
 
 	void DynamicRigidBody::UpdatePosition(const float delta) {

@@ -47,7 +47,7 @@ namespace CoherentUIOpenGLUI {
 		m_KeyIDs(input.GetSpecialKeyIds())
 	{
 		// Attach View Event
-		m_ViewListener.OnViewReady.AttachFromThis(CoherentUIOpenGLUI::OnViewReady, m_EventScope);
+		m_ViewListener.OnViewReady.AttachMember(this, &CoherentUIOpenGLUI::OnViewReady, m_EventScope);
 
 		// Initialize System
 		m_Settings.HostDirectory = L"Host";
@@ -93,10 +93,10 @@ namespace CoherentUIOpenGLUI {
 
 	void CoherentUIOpenGLUI::OnViewReady(const Utils::EmptyEventArgs &args) {
 		// Attach input event
-		m_Input.OnKeyChange.AttachFromThis(CoherentUIOpenGLUI::OnKeyInput, m_EventScope);
-		m_Input.OnCharInput.AttachFromThis(CoherentUIOpenGLUI::OnCharInput, m_EventScope);
-		m_Input.OnCursorPosChange.AttachFromThis(CoherentUIOpenGLUI::OnCursorPosChange, m_EventScope);
-		m_Input.OnMouseButtonChange.AttachFromThis(CoherentUIOpenGLUI::OnMouseButtonChange, m_EventScope);
+		m_Input.OnKeyChange.AttachMember(this, &CoherentUIOpenGLUI::OnKeyInput, m_EventScope);
+		m_Input.OnCharInput.AttachMember(this, &CoherentUIOpenGLUI::OnCharInput, m_EventScope);
+		m_Input.OnCursorPosChange.AttachMember(this, &CoherentUIOpenGLUI::OnCursorPosChange, m_EventScope);
+		m_Input.OnMouseButtonChange.AttachMember(this, &CoherentUIOpenGLUI::OnMouseButtonChange, m_EventScope);
 	}
 
 	void CoherentUIOpenGLUI::OnKeyInput(const Input::KeyChangeEventArgs &args) {

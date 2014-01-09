@@ -14,7 +14,6 @@ namespace Physics {
 		virtual ~IBroadphase() {}
 
 	public: // Broadphase Collection
-		friend class Physics;
-		virtual std::list<std::reference_wrapper<DynamicRigidBody>> DetectCollisions(const DynamicRigidBody &dynamicRigidBody, Physics &physics) = 0;
+		virtual std::list<std::reference_wrapper<DynamicRigidBody>> DetectDynamicCollisions(const DynamicRigidBody &dynamicRigidBody, Physics &physics) = 0;
 	};
 }

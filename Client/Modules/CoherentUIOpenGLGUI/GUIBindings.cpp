@@ -12,7 +12,7 @@ namespace CoherentUIOpenGLUI {
 	GUIBindings::GUIBindings(ViewEventListener &viewListener) :
 		m_ViewListener(viewListener)
 	{
-		m_ViewListener.OnViewReadyForBindings.AttachFromThis(GUIBindings::OnViewReadyForBindings, m_EventScope);
+		m_ViewListener.OnViewReadyForBindings.AttachMember(this, &GUIBindings::OnViewReadyForBindings, m_EventScope);
 	}
 
 	// Event Handlers

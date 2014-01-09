@@ -10,6 +10,6 @@ namespace Physics {
 	 */
 	class AABBBroadphase final : public IBroadphase {
 	public: // Broadphase Collection
-		std::list<std::reference_wrapper<DynamicRigidBody>> DetectCollisions(const DynamicRigidBody &dynamicRigidBody, Physics &physics);
+		std::list<std::reference_wrapper<DynamicRigidBody>> DetectDynamicCollisions(const DynamicRigidBody &dynamicRigidBody, Physics &physics);
 	};
 }

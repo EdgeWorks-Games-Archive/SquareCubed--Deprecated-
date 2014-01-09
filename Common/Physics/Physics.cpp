@@ -52,12 +52,13 @@ namespace Physics {
 	// Game Loop
 
 	void Physics::UpdatePhysics(const float delta) {
-		// Update all rigidbody velocities
+		// Update all velocities and collisions
 		for (DynamicRigidBody &rigidBody : m_DynamicRigidBodies) {
 			rigidBody.UpdateVelocity(delta, *this);
 		}
 
-		// Update all rigidbody positions
+		// Update all positions, UpdateVelocity and UpdateCollisions
+		// rely on this position so only now change it
 		for (DynamicRigidBody &rigidBody : m_DynamicRigidBodies) {
 			rigidBody.UpdatePosition(delta);
 		}

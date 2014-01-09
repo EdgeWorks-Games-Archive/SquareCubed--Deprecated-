@@ -1,18 +1,6 @@
 #include "DataTypes.h"
 
 namespace Physics {
-	/// MassData ///
-
-	MassData::MassData(const float mass) :
-		m_Mass(std::move(mass)),
-		m_InverseMass(1 / m_Mass)
-	{}
-
-	void MassData::SetMass(const float mass) {
-		m_Mass = std::move(mass);
-		m_InverseMass = 1 / m_Mass;
-	}
-
 	/// AABBData ///
 
 	bool AABBData::Intersects(const AABBData& data) const {

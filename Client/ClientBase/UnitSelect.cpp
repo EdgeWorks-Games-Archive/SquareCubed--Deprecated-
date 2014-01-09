@@ -111,8 +111,8 @@ namespace Tools {
 					auto dUnit = static_cast<const DynamicUnit*>(unit.get());
 
 					// If the mouse click or dragged box hits the Unit hitbox..
-					if (dUnit->RigidBody.BroadphaseAABB.Contains(m_Input.GetCursorPosition().World) 
-						|| (boxWasDragged && dUnit->RigidBody.BroadphaseAABB.Intersects(box))) {
+					if (dUnit->RigidBody.Collider->BroadphaseAABB.Contains(m_Input.GetCursorPosition().World) 
+						|| (boxWasDragged && dUnit->RigidBody.Collider->BroadphaseAABB.Intersects(box))) {
 						// Either way, we need to make sure the selection list isn't cleared.
 						noHit = false;
 

@@ -94,7 +94,7 @@ namespace Core {
 		float delta = 0.016f;
 
 		// Hook Core Events
-		m_GUI->GetBindings().OnQuitCall.AttachFromThis(Engine::OnQuitCall, m_EventScope);
+		m_GUI->GetBindings().OnQuitCall.AttachMember(this, &Engine::OnQuitCall, m_EventScope);
 
 		// Run Game Loop
 		m_Running = true;

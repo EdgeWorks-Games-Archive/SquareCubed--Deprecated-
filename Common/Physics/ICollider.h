@@ -1,16 +1,17 @@
 #pragma once
 
+#include "DataTypes.h"
+
 namespace Physics {
-	struct AABBData;
-	class Physics;
 	class IRigidBody;
 
 	class ICollider {
 	public:
+		AABBData BroadphaseAABB;
+		float BroadphaseRadius;
+
+	public:
 		virtual ~ICollider() {}
-	
-	protected: // Protected Broadphase Data Helpers
-		friend class IRigidBody;
-		virtual void UpdateBroadphaseAABB(IRigidBody &rigidBody) = 0;
+		virtual void UpdateBroadphaseData(IRigidBody &rigidBody) = 0;
 	};
 }

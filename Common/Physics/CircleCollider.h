@@ -1,9 +1,10 @@
 #pragma once
 
 #include "ICollider.h"
-#include "DataTypes.h"
 
 namespace Physics {
+	class IRigidBody;
+
 	class CircleCollider : public ICollider {
 	public:
 		float Radius;
@@ -14,6 +15,6 @@ namespace Physics {
 		{}
 
 	protected:
-		void UpdateBroadphaseAABB(IRigidBody &rigidBody);
+		void UpdateBroadphaseData(IRigidBody &rigidBody);
 	};
 }
