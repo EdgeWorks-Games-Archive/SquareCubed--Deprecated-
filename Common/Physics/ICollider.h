@@ -1,10 +1,9 @@
 #pragma once
 
 #include "DataTypes.h"
+#include "Types.h"
 
 namespace Physics {
-	class IRigidBody;
-
 	class ICollider {
 	public:
 		AABBData BroadphaseAABB;

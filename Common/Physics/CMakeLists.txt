@@ -10,6 +10,7 @@ file (GLOB Physics_SRC
 source_group ("" FILES
 	DataTypes.h DataTypes.cpp
 	Physics.h Physics.cpp
+	Types.h
 )
 source_group (Broadphase FILES
 	AABBBroadphase.h AABBBroadphase.cpp

@@ -1,14 +1,12 @@
 #pragma once
 
+#include "Types.h"
+
 #include <list>
 #include <memory>
 
 namespace Physics {
-	class Physics;
-	class DynamicRigidBody;
-
-	/** Broadphase base interface.
-	 */
+	/** Broadphase base interface. */
 	class IBroadphase {
 	public: // Initialization/Uninitialization
 		virtual ~IBroadphase() {}

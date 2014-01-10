@@ -35,7 +35,7 @@ namespace OpenGLGraphics {
 				glBindTexture(GL_TEXTURE_2D, NULL);
 
 				// Render Health Bar Background
-				glColor4f(0.2f, 0.2f, 0.2f, 0.8f);
+				glColor4f(0.0f, 0.0f, 0.0f, 0.5f);
 				glBegin(GL_QUADS);
 				glVertex2f(-0.4f, 0.3f);
 				glVertex2f(-0.4f + 0.8f, 0.3f);

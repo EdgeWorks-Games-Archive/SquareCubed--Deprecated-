@@ -3,8 +3,6 @@
 #include "ICollider.h"
 
 namespace Physics {
-	class IRigidBody;
-
 	class CircleCollider : public ICollider {
 	public:
 		float Radius;

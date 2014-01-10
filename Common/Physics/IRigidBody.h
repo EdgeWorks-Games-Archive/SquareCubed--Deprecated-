@@ -1,12 +1,11 @@
 #pragma once
 
 #include "DataTypes.h"
+#include "Types.h"
 
 #include <memory>
 
 namespace Physics {
-	class ICollider;
-
 	class IRigidBody {
 	public:
 		glm::vec2 Position;

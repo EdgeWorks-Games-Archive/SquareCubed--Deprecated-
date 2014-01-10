@@ -3,9 +3,6 @@
 #include "IRigidBody.h"
 
 namespace Physics {
-	class Physics;
-	class ICollider;
-
 	class DynamicRigidBody final : public IRigidBody {
 		Physics &m_Physics;
 

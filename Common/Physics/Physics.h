@@ -1,18 +1,14 @@
 #pragma once
 
+#include "Types.h"
+
 #include <CommonLib/Logger.h>
 
 #include <memory>
 #include <list>
 
-/** Contains all functionality related to the Physics module.
- */
+/** Contains all functionality related to the Physics module. */
 namespace Physics {
-	class IBroadphase;
-
-	//class FixedRigidBody;
-	class DynamicRigidBody;
-
 	class Physics final {
 		Utils::Logger m_Logger;
 

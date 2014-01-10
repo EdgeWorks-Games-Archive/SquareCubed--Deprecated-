@@ -25,7 +25,7 @@ namespace OpenGLGraphics {
 			glBindTexture(GL_TEXTURE_2D, NULL);
 			glLineWidth(1.5f);
 			glLineStipple(7, 0xAAAA);
-			glColor4f(0.1f, 0.1f, 0.1f, 0.8f);
+			glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
 			glEnable(GL_LINE_STIPPLE);
 
 			// Render Line Loop

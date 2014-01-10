@@ -1,0 +1,8 @@
+Post added effects
+
+In Gimp:
+- HSV Noise
+  Holdness	8
+  Hue		2
+  Saturation	0
+  Value		16
