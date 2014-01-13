@@ -1,0 +1,12 @@
+/* Global Styling */
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+html {
+    background-color: rgba(0, 0, 0, 0.0);
+    font-family: Segoe UI, Arial, sans-serif;
+    font-size: 14px;
+    -webkit-user-select: none;
+}

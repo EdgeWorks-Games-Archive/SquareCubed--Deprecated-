@@ -25,14 +25,41 @@ namespace CoherentUIOpenGLUI {
 		return std::make_unique<View>(L"Content/GUI/_staging/view.html");
 	}
 
-	void ViewGenerator::Generate(std::ofstream &file) {
-		file << "<html><body>\n";
+	void ViewGenerator::Generate(std::ostream &output) {
+		// Start Generating
+		output << "<html>\n";
 
-		// Add all Sub-Elements
+		// Add Head Data
+		// TODO: Change this to use a template file
+		output << "<head>\n";
+
+		// Add jQuery and jQuery-UI Sheets
+		output << "<script src=\"../scripts/jquery-2.0.3.js\"></script>";
+		output << "<script src=\"../scripts/jquery-ui-1.10.3.js\"></script>";
+
+		// Add Style Sheets
+		output << "<link rel=\"stylesheet\" href=\"../styling/reset.css\" />";
+		output << "<link rel=\"stylesheet\" href=\"../styling/style.css\" />";
+
+		output << "</head>\n";
+
+		// Add Body
+		GenerateBody(output);
+
+		// Finish Generating
+		output << "</html>";
+	}
+
+	// Internal Generation Helpers
+
+	void ViewGenerator::GenerateBody(std::ostream &output) {
+		output << "<body>\n";
+
+		// Add all Sub-Elements to Body
 		for (std::unique_ptr<GUI::IElementGenerator> &element : m_ElementGenerators)
-			element->Generate(file);
+			element->Generate(output);
 
-		file << "</body></html>";
+		output << "</body>\n";
 	}
 
 	// Adding Subcomponents

@@ -20,7 +20,10 @@ namespace CoherentUIOpenGLUI {
 
 	public: // Generation
 		std::unique_ptr<GUI::IView> GenerateView();
-		void Generate(std::ofstream &file);
+		void Generate(std::ostream &output);
+
+	private: // Internal Generation Helpers
+		void GenerateBody(std::ostream &output);
 
 	public: // Adding Subcomponents
 		GUI::ILabelGenerator& AddLabel(std::string text);

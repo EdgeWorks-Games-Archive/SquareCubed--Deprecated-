@@ -50,7 +50,11 @@ namespace GameState {
 		m_Engine.GetGraphics().GetMainCamera().SetHeight(14);
 
 		// Add UI Elements
-		m_ViewGenerator->AddLabel(APP_NAME" "APP_VERSION);
+		GUI::ILabelGenerator &label = m_ViewGenerator->AddLabel(APP_NAME" "APP_VERSION);
+		label.PositionType = GUI::PositionType::Absolute;
+		label.HorizontalAlign = GUI::HorizontalAlign::Right;
+
+		m_ViewGenerator->AddLabel("This is a test!");
 
 		// Finish off UI Generation
 		m_View = m_ViewGenerator->GenerateView();

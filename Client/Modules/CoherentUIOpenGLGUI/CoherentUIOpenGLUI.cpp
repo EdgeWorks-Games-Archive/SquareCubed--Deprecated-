@@ -212,7 +212,7 @@ namespace CoherentUIOpenGLUI {
 
 		// Build View Path
 		std::wstringstream ss;
-		ss << L"coui://Content/GUI/Views/" << view << "/" << view << ".html";
+		ss << L"coui://Content/GUI/Deprecated/Views/" << view << "/" << view << ".html";
 
 		// Replace View and Unhook Events if needed
 		if (&m_ViewListener.GetView() != nullptr) {

@@ -10,6 +10,6 @@ namespace CoherentUIOpenGLUI {
 
 	public:
 		LabelGenerator(std::string text);
-		void Generate(std::ofstream &file);
+		void Generate(std::ostream &output);
 	};
 }

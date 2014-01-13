@@ -35,7 +35,6 @@ namespace GUI {
 
 	class IView;
 	class IViewGenerator;
-	class ILabel;
 	class ILabelGenerator;
 }
 
