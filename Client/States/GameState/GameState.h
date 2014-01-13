@@ -1,5 +1,6 @@
 #pragma once
 
+#include <ClientBase/Types.h>
 #include <ClientBase/IState.h>
 #include <ClientBase/World.h>
 #include <ClientBase/Units.h>
@@ -7,20 +8,12 @@
 #include <ClientBase/RPGPlayer.h>
 #include <ClientBase/DebugMenu.h>
 
-namespace Network {
-	class IPacketHandler;
-	class IGameDispatcher;
-}
-
-namespace Graphics {
-	class ITexture2D;
-	class ITileArray;
-}
-
 namespace GameState {
 	class GameState final : public StateEngine::IState {
 		Core::Engine &m_Engine;
 		std::unique_ptr<Network::IGameDispatcher> m_Dispatcher;
+		std::unique_ptr<GUI::IViewGenerator> m_ViewGenerator;
+		std::unique_ptr<GUI::IView> m_View;
 
 		// Internal Components
 		Physics::Physics m_Physics;

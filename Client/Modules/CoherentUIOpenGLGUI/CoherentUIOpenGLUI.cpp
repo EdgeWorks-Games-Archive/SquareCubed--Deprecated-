@@ -1,6 +1,8 @@
 #include "CoherentUIOpenGLUI.h"
 #include "CoherentUIOpenGLUILoader.h"
 
+#include "View.h"
+
 #include <ClientBase/IGUI.h>
 #include <ClientBase/Input.h>
 #include <ClientBase/IContext.h>
@@ -226,8 +228,43 @@ namespace CoherentUIOpenGLUI {
 		m_System->CreateView(info, ss.str().c_str(), &m_ViewListener);
 	}
 
+	void CoherentUIOpenGLUI::SwitchView(GUI::IView &view) {
+		// Convert view to our own View
+		View &ourView = static_cast<View&>(view);
+
+		// Set Info
+		Coherent::UI::ViewInfo info;
+		info.Width = 1024;
+		info.Height = 768;
+		info.UsesSharedMemory = true;
+		info.IsTransparent = true;
+
+		// Build View Path
+		std::wstringstream ss;
+		ss << L"coui://" << ourView.GetPath();
+
+		// Replace View and Unhook Events if needed
+		if (&m_ViewListener.GetView() != nullptr) {
+			// Unhook Events
+			m_Input.OnKeyChange.DetachForScope(m_EventScope);
+			m_Input.OnCharInput.DetachForScope(m_EventScope);
+			m_Input.OnCursorPosChange.DetachForScope(m_EventScope);
+			m_Input.OnMouseButtonChange.DetachForScope(m_EventScope);
+
+			// Destroy old View
+			m_ViewListener.GetView().Destroy();
+		}
+		m_System->CreateView(info, ss.str().c_str(), &m_ViewListener);
+	}
+
 	GUI::IGUIBindings& CoherentUIOpenGLUI::GetBindings() {
 		return m_Bindings;
+	}
+
+	// View Helpers
+
+	std::unique_ptr<GUI::IViewGenerator> CoherentUIOpenGLUI::CreateViewGenerator() {
+		return std::make_unique<ViewGenerator>();
 	}
 
 	// Game Loop

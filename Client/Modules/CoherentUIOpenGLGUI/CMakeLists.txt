@@ -25,6 +25,10 @@ source_group ("Header Wrappers" FILES
 	CoherentUI.h
 	GLheaders.h
 )
+source_group (Elements FILES
+	View.h View.cpp
+	Label.h Label.cpp
+)
 
 # Add Library Build Output
 add_library (CoherentUIOpenGLGUI ${CoherentUIOpenGLGUI_SRC})

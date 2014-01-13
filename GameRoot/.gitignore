@@ -5,3 +5,5 @@
 *.pdb
 /Host/
 /Logs/*.log
+/Content/GUI/_staging/*.html
+/Content/GUI/_staging/*.css

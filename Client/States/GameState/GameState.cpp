@@ -3,16 +3,24 @@
 
 #include <ClientBase/Engine.h>
 #include <ClientBase/Content.h>
+#include <ClientBase/gdefines.h>
+
 #include <ClientBase/IGraphics.h>
 #include <ClientBase/IGraphicsFactory.h>
 #include <ClientBase/ICamera.h>
+
 #include <ClientBase/IGUI.h>
+#include <ClientBase/IView.h>
+#include <ClientBase/ILabel.h>
+
 #include <ClientBase/StateEngine.h>
+
 #include <ClientBase/INetwork.h>
 #include <ClientBase/INetworkFactory.h>
 #include <ClientBase/IGameDispatcher.h>
 
 #include <CommonLib/LoggingManager.h>
+#include <CommonLib/metadata.h>
 #include <Physics/AABBBroadphase.h>
 
 #include <string>
@@ -25,7 +33,9 @@ namespace GameState {
 	GameState::GameState(Core::Engine &engine) :
 		m_Engine(std::move(engine)),
 		m_Dispatcher(m_Engine.GetNetwork().GetFactory().CreateGameDispatcher()),
-		
+		m_ViewGenerator(m_Engine.GetGUI().CreateViewGenerator()),
+		m_View(nullptr),
+
 		// Internal Components
 		m_Physics(m_Engine.GetLoggingManager(), std::make_unique<Physics::AABBBroadphase>()),
 		m_World(m_Engine, "Content/Tiles/tiles.scta"),
@@ -39,8 +49,14 @@ namespace GameState {
 		// Set Camera Size
 		m_Engine.GetGraphics().GetMainCamera().SetHeight(14);
 
-		// Done Loading, Switch UI and Spawn the Player
-		m_Engine.GetGUI().SwitchView(L"Game");
+		// Add UI Elements
+		m_ViewGenerator->AddLabel(APP_NAME" "APP_VERSION);
+
+		// Finish off UI Generation
+		m_View = m_ViewGenerator->GenerateView();
+		m_Engine.GetGUI().SwitchView(*m_View);
+
+		// Done Loading, Spawn Player
 		m_Dispatcher->SpawnPlayer();
 	}
 

@@ -26,6 +26,19 @@ namespace Graphics {
 	class ITileArray;
 }
 
+namespace GUI {
+	class IGUIBindings;
+
+	// Elements
+	class IElement;
+	class IElementGenerator;
+
+	class IView;
+	class IViewGenerator;
+	class ILabel;
+	class ILabelGenerator;
+}
+
 namespace Input {
 	class Input;
 	struct KeyChangeEventArgs;
@@ -56,6 +69,7 @@ namespace Tools {
 	namespace Player {
 		class RPGPlayer;
 	}
+
 	namespace Units {
 		typedef unsigned int UnitID;
 		class Units;

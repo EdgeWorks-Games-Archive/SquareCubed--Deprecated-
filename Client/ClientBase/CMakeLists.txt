@@ -38,6 +38,11 @@ source_group (GUI FILES
 	IGUI.h
 	IGUIBindings.h
 )
+source_group (GUI\\Elements FILES
+	IElement.h
+	IView.h
+	ILabel.h
+)
 source_group (Input FILES
 	Input.h Input.cpp
 	InputData.h
@@ -84,6 +89,9 @@ source_group (Tools\\World FILES
 )
 source_group (Tools\\Debug FILES
 	DebugMenu.h DebugMenu.cpp
+)
+source_group (Misc FILES
+	gdefines.h
 )
 
 # Add Library Build Output
