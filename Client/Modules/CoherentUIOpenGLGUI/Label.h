@@ -2,14 +2,27 @@
 
 #include <ClientBase/ILabel.h>
 
-#include <string>
+#include <memory>
 
 namespace CoherentUIOpenGLUI {
-	class LabelGenerator final : public GUI::ILabelGenerator {
-		std::string m_Text;
+	/// Static Label ///
 
+	class LabelGenerator : public virtual GUI::ILabelGenerator {
 	public:
-		LabelGenerator(std::string text);
+		virtual ~LabelGenerator();
+
 		void Generate(std::ostream &output);
+	};
+
+	/// Dynamic Label ///
+
+	class DynamicLabel : public GUI::IDynamicLabel {
+	public:
+		void SetText(std::string text);
+	};
+
+	class DynamicLabelGenerator : public GUI::IDynamicLabelGenerator, public LabelGenerator {
+	public:
+		DynamicLabelGenerator(std::unique_ptr<GUI::IDynamicLabel> &bindingObject);
 	};
 }

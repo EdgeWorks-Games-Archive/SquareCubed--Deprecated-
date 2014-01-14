@@ -2,6 +2,8 @@
 
 #include "Label.h"
 
+#include <fstream>
+
 namespace CoherentUIOpenGLUI {
 	/// View ///
 
@@ -34,12 +36,12 @@ namespace CoherentUIOpenGLUI {
 		output << "<head>\n";
 
 		// Add jQuery and jQuery-UI Sheets
-		output << "<script src=\"../scripts/jquery-2.0.3.js\"></script>";
-		output << "<script src=\"../scripts/jquery-ui-1.10.3.js\"></script>";
+		output << "<script src=\"../scripts/jquery-2.0.3.js\"></script>\n";
+		output << "<script src=\"../scripts/jquery-ui-1.10.3.js\"></script>\n";
 
 		// Add Style Sheets
-		output << "<link rel=\"stylesheet\" href=\"../styling/reset.css\" />";
-		output << "<link rel=\"stylesheet\" href=\"../styling/style.css\" />";
+		output << "<link rel=\"stylesheet\" href=\"../styling/reset.css\" />\n";
+		output << "<link rel=\"stylesheet\" href=\"../styling/style.css\" />\n";
 
 		output << "</head>\n";
 
@@ -65,14 +67,48 @@ namespace CoherentUIOpenGLUI {
 	// Adding Subcomponents
 
 	GUI::ILabelGenerator& ViewGenerator::AddLabel(std::string text) {
-		// Create a new Label
-		std::unique_ptr<GUI::ILabelGenerator> label = std::make_unique<LabelGenerator>(std::move(text));
+		// Create the Object and Set Values
+		GUI::ILabelGenerator &label = AddNew<LabelGenerator>();
+		label.Text = std::move(text);
 
-		// Keep a reference to the old Label and add it to the list
-		GUI::ILabelGenerator &retLabel = *label;
-		m_ElementGenerators.push_back(std::move(label));
-		
-		// Return the reference
-		return retLabel;
+		// Return the Reference
+		return label;
+	}
+
+	GUI::IDynamicLabelGenerator& ViewGenerator::AddDynamicLabel(std::unique_ptr<GUI::IDynamicLabel> &bindingObject, std::string text) {
+		// Create the Object and Set Values
+		GUI::IDynamicLabelGenerator &label = AddNew<DynamicLabelGenerator>(bindingObject);
+		label.Text = std::move(text);
+
+		// Return the Reference
+		return label;
+	}
+
+	// Subcomponent Helpers
+
+	template<class T>
+	T& ViewGenerator::AddNew() {
+		// Create the Object
+		std::unique_ptr<T> obj = std::make_unique<T>();
+
+		// Keep a Reference to it and Move it to the List
+		T &objRef = *obj;
+		m_ElementGenerators.push_back(std::move(obj));
+
+		// Return the Reference
+		return objRef;
+	}
+
+	template<class T, class BindingT>
+	T& ViewGenerator::AddNew(std::unique_ptr<BindingT> &bindingObject) {
+		// Create the Object
+		std::unique_ptr<T> obj = std::make_unique<T>(bindingObject);
+
+		// Keep a Reference to it and Move it to the List
+		T &objRef = *obj;
+		m_ElementGenerators.push_back(std::move(obj));
+
+		// Return the Reference
+		return objRef;
 	}
 }

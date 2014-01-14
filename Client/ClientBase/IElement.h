@@ -1,6 +1,9 @@
 #pragma once
 
-#include <fstream>
+// Hides a warning coming from a VC++ Bug
+#pragma warning( disable : 4250 )
+
+#include <ostream>
 
 namespace GUI {
 	enum class PositionType {
@@ -16,10 +19,14 @@ namespace GUI {
 	enum class VerticalAlign { Top, Bottom };
 
 	class IElement {
+	public:
+		virtual ~IElement() {}
 	};
 
 	class IElementGenerator {
 	public:
+		virtual ~IElementGenerator() {}
+
 		/** Generates the element into the target file and generates a the binding element object.
 		 * \param[out] file Target File.
 		 */

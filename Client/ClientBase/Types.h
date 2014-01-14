@@ -35,7 +35,10 @@ namespace GUI {
 
 	class IView;
 	class IViewGenerator;
+
 	class ILabelGenerator;
+	class IDynamicLabel;
+	class IDynamicLabelGenerator;
 }
 
 namespace Input {

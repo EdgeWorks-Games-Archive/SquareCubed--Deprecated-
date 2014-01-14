@@ -27,5 +27,10 @@ namespace CoherentUIOpenGLUI {
 
 	public: // Adding Subcomponents
 		GUI::ILabelGenerator& AddLabel(std::string text);
+		GUI::IDynamicLabelGenerator& AddDynamicLabel(std::unique_ptr<GUI::IDynamicLabel> &bindingObject, std::string text);
+
+	private: // Subcomponent Helpers
+		template<class T> T& AddNew();
+		template<class T, class BindingT> T& AddNew(std::unique_ptr<BindingT> &bindingObject);
 	};
 }

@@ -5,8 +5,10 @@
 
 namespace Tools {
 	namespace Misc {
-		FPSTimer::FPSTimer(GUI::IViewGenerator &view) {
-			GUI::ILabelGenerator &label = view.AddLabel("FPS: ### Delta: ###ms");
+		FPSTimer::FPSTimer(GUI::IViewGenerator &view) :
+			m_DynamicLabel()
+		{
+			GUI::ILabelGenerator &label = view.AddDynamicLabel(m_DynamicLabel, "FPS: ### Delta: ###ms");
 			label.PositionType = GUI::PositionType::Absolute;
 		}
 

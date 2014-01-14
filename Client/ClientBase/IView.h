@@ -15,5 +15,6 @@ namespace GUI {
 
 	public: // Adding Subcomponents
 		virtual ILabelGenerator& AddLabel(std::string text) = 0;
+		virtual IDynamicLabelGenerator& AddDynamicLabel(std::unique_ptr<GUI::IDynamicLabel> &bindingObject, std::string text) = 0;
 	};
 }

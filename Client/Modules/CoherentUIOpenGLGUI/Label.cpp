@@ -1,9 +1,9 @@
 #include "Label.h"
 
 namespace CoherentUIOpenGLUI {
-	LabelGenerator::LabelGenerator(std::string text) :
-		m_Text(std::move(text))
-	{}
+	/// Static Label ///
+
+	LabelGenerator::~LabelGenerator() {}
 
 	void LabelGenerator::Generate(std::ostream &output) {
 		// If not auto position type, add style attribute
@@ -35,6 +35,14 @@ namespace CoherentUIOpenGLUI {
 		else
 			output << "<p>";
 
-		output << m_Text << "</p>\n";
+		output << Text << "</p>\n";
+	}
+
+	/// Dynamic Label ///
+
+	void DynamicLabel::SetText(std::string text) {
+	}
+
+	DynamicLabelGenerator::DynamicLabelGenerator(std::unique_ptr<GUI::IDynamicLabel> &bindingObject) {
 	}
 }
