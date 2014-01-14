@@ -6,6 +6,7 @@
 #include <ClientBase/Units.h>
 #include <ClientBase/UnitSelect.h>
 #include <ClientBase/RPGPlayer.h>
+#include <ClientBase/FPSTimer.h>
 #include <ClientBase/DebugMenu.h>
 
 namespace GameState {
@@ -18,10 +19,13 @@ namespace GameState {
 		// Internal Components
 		Physics::Physics m_Physics;
 		Tools::World::World m_World;
+
 		Tools::Units::Units m_Units;
 		Tools::Units::UnitSelect m_UnitSelect;
 		Tools::Player::RPGPlayer m_Player;
+
 #ifdef _DEBUG
+		Tools::Misc::FPSTimer m_FPSTimer;
 		Tools::Debug::DebugMenu m_DebugMenu;
 #endif
 

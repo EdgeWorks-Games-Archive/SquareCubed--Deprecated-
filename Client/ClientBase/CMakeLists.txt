@@ -90,6 +90,9 @@ source_group (Tools\\World FILES
 source_group (Tools\\Debug FILES
 	DebugMenu.h DebugMenu.cpp
 )
+source_group (Tools\\Misc FILES
+	FPSTimer.h FPSTimer.cpp
+)
 source_group (Misc FILES
 	gdefines.h
 )

@@ -39,11 +39,14 @@ namespace GameState {
 		// Internal Components
 		m_Physics(m_Engine.GetLoggingManager(), std::make_unique<Physics::AABBBroadphase>()),
 		m_World(m_Engine, "Content/Tiles/tiles.scta"),
+
 		m_Units(m_Engine, m_Physics, "Content/Units/units.scta"),
 		m_UnitSelect(m_Engine, m_Units),
 		m_Player(m_Engine, m_Units, m_Physics)
+
 #ifdef _DEBUG
-		,m_DebugMenu(m_Engine)
+		,m_FPSTimer(*m_ViewGenerator),
+		m_DebugMenu(m_Engine)
 #endif
 	{
 		// Set Camera Size
@@ -53,8 +56,6 @@ namespace GameState {
 		GUI::ILabelGenerator &label = m_ViewGenerator->AddLabel(APP_NAME" "APP_VERSION);
 		label.PositionType = GUI::PositionType::Absolute;
 		label.HorizontalAlign = GUI::HorizontalAlign::Right;
-
-		m_ViewGenerator->AddLabel("This is a test!");
 
 		// Finish off UI Generation
 		m_View = m_ViewGenerator->GenerateView();
@@ -75,6 +76,10 @@ namespace GameState {
 	void GameState::Update(const float delta) {
 		m_Player.Update(delta);
 		m_Physics.UpdatePhysics(delta);
+
+#ifdef _DEBUG
+		m_FPSTimer.Update(delta);
+#endif
 	}
 
 	void GameState::Render(const float delta) {
