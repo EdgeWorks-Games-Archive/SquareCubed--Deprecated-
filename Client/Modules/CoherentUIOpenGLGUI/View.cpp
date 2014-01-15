@@ -80,6 +80,9 @@ namespace CoherentUIOpenGLUI {
 	GUI::ILabelGenerator& ViewGenerator::AddLabel(std::string text) {
 		// Create the Object and Set Values
 		GUI::ILabelGenerator &label = AddNew<LabelGenerator>();
+
+		// Set Values
+		HTMLHelper::Escape(text);
 		label.Text = std::move(text);
 
 		// Return the Reference
@@ -89,6 +92,9 @@ namespace CoherentUIOpenGLUI {
 	GUI::IDynamicLabelGenerator& ViewGenerator::AddDynamicLabel(std::unique_ptr<GUI::IDynamicLabel> &bindingObject, std::string text) {
 		// Create the Object and Set Values
 		GUI::IDynamicLabelGenerator &label = AddNew<DynamicLabelGenerator>(m_ViewListener, bindingObject);
+
+		// Set Values
+		HTMLHelper::Escape(text);
 		label.Text = std::move(text);
 
 		// Return the Reference

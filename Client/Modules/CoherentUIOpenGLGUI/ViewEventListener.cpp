@@ -51,11 +51,13 @@ namespace CoherentUIOpenGLUI {
 	}
 
 	void ViewEventListener::DestroySurface(Coherent::UI::CoherentHandle surface, bool useSharedMemory) {
+		m_IsReady = false;
 		assert(useSharedMemory);
 		SharedMemoryHelper::DestroySegment(surface);
 	}
 
 	void ViewEventListener::OnReadyForBindings(int frameId, const wchar_t* url, bool isMainFrame) {
+		m_IsReady = true;
 		OnViewReadyForBindings.Invoke(Utils::NO_ARGS);
 	}
 }

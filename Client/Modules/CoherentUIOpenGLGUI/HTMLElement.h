@@ -4,6 +4,14 @@
 #include <string>
 
 namespace CoherentUIOpenGLUI {
+	class HTMLHelper {
+	public:
+		/** HTML Escapes characters in a string.
+		 * \param[in,out] data The string to escape.
+		 */
+		static void Escape(std::string &data);
+	};
+
 	class HTMLElement final {
 	public: // Properties
 		std::string Tag;

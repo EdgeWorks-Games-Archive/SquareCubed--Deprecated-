@@ -13,18 +13,22 @@ namespace Tools {
 			UpdateInterval(0.5f),
 			Accumulator(0.0f)
 		{
-			GUI::ILabelGenerator &label = view.AddDynamicLabel(m_Label, "FPS: ### Delta: ###ms");
+			GUI::ILabelGenerator &label = view.AddDynamicLabel(m_Label, "FPS: 060 Delta: 016ms");
 			label.PositionType = GUI::PositionType::Absolute;
 		}
 
 		void FPSTimer::Update(const float delta) {
 			Accumulator += delta;
-			if (Accumulator > UpdateInterval) {
+			if (Accumulator >= UpdateInterval) {
 				Accumulator -= UpdateInterval;
+
+				// Build the New String
 				std::stringstream text;
 				text << std::setfill('0') << std::fixed << std::setprecision(0);
 				text << "FPS: " << std::setw(3) << 1.0f / delta;
 				text << " Delta: " << std::setw(3) << delta * 1000.0f << "ms";
+
+				// Set the New String
 				m_Label->SetText(text.str());
 			}
 		}

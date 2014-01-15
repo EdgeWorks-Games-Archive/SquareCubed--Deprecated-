@@ -17,6 +17,12 @@ namespace CoherentUIOpenGLUI {
 		ViewEventListener(Renderer &renderer);
 		~ViewEventListener();
 
+	private: // Internal Properties
+		bool m_IsReady;
+
+	public: // Properties
+		bool IsReady() { return m_IsReady; }
+
 	public: // Events
 		Utils::Event<Utils::EmptyEventArgs> OnViewReady;
 		Utils::Event<Utils::EmptyEventArgs> OnViewReadyForBindings;

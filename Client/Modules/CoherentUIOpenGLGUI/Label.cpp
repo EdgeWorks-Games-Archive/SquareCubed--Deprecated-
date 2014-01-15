@@ -62,8 +62,10 @@ namespace CoherentUIOpenGLUI {
 	{}
 
 	void DynamicLabel::SetText(std::string text) {
-		Coherent::UI::View &view = m_ViewListener.GetView();
-		view.TriggerEvent("LabelTextChanged", m_HTMLId, text);
+		if (m_ViewListener.IsReady()) {
+			Coherent::UI::View &view = m_ViewListener.GetView();
+			view.TriggerEvent("LabelTextChanged", m_HTMLId, text);
+		}
 	}
 
 	/// Dynamic Label Generator ///
@@ -91,7 +93,7 @@ namespace CoherentUIOpenGLUI {
 
 		// Add ID
 		std::stringstream idstream;
-		idstream << "label" << ID;
+		idstream << "#label" << ID;
 		element.ID = idstream.str();
 
 		return element;
