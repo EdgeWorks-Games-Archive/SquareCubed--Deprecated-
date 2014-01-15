@@ -264,7 +264,7 @@ namespace CoherentUIOpenGLUI {
 	// View Helpers
 
 	std::unique_ptr<GUI::IViewGenerator> CoherentUIOpenGLUI::CreateViewGenerator() {
-		return std::make_unique<ViewGenerator>();
+		return std::make_unique<ViewGenerator>(m_ViewListener);
 	}
 
 	// Game Loop

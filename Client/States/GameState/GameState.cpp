@@ -59,6 +59,7 @@ namespace GameState {
 
 		// Finish off UI Generation
 		m_View = m_ViewGenerator->GenerateView();
+		m_ViewGenerator.reset();
 		m_Engine.GetGUI().SwitchView(*m_View);
 
 		// Done Loading, Spawn Player

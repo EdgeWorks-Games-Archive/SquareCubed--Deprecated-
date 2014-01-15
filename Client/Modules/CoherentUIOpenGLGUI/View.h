@@ -7,6 +7,8 @@
 #include <string>
 
 namespace CoherentUIOpenGLUI {
+	class ViewEventListener;
+
 	class View final : public GUI::IView {
 		std::wstring m_Path;
 
@@ -16,7 +18,11 @@ namespace CoherentUIOpenGLUI {
 	};
 
 	class ViewGenerator final : public GUI::IViewGenerator {
+		ViewEventListener &m_ViewListener;
 		std::list<std::unique_ptr<GUI::IElementGenerator>> m_ElementGenerators;
+
+	public:
+		ViewGenerator(ViewEventListener &viewListener);
 
 	public: // Generation
 		std::unique_ptr<GUI::IView> GenerateView();
@@ -31,6 +37,6 @@ namespace CoherentUIOpenGLUI {
 
 	private: // Subcomponent Helpers
 		template<class T> T& AddNew();
-		template<class T, class BindingT> T& AddNew(std::unique_ptr<BindingT> &bindingObject);
+		template<class T, class BindingT> T& AddNew(ViewEventListener &viewListener, std::unique_ptr<BindingT> &bindingObject);
 	};
 }

@@ -21,7 +21,7 @@ namespace GUI {
 		{}
 		virtual ~ILabelGenerator() {}
 
-	public: // Generation Properties
+	public: // Properties
 		std::string Text;
 
 		// Position Data

@@ -15,6 +15,10 @@ namespace CoherentUIOpenGLUI {
 
 	/// View Generator ///
 
+	ViewGenerator::ViewGenerator(ViewEventListener &viewListener) :
+		m_ViewListener(viewListener)
+	{}
+
 	// Generation
 
 	std::unique_ptr<GUI::IView> ViewGenerator::GenerateView() {
@@ -35,9 +39,16 @@ namespace CoherentUIOpenGLUI {
 		// TODO: Change this to use a template file
 		output << "<head>\n";
 
-		// Add jQuery and jQuery-UI Sheets
+		// Add jQuery and jQuery-UI Scripts
 		output << "<script src=\"../scripts/jquery-2.0.3.js\"></script>\n";
 		output << "<script src=\"../scripts/jquery-ui-1.10.3.js\"></script>\n";
+
+		// Add Coherent UI Scripts
+		output << "<script type=\"text/javascript\">engineCreateDeferred = jQuery.Deferred;</script>";
+		output << "<script type=\"text/javascript\" src=\"../scripts/coherent.js\"></script>";
+
+		// Add our Custom Bindings Script
+		output << "<script type=\"text/javascript\" src=\"../scripts/bindings.js\"></script>\n";
 
 		// Add Style Sheets
 		output << "<link rel=\"stylesheet\" href=\"../styling/reset.css\" />\n";
@@ -77,7 +88,7 @@ namespace CoherentUIOpenGLUI {
 
 	GUI::IDynamicLabelGenerator& ViewGenerator::AddDynamicLabel(std::unique_ptr<GUI::IDynamicLabel> &bindingObject, std::string text) {
 		// Create the Object and Set Values
-		GUI::IDynamicLabelGenerator &label = AddNew<DynamicLabelGenerator>(bindingObject);
+		GUI::IDynamicLabelGenerator &label = AddNew<DynamicLabelGenerator>(m_ViewListener, bindingObject);
 		label.Text = std::move(text);
 
 		// Return the Reference
@@ -100,9 +111,9 @@ namespace CoherentUIOpenGLUI {
 	}
 
 	template<class T, class BindingT>
-	T& ViewGenerator::AddNew(std::unique_ptr<BindingT> &bindingObject) {
+	T& ViewGenerator::AddNew(ViewEventListener &viewListener, std::unique_ptr<BindingT> &bindingObject) {
 		// Create the Object
-		std::unique_ptr<T> obj = std::make_unique<T>(bindingObject);
+		std::unique_ptr<T> obj = std::make_unique<T>(viewListener, bindingObject);
 
 		// Keep a Reference to it and Move it to the List
 		T &objRef = *obj;

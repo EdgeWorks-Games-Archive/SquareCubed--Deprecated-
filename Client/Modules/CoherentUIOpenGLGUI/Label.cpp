@@ -1,48 +1,99 @@
 #include "Label.h"
 
+#include "ViewEventListener.h"
+
+#include <Coherent/UI/Binding/String.h>
+
+#include <sstream>
+
 namespace CoherentUIOpenGLUI {
-	/// Static Label ///
+	/// Static Label Generator ///
 
 	LabelGenerator::~LabelGenerator() {}
 
 	void LabelGenerator::Generate(std::ostream &output) {
-		// If not auto position type, add style attribute
+		HTMLElement element = GenerateHTML();
+		element.Generate(output);
+	}
+
+	// Generation Helpers
+
+	HTMLElement LabelGenerator::GenerateHTML() {
+		// Create basic Element
+		HTMLElement element("p");
+		element.Content = Text;
+
+		// If not auto position type, add style
 		if (PositionType != GUI::PositionType::Auto) {
-			output << "<p style=\"";
+			std::stringstream style;
 
 			// Add Position Type
-			output << "position:";
+			style << "position:";
 			if (PositionType == GUI::PositionType::Relative)
-				output << "absolute;"; // < This is the CSS equivalent of our Relative
+				style << "absolute;"; // < This is the CSS equivalent of our Relative
 			else
-				output << "fixed;"; // < This is the CSS equivalent of our Absolute
+				style << "fixed;"; // < This is the CSS equivalent of our Absolute
 
 			// Add Actual Position
 			if (HorizontalAlign == GUI::HorizontalAlign::Left)
-				output << "left:";
+				style << "left:";
 			else
-				output << "right:";
-			output << Position.x << ";";
+				style << "right:";
+			style << Position.x << ";";
 
 			if (VerticalAlign == GUI::VerticalAlign::Top)
-				output << "top:";
+				style << "top:";
 			else
-				output << "bottom:";
-			output << Position.y << ";";
+				style << "bottom:";
+			style << Position.y << ";";
 
-			output << "\">";
+			// And done!
+			element.Style = style.str();
 		}
-		else
-			output << "<p>";
 
-		output << Text << "</p>\n";
+		return element;
 	}
 
 	/// Dynamic Label ///
 
+	DynamicLabel::DynamicLabel(ViewEventListener &viewListener, std::string htmlId) :
+		m_ViewListener(viewListener),
+		m_HTMLId(htmlId)
+	{}
+
 	void DynamicLabel::SetText(std::string text) {
+		Coherent::UI::View &view = m_ViewListener.GetView();
+		view.TriggerEvent("LabelTextChanged", m_HTMLId, text);
 	}
 
-	DynamicLabelGenerator::DynamicLabelGenerator(std::unique_ptr<GUI::IDynamicLabel> &bindingObject) {
+	/// Dynamic Label Generator ///
+
+	unsigned int DynamicLabelGenerator::nextId = 0;
+
+	DynamicLabelGenerator::DynamicLabelGenerator(ViewEventListener &viewListener, std::unique_ptr<GUI::IDynamicLabel> &bindingObject) :
+		m_ViewListener(viewListener),
+		ID(nextId),
+		BindingObject(bindingObject)
+	{
+		nextId++;
+	}
+
+	void DynamicLabelGenerator::Generate(std::ostream &output) {
+		HTMLElement element = GenerateHTML();
+		element.Generate(output);
+		BindingObject = std::make_unique<DynamicLabel>(m_ViewListener, element.ID);
+	}
+
+	// Generation Helpers
+
+	HTMLElement DynamicLabelGenerator::GenerateHTML() {
+		HTMLElement element = LabelGenerator::GenerateHTML();
+
+		// Add ID
+		std::stringstream idstream;
+		idstream << "label" << ID;
+		element.ID = idstream.str();
+
+		return element;
 	}
 }
