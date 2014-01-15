@@ -1,5 +1,7 @@
 #include "HTMLElement.h"
 
+#include <sstream>
+
 namespace CoherentUIOpenGLUI {
 	void HTMLHelper::Escape(std::string &data) {
 		std::string::size_type pos = 0;
@@ -21,14 +23,23 @@ namespace CoherentUIOpenGLUI {
 	}
 
 	HTMLElement::HTMLElement(std::string tag) :
-		Tag(std::move(tag))
+		m_StyleEntries(),
+		Tag(std::move(tag)),
+		Content(),
+		ID()
 	{}
 
 	void HTMLElement::Generate(std::ostream &output) {
 		// Add Opening Tag
 		output << "<" << Tag;
 		if (ID != "") output << " id=\"" << ID << "\"";
-		if (Style != "") output << " style=\"" << Style << "\"";
+		// If there's style entries, add those
+		if (!m_StyleEntries.empty()) {
+			output << " style=\"";
+			for (std::string &entry : m_StyleEntries)
+				output << entry;
+			output << "\"";
+		}
 		output << ">";
 
 		// Add Content and Closing Tag

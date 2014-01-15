@@ -103,7 +103,7 @@ namespace CoherentUIOpenGLUI {
 
 	// Subcomponent Helpers
 
-	template<class T>
+	template<typename T>
 	T& ViewGenerator::AddNew() {
 		// Create the Object
 		std::unique_ptr<T> obj = std::make_unique<T>();
@@ -116,7 +116,7 @@ namespace CoherentUIOpenGLUI {
 		return objRef;
 	}
 
-	template<class T, class BindingT>
+	template<typename T, typename BindingT>
 	T& ViewGenerator::AddNew(ViewEventListener &viewListener, std::unique_ptr<BindingT> &bindingObject) {
 		// Create the Object
 		std::unique_ptr<T> obj = std::make_unique<T>(viewListener, bindingObject);

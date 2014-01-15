@@ -25,30 +25,22 @@ namespace CoherentUIOpenGLUI {
 
 		// If not auto position type, add style
 		if (PositionType != GUI::PositionType::Auto) {
-			std::stringstream style;
-
 			// Add Position Type
-			style << "position:";
 			if (PositionType == GUI::PositionType::Relative)
-				style << "absolute;"; // < This is the CSS equivalent of our Relative
+				element.AddStyle("position", "absolute"); // < This is the CSS equivalent of our Relative
 			else
-				style << "fixed;"; // < This is the CSS equivalent of our Absolute
+				element.AddStyle("position", "fixed"); // < This is the CSS equivalent of our Absolute
 
 			// Add Actual Position
 			if (HorizontalAlign == GUI::HorizontalAlign::Left)
-				style << "left:";
+				element.AddStyle("left", Position.x);
 			else
-				style << "right:";
-			style << Position.x << ";";
+				element.AddStyle("right", Position.x);
 
 			if (VerticalAlign == GUI::VerticalAlign::Top)
-				style << "top:";
+				element.AddStyle("top", Position.y);
 			else
-				style << "bottom:";
-			style << Position.y << ";";
-
-			// And done!
-			element.Style = style.str();
+				element.AddStyle("bottom", Position.y);
 		}
 
 		return element;
@@ -58,7 +50,7 @@ namespace CoherentUIOpenGLUI {
 
 	DynamicLabel::DynamicLabel(ViewEventListener &viewListener, std::string htmlId) :
 		m_ViewListener(viewListener),
-		m_HTMLId(htmlId)
+		m_HTMLId("#" + std::move(htmlId))
 	{}
 
 	void DynamicLabel::SetText(std::string text) {
@@ -92,9 +84,9 @@ namespace CoherentUIOpenGLUI {
 		HTMLElement element = LabelGenerator::GenerateHTML();
 
 		// Add ID
-		std::stringstream idstream;
-		idstream << "#label" << ID;
-		element.ID = idstream.str();
+		std::stringstream idStream;
+		idStream << "label" << ID;
+		element.ID = idStream.str();
 
 		return element;
 	}
