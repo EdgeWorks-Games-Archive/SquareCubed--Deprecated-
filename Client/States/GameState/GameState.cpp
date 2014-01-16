@@ -41,7 +41,7 @@ namespace GameState {
 		m_World(m_Engine, "Content/Tiles/tiles.scta"),
 
 		m_Units(m_Engine, m_Physics, "Content/Units/units.scta"),
-		m_UnitSelect(m_Engine, m_Units),
+		m_UnitSelect(m_Engine, *m_ViewGenerator, m_Units),
 		m_Player(m_Engine, m_Units, m_Physics)
 
 #ifdef _DEBUG
@@ -55,7 +55,7 @@ namespace GameState {
 		// Add UI Elements
 		GUI::ILabelGenerator &label = m_ViewGenerator->AddLabel(APP_NAME" "APP_VERSION);
 		label.PositionType = GUI::PositionType::Absolute;
-		label.HorizontalAlign = GUI::HorizontalAlign::Right;
+		label.HorizontalPos = GUI::HorizontalAlign::Right;
 
 		// Finish off UI Generation
 		m_View = m_ViewGenerator->GenerateView();

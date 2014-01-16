@@ -39,6 +39,8 @@ namespace GUI {
 	class ILabelGenerator;
 	class IDynamicLabel;
 	class IDynamicLabelGenerator;
+
+	class IPanelGenerator;
 }
 
 namespace Input {

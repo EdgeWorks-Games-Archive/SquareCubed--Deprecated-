@@ -22,7 +22,7 @@ namespace Tools {
 			Input::KeyID Key[9];
 
 		public: // Initialization/Uninitialization
-			UnitSelect(Core::Engine &engine, Tools::Units::Units &units);
+			UnitSelect(Core::Engine &engine, GUI::IViewGenerator &view, Tools::Units::Units &units);
 			~UnitSelect();
 
 		private: // Internal Helper Functions

@@ -2,6 +2,7 @@
 
 #include "IView.h"
 #include "ILabel.h"
+#include "IPanel.h"
 
 #include <sstream>
 #include <iomanip>

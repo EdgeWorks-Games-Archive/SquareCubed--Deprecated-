@@ -10,3 +10,10 @@ html {
     font-size: 14px;
     -webkit-user-select: none;
 }
+
+/* UI Panel Styling */
+
+.panel {
+	background-color: rgba(48, 48, 48, 1.0);
+	border: 1px solid rgba(24, 24, 24, 1.0);
+}

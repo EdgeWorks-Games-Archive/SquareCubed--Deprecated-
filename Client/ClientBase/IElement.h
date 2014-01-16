@@ -3,6 +3,8 @@
 // Hides a warning coming from a VC++ Bug
 #pragma warning( disable : 4250 )
 
+#include <glm/glm.hpp>
+
 #include <ostream>
 
 namespace GUI {
@@ -24,9 +26,23 @@ namespace GUI {
 	};
 
 	class IElementGenerator {
-	public:
+	public: // Initialization/Uninitialization
+		IElementGenerator() :
+			PositionType(GUI::PositionType::Auto),
+			Position(0, 0),
+			HorizontalPos(GUI::HorizontalAlign::Left),
+			VerticalPos(GUI::VerticalAlign::Top)
+		{}
 		virtual ~IElementGenerator() {}
 
+	public: // Properties
+		// Position Data
+		GUI::PositionType PositionType;
+		glm::ivec2 Position;
+		GUI::HorizontalAlign HorizontalPos;
+		GUI::VerticalAlign VerticalPos;
+
+	public: // Generation
 		/** Generates the element into the target file and generates a the binding element object.
 		 * \param[out] file Target File.
 		 */

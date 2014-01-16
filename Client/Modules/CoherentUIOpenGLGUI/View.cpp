@@ -1,6 +1,7 @@
 #include "View.h"
 
 #include "Label.h"
+#include "Panel.h"
 
 #include <fstream>
 
@@ -100,6 +101,8 @@ namespace CoherentUIOpenGLUI {
 		// Return the Reference
 		return label;
 	}
+
+	GUI::IPanelGenerator& ViewGenerator::AddPanel() { return AddNew<PanelGenerator>(); }
 
 	// Subcomponent Helpers
 

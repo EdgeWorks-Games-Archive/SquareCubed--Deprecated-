@@ -28,6 +28,7 @@ source_group ("Header Wrappers" FILES
 source_group (Elements FILES
 	View.h View.cpp
 	Label.h Label.cpp
+	Panel.h Panel.cpp
 )
 source_group (Elements\\Helpers FILES
 	HTMLElement.h HTMLElement.cpp

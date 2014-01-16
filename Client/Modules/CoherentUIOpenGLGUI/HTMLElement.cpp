@@ -22,9 +22,9 @@ namespace CoherentUIOpenGLUI {
 		};
 	}
 
-	HTMLElement::HTMLElement(std::string tag) :
+	HTMLElement::HTMLElement() :
 		m_StyleEntries(),
-		Tag(std::move(tag)),
+		Tag(),
 		Content(),
 		ID()
 	{}
@@ -33,6 +33,7 @@ namespace CoherentUIOpenGLUI {
 		// Add Opening Tag
 		output << "<" << Tag;
 		if (ID != "") output << " id=\"" << ID << "\"";
+		
 		// If there's style entries, add those
 		if (!m_StyleEntries.empty()) {
 			output << " style=\"";
@@ -40,9 +41,18 @@ namespace CoherentUIOpenGLUI {
 				output << entry;
 			output << "\"";
 		}
+
+		// If there's class entries, add those as well
+		if (!m_ClassEntries.empty()) {
+			output << " class=\"";
+			for (std::string &entry : m_ClassEntries)
+				output << entry << " ";
+			output << "\"";
+		}
+
 		output << ">";
 
 		// Add Content and Closing Tag
-		output << Content << "</" << Tag << ">";
+		output << Content << "</" << Tag << ">\n";
 	}
 }

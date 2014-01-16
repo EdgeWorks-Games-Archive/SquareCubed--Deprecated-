@@ -20,7 +20,8 @@ namespace CoherentUIOpenGLUI {
 
 	HTMLElement LabelGenerator::GenerateHTML() {
 		// Create basic Element
-		HTMLElement element("p");
+		HTMLElement element;
+		element.Tag = "p";
 		element.Content = Text;
 
 		// If not auto position type, add style
@@ -32,12 +33,12 @@ namespace CoherentUIOpenGLUI {
 				element.AddStyle("position", "fixed"); // < This is the CSS equivalent of our Absolute
 
 			// Add Actual Position
-			if (HorizontalAlign == GUI::HorizontalAlign::Left)
+			if (HorizontalPos == GUI::HorizontalAlign::Left)
 				element.AddStyle("left", Position.x);
 			else
 				element.AddStyle("right", Position.x);
 
-			if (VerticalAlign == GUI::VerticalAlign::Top)
+			if (VerticalPos == GUI::VerticalAlign::Top)
 				element.AddStyle("top", Position.y);
 			else
 				element.AddStyle("bottom", Position.y);

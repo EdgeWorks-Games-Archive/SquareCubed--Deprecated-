@@ -13,22 +13,12 @@ namespace GUI {
 	class ILabelGenerator : public IElementGenerator {
 	public:
 		ILabelGenerator() :
-			Text(),
-			PositionType(GUI::PositionType::Auto),
-			Position(0, 0),
-			HorizontalAlign(GUI::HorizontalAlign::Left),
-			VerticalAlign(GUI::VerticalAlign::Top)
+			Text()
 		{}
 		virtual ~ILabelGenerator() {}
 
 	public: // Properties
 		std::string Text;
-
-		// Position Data
-		GUI::PositionType PositionType;
-		glm::ivec2 Position;
-		GUI::HorizontalAlign HorizontalAlign;
-		GUI::VerticalAlign VerticalAlign;
 	};
 
 	/// Dynamic Label ///

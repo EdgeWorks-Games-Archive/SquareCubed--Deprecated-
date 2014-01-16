@@ -7,12 +7,14 @@
 #include "INetwork.h"
 #include "INetworkFactory.h"
 #include "IUnitSelectDispatcher.h"
+#include "IView.h"
+#include "IPanel.h"
 
 #include <algorithm>
 
 namespace Tools {
 	namespace Units {
-		UnitSelect::UnitSelect(Core::Engine &engine, Tools::Units::Units &units) :
+		UnitSelect::UnitSelect(Core::Engine &engine, GUI::IViewGenerator &view, Tools::Units::Units &units) :
 			m_Renderer(engine.GetGraphics().GetFactory().CreateSelectionRenderer()),
 			m_Units(units),
 			m_EventScope(),
@@ -21,9 +23,18 @@ namespace Tools {
 			m_Dispatcher(engine.GetNetwork().GetFactory().CreateUnitSelectDispatcher()),
 			m_ControlGroup()
 		{
+			// Add Panel
+			GUI::IPanelGenerator &panel = view.AddPanel();
+			panel.Size = glm::uvec2(200, 100);
+			panel.PositionType = GUI::PositionType::Absolute;
+			panel.HorizontalPos = GUI::HorizontalAlign::Right;
+			panel.VerticalPos = GUI::VerticalAlign::Bottom;
+
+			// Bind Key Events
 			engine.GetInput().OnMouseButtonChange.AttachMember(this, &UnitSelect::OnMouseButtonChange, m_EventScope);
 			engine.GetInput().OnKeyChange.AttachMember(this, &UnitSelect::OnKeyChange, m_EventScope);
 
+			// Get Key IDs for 1 till 0
 			for (int i = 0; i < 9; i++)
 				Key[i] = m_Input.GetKeyId('1' + i);
 		}

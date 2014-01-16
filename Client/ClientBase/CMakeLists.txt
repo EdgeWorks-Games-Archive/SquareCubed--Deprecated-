@@ -42,6 +42,7 @@ source_group (GUI\\Elements FILES
 	IElement.h
 	IView.h
 	ILabel.h
+	IPanel.h
 )
 source_group (Input FILES
 	Input.h Input.cpp
