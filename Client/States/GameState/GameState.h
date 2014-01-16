@@ -13,8 +13,8 @@ namespace GameState {
 	class GameState final : public StateEngine::IState {
 		Core::Engine &m_Engine;
 		std::unique_ptr<Network::IGameDispatcher> m_Dispatcher;
-		std::unique_ptr<GUI::IViewGenerator> m_ViewGenerator;
-		std::unique_ptr<GUI::IView> m_View;
+		std::unique_ptr<GUI::Elements::IViewGenerator> m_ViewGenerator;
+		std::unique_ptr<GUI::Elements::IView> m_View;
 
 		// Internal Components
 		Physics::Physics m_Physics;

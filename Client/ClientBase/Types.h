@@ -28,20 +28,22 @@ namespace Graphics {
 
 namespace GUI {
 	class IGUIBindings;
-	class IElementFactory;
 
-	// Elements
-	class IElement;
-	class IElementGenerator;
+	namespace Elements {
+		class IElementFactory;
 
-	class IView;
-	class IViewGenerator;
+		class IElement;
+		class IElementGenerator;
 
-	class ILabelGenerator;
-	class IDynamicLabel;
-	class IDynamicLabelGenerator;
+		class IView;
+		class IViewGenerator;
 
-	class IPanelGenerator;
+		class ILabelGenerator;
+		class IDynamicLabel;
+		class IDynamicLabelGenerator;
+
+		class IPanelGenerator;
+	}
 }
 
 namespace Input {

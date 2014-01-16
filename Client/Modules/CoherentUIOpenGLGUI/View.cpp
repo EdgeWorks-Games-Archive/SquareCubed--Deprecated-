@@ -22,7 +22,7 @@ namespace CoherentUIOpenGLUI {
 
 	// Generation
 
-	std::unique_ptr<GUI::IView> ViewGenerator::GenerateView() {
+	std::unique_ptr<GUI::Elements::IView> ViewGenerator::GenerateView() {
 		// Generate Output File
 		std::ofstream outFile("Content/GUI/_staging/view.html", std::ofstream::out | std::ofstream::trunc);
 		Generate(outFile);
@@ -70,7 +70,7 @@ namespace CoherentUIOpenGLUI {
 		output << "<body>\n";
 
 		// Add all Sub-Elements to Body
-		for (std::unique_ptr<GUI::IElementGenerator> &element : m_ElementGenerators)
+		for (std::unique_ptr<GUI::Elements::IElementGenerator> &element : m_ElementGenerators)
 			element->Generate(output);
 
 		output << "</body>\n";
@@ -78,7 +78,7 @@ namespace CoherentUIOpenGLUI {
 
 	// Adding Subcomponents
 
-	void ViewGenerator::Add(std::unique_ptr<GUI::IElementGenerator> element) {
+	void ViewGenerator::Add(std::unique_ptr<GUI::Elements::IElementGenerator> element) {
 		m_ElementGenerators.push_back(std::move(element));
 	}
 }

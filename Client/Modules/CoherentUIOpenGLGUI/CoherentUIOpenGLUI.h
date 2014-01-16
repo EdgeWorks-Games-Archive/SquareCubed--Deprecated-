@@ -62,11 +62,11 @@ namespace CoherentUIOpenGLUI {
 		void SwitchView(std::wstring view);
 		GUI::IGUIBindings& GetBindings();
 
-		GUI::IElementFactory& GetElementFactory();
+		GUI::Elements::IElementFactory& GetElementFactory();
 
 	public: // View Helpers
-		std::unique_ptr<GUI::IViewGenerator> CreateViewGenerator();
-		void SwitchView(GUI::IView &view);
+		std::unique_ptr<GUI::Elements::IViewGenerator> CreateViewGenerator();
+		void SwitchView(GUI::Elements::IView &view);
 
 	public: // Game Loop
 		void Update();

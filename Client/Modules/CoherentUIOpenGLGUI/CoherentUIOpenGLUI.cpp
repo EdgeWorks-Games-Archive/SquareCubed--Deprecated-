@@ -229,7 +229,7 @@ namespace CoherentUIOpenGLUI {
 		m_System->CreateView(info, ss.str().c_str(), &m_ViewListener);
 	}
 
-	void CoherentUIOpenGLUI::SwitchView(GUI::IView &view) {
+	void CoherentUIOpenGLUI::SwitchView(GUI::Elements::IView &view) {
 		// Convert view to our own View
 		View &ourView = static_cast<View&>(view);
 
@@ -259,11 +259,11 @@ namespace CoherentUIOpenGLUI {
 	}
 
 	GUI::IGUIBindings& CoherentUIOpenGLUI::GetBindings() { return m_Bindings; }
-	GUI::IElementFactory& CoherentUIOpenGLUI::GetElementFactory() { return m_ElementFactory; }
+	GUI::Elements::IElementFactory& CoherentUIOpenGLUI::GetElementFactory() { return m_ElementFactory; }
 
 	// View Helpers
 
-	std::unique_ptr<GUI::IViewGenerator> CoherentUIOpenGLUI::CreateViewGenerator() {
+	std::unique_ptr<GUI::Elements::IViewGenerator> CoherentUIOpenGLUI::CreateViewGenerator() {
 		return std::make_unique<ViewGenerator>(m_ViewListener);
 	}
 

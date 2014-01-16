@@ -12,13 +12,13 @@
 
 namespace Tools {
 	namespace Misc {
-		FPSTimer::FPSTimer(Core::Engine &engine, GUI::IViewGenerator &view) :
+		FPSTimer::FPSTimer(Core::Engine &engine, GUI::Elements::IViewGenerator &view) :
 			m_Label(),
 			UpdateInterval(0.5f),
 			Accumulator(0.0f)
 		{
-			std::unique_ptr<GUI::ILabelGenerator> label = engine.GetGUI().GetElementFactory().CreateDynamicLabel(m_Label);
-			label->PositionType = GUI::PositionType::Absolute;
+			std::unique_ptr<GUI::Elements::ILabelGenerator> label = engine.GetGUI().GetElementFactory().CreateDynamicLabel(m_Label);
+			label->PositionType = GUI::Elements::PositionType::Absolute;
 			view.Add(std::move(label));
 		}
 

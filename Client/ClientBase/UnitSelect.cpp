@@ -17,7 +17,7 @@
 
 namespace Tools {
 	namespace Units {
-		UnitSelect::UnitSelect(Core::Engine &engine, GUI::IViewGenerator &view, Tools::Units::Units &units) :
+		UnitSelect::UnitSelect(Core::Engine &engine, GUI::Elements::IViewGenerator &view, Tools::Units::Units &units) :
 			m_Renderer(engine.GetGraphics().GetFactory().CreateSelectionRenderer()),
 			m_Units(units),
 			m_EventScope(),
@@ -27,11 +27,11 @@ namespace Tools {
 			m_ControlGroup()
 		{
 			// Add Panel
-			std::unique_ptr<GUI::IPanelGenerator> panel = engine.GetGUI().GetElementFactory().CreatePanel();
+			std::unique_ptr<GUI::Elements::IPanelGenerator> panel = engine.GetGUI().GetElementFactory().CreatePanel();
 			panel->Size = glm::uvec2(200, 100);
-			panel->PositionType = GUI::PositionType::Absolute;
-			panel->HorizontalPos = GUI::HorizontalAlign::Right;
-			panel->VerticalPos = GUI::VerticalAlign::Bottom;
+			panel->PositionType = GUI::Elements::PositionType::Absolute;
+			panel->HorizontalPos = GUI::Elements::HorizontalAlign::Right;
+			panel->VerticalPos = GUI::Elements::VerticalAlign::Bottom;
 			view.Add(std::move(panel));
 
 			// Bind Key Events

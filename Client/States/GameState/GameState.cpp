@@ -54,10 +54,10 @@ namespace GameState {
 		m_Engine.GetGraphics().GetMainCamera().SetHeight(14);
 
 		// Add UI Elements
-		std::unique_ptr<GUI::ILabelGenerator> label = m_Engine.GetGUI().GetElementFactory().CreateLabel();
+		std::unique_ptr<GUI::Elements::ILabelGenerator> label = m_Engine.GetGUI().GetElementFactory().CreateLabel();
 		label->Text = APP_NAME" "APP_VERSION;
-		label->PositionType = GUI::PositionType::Absolute;
-		label->HorizontalPos = GUI::HorizontalAlign::Right;
+		label->PositionType = GUI::Elements::PositionType::Absolute;
+		label->HorizontalPos = GUI::Elements::HorizontalAlign::Right;
 		m_ViewGenerator->Add(std::move(label));
 
 		// Finish off UI Generation
