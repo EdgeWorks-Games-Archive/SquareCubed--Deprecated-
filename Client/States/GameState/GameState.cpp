@@ -45,7 +45,7 @@ namespace GameState {
 		m_Player(m_Engine, m_Units, m_Physics)
 
 #ifdef _DEBUG
-		,m_FPSTimer(*m_ViewGenerator),
+		,m_FPSTimer(m_Engine, *m_ViewGenerator),
 		m_DebugMenu(m_Engine)
 #endif
 	{

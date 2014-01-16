@@ -40,6 +40,7 @@ namespace CoherentUIOpenGLUI {
 		m_SystemListener(m_ViewListener),
 
 		m_Bindings(m_ViewListener),
+		m_ElementFactory(m_ViewListener),
 
 		m_LogHandler(logManager),
 
@@ -257,9 +258,8 @@ namespace CoherentUIOpenGLUI {
 		m_System->CreateView(info, ss.str().c_str(), &m_ViewListener);
 	}
 
-	GUI::IGUIBindings& CoherentUIOpenGLUI::GetBindings() {
-		return m_Bindings;
-	}
+	GUI::IGUIBindings& CoherentUIOpenGLUI::GetBindings() { return m_Bindings; }
+	GUI::IElementFactory& CoherentUIOpenGLUI::GetElementFactory() { return m_ElementFactory; }
 
 	// View Helpers
 

@@ -13,6 +13,7 @@ source_group ("" FILES
 	LogHandler.h LogHandler.cpp
 	Renderer.h Renderer.cpp
 	SharedMemoryHelper.h SharedMemoryHelperWin.cpp
+	Types.h
 )
 source_group (Bindings FILES
 	GUIBindings.h GUIBindings.cpp
@@ -26,6 +27,7 @@ source_group ("Header Wrappers" FILES
 	GLheaders.h
 )
 source_group (Elements FILES
+	ElementFactory.h ElementFactory.cpp
 	View.h View.cpp
 	Label.h Label.cpp
 	Panel.h Panel.cpp

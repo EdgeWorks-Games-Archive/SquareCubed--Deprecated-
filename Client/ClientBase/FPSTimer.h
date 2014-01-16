@@ -14,7 +14,7 @@ namespace Tools {
 			float Accumulator;
 
 		public:
-			FPSTimer(GUI::IViewGenerator &view);
+			FPSTimer(Core::Engine &engine, GUI::IViewGenerator &view);
 			void Update(const float delta);
 		};
 	}

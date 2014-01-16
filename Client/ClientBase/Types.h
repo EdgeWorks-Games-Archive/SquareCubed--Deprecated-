@@ -28,6 +28,7 @@ namespace Graphics {
 
 namespace GUI {
 	class IGUIBindings;
+	class IElementFactory;
 
 	// Elements
 	class IElement;

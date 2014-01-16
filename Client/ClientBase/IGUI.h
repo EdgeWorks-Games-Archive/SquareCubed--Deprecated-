@@ -16,6 +16,8 @@ namespace GUI {
 		/** Returns the bindings helper class. In the process of being replaced. */
 		virtual IGUIBindings& GetBindings() = 0;
 
+		virtual IElementFactory& GetElementFactory() = 0;
+
 	public: // View Helpers
 		virtual std::unique_ptr<IViewGenerator> CreateViewGenerator() = 0;
 		virtual void SwitchView(IView &view) = 0;

@@ -32,8 +32,9 @@ namespace CoherentUIOpenGLUI {
 		void GenerateBody(std::ostream &output);
 
 	public: // Adding Subcomponents
+		void Add(std::unique_ptr<GUI::IElementGenerator> element);
+
 		GUI::ILabelGenerator& AddLabel(std::string text);
-		GUI::IDynamicLabelGenerator& AddDynamicLabel(std::unique_ptr<GUI::IDynamicLabel> &bindingObject, std::string text);
 		GUI::IPanelGenerator& AddPanel();
 
 	private: // Subcomponent Helpers

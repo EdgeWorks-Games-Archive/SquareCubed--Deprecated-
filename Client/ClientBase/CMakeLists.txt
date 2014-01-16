@@ -39,6 +39,7 @@ source_group (GUI FILES
 	IGUIBindings.h
 )
 source_group (GUI\\Elements FILES
+	IElementFactory.h
 	IElement.h
 	IView.h
 	ILabel.h

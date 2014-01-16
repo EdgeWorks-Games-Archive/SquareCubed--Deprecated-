@@ -43,8 +43,8 @@ namespace GUI {
 		GUI::VerticalAlign VerticalPos;
 
 	public: // Generation
-		/** Generates the element into the target file and generates a the binding element object.
-		 * \param[out] file Target File.
+		/** Generates the element into the output stream and generates a the binding element object if needed.
+		 * \param[out] output Target output stream.
 		 */
 		virtual void Generate(std::ostream &output) = 0;
 	};

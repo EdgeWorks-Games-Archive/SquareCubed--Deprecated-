@@ -5,6 +5,7 @@
 #include "SystemEventListener.h"
 #include "GUIBindings.h"
 #include "LogHandler.h"
+#include "ElementFactory.h"
 
 #include <ClientBase/IGUI.h>
 #include <ClientBase/Input.h>
@@ -30,8 +31,9 @@ namespace CoherentUIOpenGLUI {
 		Coherent::UI::SystemSettings m_Settings;
 		Coherent::UI::UISystem* m_System;
 
-		// Bindings
+		// Bindings/Elements
 		GUIBindings m_Bindings;
+		ElementFactory m_ElementFactory;
 
 		// Logging
 		LogHandler m_LogHandler;
@@ -59,6 +61,8 @@ namespace CoherentUIOpenGLUI {
 	public: // Utility Functions
 		void SwitchView(std::wstring view);
 		GUI::IGUIBindings& GetBindings();
+
+		GUI::IElementFactory& GetElementFactory();
 
 	public: // View Helpers
 		std::unique_ptr<GUI::IViewGenerator> CreateViewGenerator();

@@ -5,7 +5,7 @@
 #include <ClientBase/IPanel.h>
 
 namespace CoherentUIOpenGLUI {
-	class PanelGenerator final : public virtual GUI::IPanelGenerator {
+	class PanelGenerator final : public GUI::IPanelGenerator {
 	public:
 		void Generate(std::ostream &output);
 
