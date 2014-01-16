@@ -15,9 +15,5 @@ namespace GUI {
 
 	public: // Adding Subcomponents
 		virtual void Add(std::unique_ptr<IElementGenerator> element) = 0;
-
-		// About to be deprecated:
-		virtual ILabelGenerator& AddLabel(std::string text) = 0;
-		virtual IPanelGenerator& AddPanel() = 0;
 	};
 }

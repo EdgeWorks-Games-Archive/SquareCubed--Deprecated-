@@ -7,6 +7,9 @@
 #include "INetwork.h"
 #include "INetworkFactory.h"
 #include "IUnitSelectDispatcher.h"
+
+#include "IGUI.h"
+#include "IElementFactory.h"
 #include "IView.h"
 #include "IPanel.h"
 
@@ -24,11 +27,12 @@ namespace Tools {
 			m_ControlGroup()
 		{
 			// Add Panel
-			GUI::IPanelGenerator &panel = view.AddPanel();
-			panel.Size = glm::uvec2(200, 100);
-			panel.PositionType = GUI::PositionType::Absolute;
-			panel.HorizontalPos = GUI::HorizontalAlign::Right;
-			panel.VerticalPos = GUI::VerticalAlign::Bottom;
+			std::unique_ptr<GUI::IPanelGenerator> panel = engine.GetGUI().GetElementFactory().CreatePanel();
+			panel->Size = glm::uvec2(200, 100);
+			panel->PositionType = GUI::PositionType::Absolute;
+			panel->HorizontalPos = GUI::HorizontalAlign::Right;
+			panel->VerticalPos = GUI::VerticalAlign::Bottom;
+			view.Add(std::move(panel));
 
 			// Bind Key Events
 			engine.GetInput().OnMouseButtonChange.AttachMember(this, &UnitSelect::OnMouseButtonChange, m_EventScope);

@@ -33,15 +33,5 @@ namespace CoherentUIOpenGLUI {
 
 	public: // Adding Subcomponents
 		void Add(std::unique_ptr<GUI::IElementGenerator> element);
-
-		GUI::ILabelGenerator& AddLabel(std::string text);
-		GUI::IPanelGenerator& AddPanel();
-
-	private: // Subcomponent Helpers
-		template<typename T>
-		T& AddNew();
-
-		template<typename T, typename BindingT>
-		T& AddNew(ViewEventListener &viewListener, std::unique_ptr<BindingT> &bindingObject);
 	};
 }

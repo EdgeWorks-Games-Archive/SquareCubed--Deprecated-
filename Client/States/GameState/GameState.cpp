@@ -10,6 +10,7 @@
 #include <ClientBase/ICamera.h>
 
 #include <ClientBase/IGUI.h>
+#include <ClientBase/IElementFactory.h>
 #include <ClientBase/IView.h>
 #include <ClientBase/ILabel.h>
 
@@ -53,9 +54,11 @@ namespace GameState {
 		m_Engine.GetGraphics().GetMainCamera().SetHeight(14);
 
 		// Add UI Elements
-		GUI::ILabelGenerator &label = m_ViewGenerator->AddLabel(APP_NAME" "APP_VERSION);
-		label.PositionType = GUI::PositionType::Absolute;
-		label.HorizontalPos = GUI::HorizontalAlign::Right;
+		std::unique_ptr<GUI::ILabelGenerator> label = m_Engine.GetGUI().GetElementFactory().CreateLabel();
+		label->Text = APP_NAME" "APP_VERSION;
+		label->PositionType = GUI::PositionType::Absolute;
+		label->HorizontalPos = GUI::HorizontalAlign::Right;
+		m_ViewGenerator->Add(std::move(label));
 
 		// Finish off UI Generation
 		m_View = m_ViewGenerator->GenerateView();

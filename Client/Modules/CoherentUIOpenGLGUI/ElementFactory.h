@@ -11,6 +11,8 @@ namespace CoherentUIOpenGLUI {
 	public:
 		ElementFactory(ViewEventListener &viewListener);
 
+		std::unique_ptr<GUI::ILabelGenerator> CreateLabel();
 		std::unique_ptr<GUI::IDynamicLabelGenerator> CreateDynamicLabel(std::unique_ptr<GUI::IDynamicLabel> &bindingObjPtr);
+		std::unique_ptr<GUI::IPanelGenerator> CreatePanel();
 	};
 }

@@ -81,46 +81,4 @@ namespace CoherentUIOpenGLUI {
 	void ViewGenerator::Add(std::unique_ptr<GUI::IElementGenerator> element) {
 		m_ElementGenerators.push_back(std::move(element));
 	}
-
-	GUI::ILabelGenerator& ViewGenerator::AddLabel(std::string text) {
-		// Create the Object and Set Values
-		GUI::ILabelGenerator &label = AddNew<LabelGenerator>();
-
-		// Set Values
-		HTMLHelper::Escape(text);
-		label.Text = std::move(text);
-
-		// Return the Reference
-		return label;
-	}
-
-	GUI::IPanelGenerator& ViewGenerator::AddPanel() { return AddNew<PanelGenerator>(); }
-
-	// Subcomponent Helpers
-
-	template<typename T>
-	T& ViewGenerator::AddNew() {
-		// Create the Object
-		std::unique_ptr<T> obj = std::make_unique<T>();
-
-		// Keep a Reference to it and Move it to the List
-		T &objRef = *obj;
-		m_ElementGenerators.push_back(std::move(obj));
-
-		// Return the Reference
-		return objRef;
-	}
-
-	template<typename T, typename BindingT>
-	T& ViewGenerator::AddNew(ViewEventListener &viewListener, std::unique_ptr<BindingT> &bindingObject) {
-		// Create the Object
-		std::unique_ptr<T> obj = std::make_unique<T>(viewListener, bindingObject);
-
-		// Keep a Reference to it and Move it to the List
-		T &objRef = *obj;
-		m_ElementGenerators.push_back(std::move(obj));
-
-		// Return the Reference
-		return objRef;
-	}
 }
