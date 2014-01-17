@@ -11,6 +11,7 @@
 #include "IGUI.h"
 #include "IElementFactory.h"
 #include "IView.h"
+#include "ILabel.h"
 #include "IPanel.h"
 
 #include <algorithm>
@@ -26,12 +27,20 @@ namespace Tools {
 			m_Dispatcher(engine.GetNetwork().GetFactory().CreateUnitSelectDispatcher()),
 			m_ControlGroup()
 		{
-			// Add Panel
+			// Create Panel
 			std::unique_ptr<GUI::Elements::IPanelGenerator> panel = engine.GetGUI().GetElementFactory().CreatePanel();
 			panel->Size = glm::uvec2(200, 100);
 			panel->PositionType = GUI::Elements::PositionType::Absolute;
 			panel->HorizontalPos = GUI::Elements::HorizontalAlign::Right;
 			panel->VerticalPos = GUI::Elements::VerticalAlign::Bottom;
+			panel->Position = glm::ivec2(6, 6);
+			
+			// Add Label to Panel
+			std::unique_ptr<GUI::Elements::ILabelGenerator> label = engine.GetGUI().GetElementFactory().CreateLabel();
+			label->Text = "Unit Selection Panel";
+			panel->Add(std::move(label));
+
+			// Add Panel
 			view.Add(std::move(panel));
 
 			// Bind Key Events

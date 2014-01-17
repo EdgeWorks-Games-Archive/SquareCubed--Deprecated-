@@ -6,6 +6,7 @@
 #include <glm/glm.hpp>
 
 #include <ostream>
+#include <memory>
 
 namespace GUI {
 	namespace Elements {
@@ -48,6 +49,11 @@ namespace GUI {
 			 * \param[out] output Target output stream.
 			 */
 			virtual void Generate(std::ostream &output) = 0;
+		};
+
+		class IElementContainer {
+		public: // Adding Subcomponents
+			virtual void Add(std::unique_ptr<IElementGenerator> element) = 0;
 		};
 	}
 }

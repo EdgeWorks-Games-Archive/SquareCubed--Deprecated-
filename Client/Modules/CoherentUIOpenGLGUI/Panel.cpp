@@ -16,6 +16,12 @@ namespace CoherentUIOpenGLUI {
 		element.Tag = "div";
 		element.AddClass("panel");
 
+		// Add all Sub-Elements to Content
+		std::stringstream content;
+		for (std::unique_ptr<GUI::Elements::IElementGenerator> &element : m_ElementGenerators)
+			element->Generate(content);
+		element.Content = content.str();
+
 		// If not auto position type, Add position style
 		if (PositionType != GUI::Elements::PositionType::Auto) {
 			// Add Position Type
@@ -41,5 +47,11 @@ namespace CoherentUIOpenGLUI {
 		element.AddStyle("height", Size.y);
 
 		return element;
+	}
+
+	// Adding Subcomponents
+
+	void PanelGenerator::Add(std::unique_ptr<GUI::Elements::IElementGenerator> element) {
+		m_ElementGenerators.push_back(std::move(element));
 	}
 }
