@@ -157,8 +157,8 @@ namespace Tools {
 							m_SelectedUnits.push_back(*unit);
 
 						/* Unless of course we're multiselecting,
-						   for which we might just want to be removing one of the units. */
-						else if (m_Input.GetKeyMods().Shift)
+						   for which we might just want to be removing one of the units, as long as we're clicking and not dragging, anyway. */
+						else if (m_Input.GetKeyMods().Shift && !boxWasDragged)
 							Deselect(dUnit->ID);
 					}
 				}
