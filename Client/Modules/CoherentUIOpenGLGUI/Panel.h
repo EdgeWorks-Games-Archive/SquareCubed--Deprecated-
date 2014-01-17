@@ -1,13 +1,13 @@
 #pragma once
 
-#include "HTMLElement.h"
+#include "Element.h"
 
 #include <ClientBase/IPanel.h>
 
 #include <list>
 
 namespace CoherentUIOpenGLUI {
-	class PanelGenerator final : public GUI::Elements::IPanelGenerator {
+	class PanelGenerator final : public GUI::Elements::IPanelGenerator, public ElementGenerator {
 		std::list<std::unique_ptr<GUI::Elements::IElementGenerator>> m_ElementGenerators;
 
 	public:

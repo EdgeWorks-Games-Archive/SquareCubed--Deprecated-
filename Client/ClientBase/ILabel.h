@@ -11,15 +11,18 @@ namespace GUI {
 		/// Static Label ///
 
 		/** Generates a static label, does not give you a binding object. */
-		class ILabelGenerator : public IElementGenerator {
+		class ILabelGenerator : public virtual IElementGenerator {
 		public:
 			ILabelGenerator() :
-				Text()
+				Text(),
+				Italic(false)
 			{}
 			virtual ~ILabelGenerator() {}
 
 		public: // Properties
 			std::string Text;
+
+			bool Italic;
 		};
 
 		/// Dynamic Label ///

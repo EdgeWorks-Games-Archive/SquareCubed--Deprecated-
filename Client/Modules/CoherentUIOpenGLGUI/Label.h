@@ -1,6 +1,6 @@
 #pragma once
 
-#include "HTMLElement.h"
+#include "Element.h"
 
 #include <ClientBase/ILabel.h>
 
@@ -11,7 +11,7 @@ namespace CoherentUIOpenGLUI {
 
 	/// Static Label ///
 
-	class LabelGenerator : public virtual GUI::Elements::ILabelGenerator {
+	class LabelGenerator : public virtual GUI::Elements::ILabelGenerator, public ElementGenerator {
 	public:
 		virtual ~LabelGenerator();
 		void Generate(std::ostream &output);

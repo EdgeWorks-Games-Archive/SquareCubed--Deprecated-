@@ -27,21 +27,33 @@ namespace Tools {
 			m_Dispatcher(engine.GetNetwork().GetFactory().CreateUnitSelectDispatcher()),
 			m_ControlGroup()
 		{
-			// Create Panel
-			std::unique_ptr<GUI::Elements::IPanelGenerator> panel = engine.GetGUI().GetElementFactory().CreatePanel();
-			panel->Size = glm::uvec2(200, 100);
-			panel->PositionType = GUI::Elements::PositionType::Absolute;
-			panel->HorizontalPos = GUI::Elements::HorizontalAlign::Right;
-			panel->VerticalPos = GUI::Elements::VerticalAlign::Bottom;
-			panel->Position = glm::ivec2(6, 6);
+			// Create Unit Info Panel
+			std::unique_ptr<GUI::Elements::IPanelGenerator> infoPanel = engine.GetGUI().GetElementFactory().CreatePanel();
+			infoPanel->Size = glm::uvec2(200, 100);
+			infoPanel->PositionType = GUI::Elements::PositionType::Absolute;
+			infoPanel->HorizontalPos = GUI::Elements::HorizontalAlign::Right;
+			infoPanel->VerticalPos = GUI::Elements::VerticalAlign::Bottom;
+			infoPanel->Position = glm::ivec2(6, 6);
 			
-			// Add Label to Panel
-			std::unique_ptr<GUI::Elements::ILabelGenerator> label = engine.GetGUI().GetElementFactory().CreateLabel();
-			label->Text = "Unit Selection Panel";
-			panel->Add(std::move(label));
+			// Add Name Label to Panel
+			std::unique_ptr<GUI::Elements::ILabelGenerator> nameLabel = engine.GetGUI().GetElementFactory().CreateLabel();
+			nameLabel->Text = "Random McRandom";
+			infoPanel->Add(std::move(nameLabel));
+
+			// Add Type Label to Panel
+			std::unique_ptr<GUI::Elements::ILabelGenerator> typeLabel = engine.GetGUI().GetElementFactory().CreateLabel();
+
+			typeLabel->Text = "Human";
+			typeLabel->Italic = true;
+
+			typeLabel->Position = glm::ivec2(6, 6);
+			typeLabel->PositionType = GUI::Elements::PositionType::Relative;
+			typeLabel->HorizontalPos = GUI::Elements::HorizontalAlign::Right;
+
+			infoPanel->Add(std::move(typeLabel));
 
 			// Add Panel
-			view.Add(std::move(panel));
+			view.Add(std::move(infoPanel));
 
 			// Bind Key Events
 			engine.GetInput().OnMouseButtonChange.AttachMember(this, &UnitSelect::OnMouseButtonChange, m_EventScope);

@@ -28,6 +28,7 @@ source_group ("Header Wrappers" FILES
 )
 source_group (Elements FILES
 	ElementFactory.h ElementFactory.cpp
+	Element.h Element.cpp
 	View.h View.cpp
 	Label.h Label.cpp
 	Panel.h Panel.cpp

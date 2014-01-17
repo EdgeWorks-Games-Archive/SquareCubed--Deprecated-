@@ -4,7 +4,7 @@
 
 namespace GUI {
 	namespace Elements {
-		class IPanelGenerator : public IElementGenerator, public IElementContainer {
+		class IPanelGenerator : public virtual IElementGenerator, public IElementContainer {
 		public: // Initialization/Uninitialization
 			IPanelGenerator() :
 				Size(100, 100)
