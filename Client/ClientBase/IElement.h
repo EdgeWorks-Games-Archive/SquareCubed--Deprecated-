@@ -30,8 +30,8 @@ namespace GUI {
 		class IElementGenerator {
 		public: // Initialization/Uninitialization
 			IElementGenerator() :
-				PositionType(PositionType::Auto),
 				Position(0, 0),
+				PositionType(PositionType::Auto),
 				HorizontalPos(HorizontalAlign::Left),
 				VerticalPos(VerticalAlign::Top)
 			{}
@@ -39,8 +39,8 @@ namespace GUI {
 
 		public: // Properties
 			// Position Data
-			PositionType PositionType;
 			glm::ivec2 Position;
+			PositionType PositionType;
 			HorizontalAlign HorizontalPos;
 			VerticalAlign VerticalPos;
 

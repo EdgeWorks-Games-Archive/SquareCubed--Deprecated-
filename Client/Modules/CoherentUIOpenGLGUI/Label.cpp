@@ -11,11 +11,6 @@ namespace CoherentUIOpenGLUI {
 
 	LabelGenerator::~LabelGenerator() {}
 
-	void LabelGenerator::Generate(std::ostream &output) {
-		HTMLElement element = GenerateHTML();
-		element.Generate(output);
-	}
-
 	// Generation Helpers
 
 	HTMLElement LabelGenerator::GenerateHTML() {
@@ -40,7 +35,7 @@ namespace CoherentUIOpenGLUI {
 	void DynamicLabel::SetText(std::string text) {
 		if (m_ViewListener.IsReady()) {
 			Coherent::UI::View &view = m_ViewListener.GetView();
-			view.TriggerEvent("LabelTextChanged", m_HTMLId, text);
+			view.TriggerEvent("TextChange", m_HTMLId, text);
 		}
 	}
 
@@ -48,10 +43,10 @@ namespace CoherentUIOpenGLUI {
 
 	unsigned int DynamicLabelGenerator::nextId = 0;
 
-	DynamicLabelGenerator::DynamicLabelGenerator(ViewEventListener &viewListener, std::unique_ptr<GUI::Elements::IDynamicLabel> &bindingObject) :
+	DynamicLabelGenerator::DynamicLabelGenerator(ViewEventListener &viewListener, std::unique_ptr<GUI::Elements::IDynamicLabel> &bindingPtr) :
 		m_ViewListener(viewListener),
 		ID(nextId),
-		BindingObject(bindingObject)
+		BindingPtr(bindingPtr)
 	{
 		nextId++;
 	}
@@ -59,7 +54,7 @@ namespace CoherentUIOpenGLUI {
 	void DynamicLabelGenerator::Generate(std::ostream &output) {
 		HTMLElement element = GenerateHTML();
 		element.Generate(output);
-		BindingObject = std::make_unique<DynamicLabel>(m_ViewListener, element.ID);
+		BindingPtr = std::make_unique<DynamicLabel>(m_ViewListener, element.ID);
 	}
 
 	// Generation Helpers

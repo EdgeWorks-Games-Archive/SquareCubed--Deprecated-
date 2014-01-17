@@ -1,5 +1,5 @@
 $(function() {
-	engine.on('LabelTextChanged', function (id, newText) {
+	engine.on('TextChange', function (id, newText) {
     	$(id).text(newText);
 	});
 });

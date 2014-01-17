@@ -9,6 +9,9 @@ namespace CoherentUIOpenGLUI {
 	public:
 		virtual ~ElementGenerator() {}
 
+	public: // Generation
+		virtual void Generate(std::ostream &output);
+
 	protected: // Internal Generation Helpers
 		virtual HTMLElement GenerateHTML();
 	};

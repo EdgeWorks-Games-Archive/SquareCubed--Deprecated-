@@ -1,6 +1,11 @@
 #include "Element.h"
 
 namespace CoherentUIOpenGLUI {
+	void ElementGenerator::Generate(std::ostream &output) {
+		HTMLElement element = GenerateHTML();
+		element.Generate(output);
+	}
+
 	// Internal Generation Helpers
 
 	HTMLElement ElementGenerator::GenerateHTML() {

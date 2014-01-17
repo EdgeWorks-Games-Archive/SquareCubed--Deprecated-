@@ -8,53 +8,24 @@
 #include "INetworkFactory.h"
 #include "IUnitSelectDispatcher.h"
 
-#include "IGUI.h"
-#include "IElementFactory.h"
-#include "IView.h"
-#include "ILabel.h"
-#include "IPanel.h"
-
 #include <algorithm>
 
 namespace Tools {
 	namespace Units {
 		UnitSelect::UnitSelect(Core::Engine &engine, GUI::Elements::IViewGenerator &view, Tools::Units::Units &units) :
-			m_Renderer(engine.GetGraphics().GetFactory().CreateSelectionRenderer()),
+			// External Components
 			m_Units(units),
-			m_EventScope(),
 			m_Input(engine.GetInput()),
-			m_SelectedUnits(),
+
+			// Internal Components
+			m_InfoPanel(engine, view),
+			m_Renderer(engine.GetGraphics().GetFactory().CreateSelectionRenderer()),
 			m_Dispatcher(engine.GetNetwork().GetFactory().CreateUnitSelectDispatcher()),
+
+			m_EventScope(),
+			m_SelectedUnits(),
 			m_ControlGroup()
 		{
-			// Create Unit Info Panel
-			std::unique_ptr<GUI::Elements::IPanelGenerator> infoPanel = engine.GetGUI().GetElementFactory().CreatePanel();
-			infoPanel->Size = glm::uvec2(200, 100);
-			infoPanel->PositionType = GUI::Elements::PositionType::Absolute;
-			infoPanel->HorizontalPos = GUI::Elements::HorizontalAlign::Right;
-			infoPanel->VerticalPos = GUI::Elements::VerticalAlign::Bottom;
-			infoPanel->Position = glm::ivec2(6, 6);
-			
-			// Add Name Label to Panel
-			std::unique_ptr<GUI::Elements::ILabelGenerator> nameLabel = engine.GetGUI().GetElementFactory().CreateLabel();
-			nameLabel->Text = "Random McRandom";
-			infoPanel->Add(std::move(nameLabel));
-
-			// Add Type Label to Panel
-			std::unique_ptr<GUI::Elements::ILabelGenerator> typeLabel = engine.GetGUI().GetElementFactory().CreateLabel();
-
-			typeLabel->Text = "Human";
-			typeLabel->Italic = true;
-
-			typeLabel->Position = glm::ivec2(6, 6);
-			typeLabel->PositionType = GUI::Elements::PositionType::Relative;
-			typeLabel->HorizontalPos = GUI::Elements::HorizontalAlign::Right;
-
-			infoPanel->Add(std::move(typeLabel));
-
-			// Add Panel
-			view.Add(std::move(infoPanel));
-
 			// Bind Key Events
 			engine.GetInput().OnMouseButtonChange.AttachMember(this, &UnitSelect::OnMouseButtonChange, m_EventScope);
 			engine.GetInput().OnKeyChange.AttachMember(this, &UnitSelect::OnKeyChange, m_EventScope);

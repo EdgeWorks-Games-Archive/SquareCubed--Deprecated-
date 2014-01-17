@@ -14,7 +14,6 @@ namespace CoherentUIOpenGLUI {
 	class LabelGenerator : public virtual GUI::Elements::ILabelGenerator, public ElementGenerator {
 	public:
 		virtual ~LabelGenerator();
-		void Generate(std::ostream &output);
 
 	protected: // Internal Generation Helpers
 		virtual HTMLElement GenerateHTML();
@@ -37,10 +36,10 @@ namespace CoherentUIOpenGLUI {
 
 	public: // Properties
 		const unsigned int ID;
-		std::unique_ptr<GUI::Elements::IDynamicLabel> &BindingObject;
+		std::unique_ptr<GUI::Elements::IDynamicLabel> &BindingPtr;
 
 	public:
-		DynamicLabelGenerator(ViewEventListener &viewListener, std::unique_ptr<GUI::Elements::IDynamicLabel> &bindingObject);
+		DynamicLabelGenerator(ViewEventListener &viewListener, std::unique_ptr<GUI::Elements::IDynamicLabel> &bindingPtr);
 		void Generate(std::ostream &output);
 
 	protected: // Internal Generation Helpers

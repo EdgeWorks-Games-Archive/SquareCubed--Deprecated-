@@ -4,18 +4,24 @@
 #include "ISelectionRenderer.h"
 #include "Input.h"
 
+#include "UnitInfoPanel.h"
+
 #include <memory>
 
 namespace Tools {
 	namespace Units {
-		class Units;
 		class UnitSelect final {
-			std::unique_ptr<Graphics::ISelectionRenderer> m_Renderer;
+			// External Components
 			Tools::Units::Units &m_Units;
-			Utils::EventScope m_EventScope;
 			Input::Input &m_Input;
-			std::list<std::reference_wrapper<IUnit>> m_SelectedUnits, m_ControlGroup[9];
+
+			// Internal Components
+			UnitInfoPanel m_InfoPanel;
+			std::unique_ptr<Graphics::ISelectionRenderer> m_Renderer;
 			std::unique_ptr<Network::IUnitSelectDispatcher> m_Dispatcher;
+
+			Utils::EventScope m_EventScope;
+			std::list<std::reference_wrapper<IUnit>> m_SelectedUnits, m_ControlGroup[9];
 			glm::vec2 m_OriginalCursorPos;
 			bool m_CurrentlyHolding = false;
 

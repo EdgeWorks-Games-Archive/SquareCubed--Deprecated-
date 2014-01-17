@@ -10,7 +10,7 @@ namespace CoherentUIOpenGLUI {
 	class PanelGenerator final : public GUI::Elements::IPanelGenerator, public ElementGenerator {
 		std::list<std::unique_ptr<GUI::Elements::IElementGenerator>> m_ElementGenerators;
 
-	public:
+	public: // Generation
 		void Generate(std::ostream &output);
 
 	protected: // Internal Generation Helpers

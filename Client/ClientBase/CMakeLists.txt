@@ -77,6 +77,7 @@ source_group (StateEngine FILES
 source_group (Tools\\Units FILES
 	Units.h Units.cpp
 	UnitSelect.h UnitSelect.cpp
+	UnitInfoPanel.h UnitInfoPanel.cpp
 )
 source_group ("Tools\\Units\\Unit Types" FILES
 	BaseUnitTypes.h BaseUnitTypes.cpp
