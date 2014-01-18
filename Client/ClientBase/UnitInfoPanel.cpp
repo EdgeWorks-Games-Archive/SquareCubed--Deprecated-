@@ -6,6 +6,7 @@
 #include "IView.h"
 #include "ILabel.h"
 #include "IPanel.h"
+#include "IProgressBar.h"
 
 namespace Tools {
 	namespace Units {
@@ -35,6 +36,11 @@ namespace Tools {
 			typeLabel->HorizontalPos = GUI::Elements::HorizontalAlign::Right;
 
 			infoPanel->Add(std::move(typeLabel));
+
+			// Add Progress Bar to Panel
+			std::unique_ptr<GUI::Elements::IProgressBarGenerator> progressBar = engine.GetGUI().GetElementFactory().CreateProgressBar();
+			progressBar->Width = 200;
+			infoPanel->Add(std::move(progressBar));
 
 			// Add Panel
 			view.Add(std::move(infoPanel));

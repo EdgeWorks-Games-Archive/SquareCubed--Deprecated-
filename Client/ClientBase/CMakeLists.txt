@@ -44,6 +44,7 @@ source_group (GUI\\Elements FILES
 	IView.h
 	ILabel.h
 	IPanel.h
+	IProgressBar.h
 )
 source_group (Input FILES
 	Input.h Input.cpp

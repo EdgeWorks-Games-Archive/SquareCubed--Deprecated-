@@ -11,6 +11,12 @@ html {
     -webkit-user-select: none;
 }
 
+progress {
+	margin-top: 6px;
+	height: 12px;
+	-webkit-appearance: none;
+}
+
 /* UI Panel Styling */
 
 .panel {

@@ -19,6 +19,8 @@ namespace GUI {
 			virtual std::unique_ptr<IDynamicLabelGenerator> CreateDynamicLabel(std::unique_ptr<IDynamicLabel> &bindingObjPtr) = 0;
 
 			virtual std::unique_ptr<IPanelGenerator> CreatePanel() = 0;
+
+			virtual std::unique_ptr<IProgressBarGenerator> CreateProgressBar() = 0;
 		};
 	}
 }

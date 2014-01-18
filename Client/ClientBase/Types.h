@@ -43,6 +43,8 @@ namespace GUI {
 		class IDynamicLabelGenerator;
 
 		class IPanelGenerator;
+
+		class IProgressBarGenerator;
 	}
 }
 

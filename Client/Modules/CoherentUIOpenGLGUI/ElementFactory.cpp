@@ -2,6 +2,7 @@
 
 #include "Label.h"
 #include "Panel.h"
+#include "ProgressBar.h"
 
 namespace CoherentUIOpenGLUI {
 	ElementFactory::ElementFactory(ViewEventListener &viewListener) :
@@ -18,5 +19,9 @@ namespace CoherentUIOpenGLUI {
 
 	std::unique_ptr<GUI::Elements::IPanelGenerator> ElementFactory::CreatePanel() {
 		return std::make_unique<PanelGenerator>();
+	}
+
+	std::unique_ptr<GUI::Elements::IProgressBarGenerator> ElementFactory::CreateProgressBar() {
+		return std::make_unique<ProgressBarGenerator>();
 	}
 }
