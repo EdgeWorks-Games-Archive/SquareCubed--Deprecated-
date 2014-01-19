@@ -32,6 +32,7 @@ source_group (Elements FILES
 	View.h View.cpp
 	Label.h Label.cpp
 	Panel.h Panel.cpp
+	ProgressBar.h ProgressBar.cpp
 )
 source_group (Elements\\Helpers FILES
 	HTMLElement.h HTMLElement.cpp

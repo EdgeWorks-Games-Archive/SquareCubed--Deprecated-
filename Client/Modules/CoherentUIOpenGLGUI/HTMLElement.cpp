@@ -23,7 +23,9 @@ namespace CoherentUIOpenGLUI {
 	}
 
 	HTMLElement::HTMLElement() :
+		m_AttributeEntries(),
 		m_StyleEntries(),
+		m_ClassEntries(),
 		Tag(),
 		Content(),
 		ID()
@@ -34,6 +36,12 @@ namespace CoherentUIOpenGLUI {
 		output << "<" << Tag;
 		if (ID != "") output << " id=\"" << ID << "\"";
 		
+		// If there's attribute entries, add those
+		if (!m_AttributeEntries.empty()) {
+			for (std::string &entry : m_AttributeEntries)
+				output << entry;
+		}
+
 		// If there's style entries, add those
 		if (!m_StyleEntries.empty()) {
 			output << " style=\"";

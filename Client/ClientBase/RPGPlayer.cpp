@@ -57,6 +57,7 @@ namespace Tools {
 
 		void RPGPlayer::Update(float delta) {
 			if (m_Unit != nullptr) {
+				m_PacketTimer += delta;
 				Input::AxisDesc inpVal = m_Input.GetMovementAxis();
 				if (inpVal.Any) {
 					// Change Character Force
@@ -79,7 +80,14 @@ namespace Tools {
 
 					// Update Previous Force
 					m_PreviousForce = m_Unit->RigidBody.TargetVelocity;
+
+					// Reset Physics Packet Timer
+					m_PacketTimer = 0.0f;
 				}
+
+				// Send Update at least Every Second
+				if (m_PacketTimer > 1.0f)
+					m_Dispatcher->SendPlayerPhysics(m_Unit->RigidBody, m_Unit->Rotation.Radians);
 
 				// Set Camera Position
 				float xOffset = m_CameraSize.x / 2 * m_Deadzone;

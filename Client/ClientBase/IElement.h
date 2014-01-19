@@ -22,6 +22,18 @@ namespace GUI {
 		enum class HorizontalAlign { Left, Right };
 		enum class VerticalAlign { Top, Bottom };
 
+		/** Color override types.
+		 * Doesn't translate to exact colors, elements can
+		 * decide what specific color value they translate to.
+		 */
+		enum class ColorType {
+			/** No color override. */
+			None,
+			Red,
+			Blue,
+			Yellow
+		};
+
 		class IElement {
 		public:
 			virtual ~IElement() {}

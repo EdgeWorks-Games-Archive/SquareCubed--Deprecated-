@@ -27,6 +27,7 @@ namespace Tools {
 
 		private: // Physics Change Check Properties
 			glm::vec2 m_PreviousForce;
+			float m_PacketTimer;
 
 		private: // Player Properties
 			float m_Speed;

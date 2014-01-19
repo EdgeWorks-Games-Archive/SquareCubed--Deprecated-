@@ -15,6 +15,7 @@ namespace CoherentUIOpenGLUI {
 	};
 
 	class HTMLElement final {
+		std::forward_list<std::string> m_AttributeEntries;
 		std::forward_list<std::string> m_StyleEntries;
 		std::forward_list<std::string> m_ClassEntries;
 
@@ -27,6 +28,13 @@ namespace CoherentUIOpenGLUI {
 		HTMLElement();
 
 		template <typename T>
+		void AddAttribute(std::string key, T entry) {
+			std::stringstream entryStream;
+			entryStream << " " << key << "=\"" << entry << "\"";
+			m_AttributeEntries.push_front(entryStream.str());
+		}
+
+		template <typename T>
 		void AddStyle(std::string key, T entry) {
 			std::stringstream entryStream;
 			entryStream << key << ":" << entry << ";";
@@ -36,7 +44,7 @@ namespace CoherentUIOpenGLUI {
 		void AddClass(std::string className) {
 			m_ClassEntries.push_front(std::move(className));
 		}
-
+		
 		void Generate(std::ostream &output);
 	};
 }
