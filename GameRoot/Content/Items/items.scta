@@ -1,0 +1,7 @@
+1
+Content/Items/001.png
+
+This is a SquareCubed TileArray description file.
+First number tells the engine how many tiles to load.
+After that every line is one file.
+After the last file anything can be written.

@@ -17,6 +17,7 @@ namespace CoherentUIOpenGLUI {
 		// Create basic Element
 		HTMLElement element = ElementGenerator::GenerateHTML();
 		element.Tag = "p";
+		HTMLHelper::Escape(Text);
 		element.Content = Text;
 
 		// If italic, set style
