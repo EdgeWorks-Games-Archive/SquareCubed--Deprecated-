@@ -1,7 +1,12 @@
 #include "IRigidBody.h"
 
+#include "ICollider.h"
+
 namespace Physics {
-	void IRigidBody::UpdateBroadphase() {
-		pm_Collider->UpdateBroadphaseAABB(*this);
-	}
+	IRigidBody::IRigidBody(std::unique_ptr<ICollider> collider) :
+		Position(),
+		Collider(std::move(collider))
+	{}
+
+	IRigidBody::~IRigidBody() {}
 }

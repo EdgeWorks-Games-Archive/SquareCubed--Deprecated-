@@ -1,10 +1,12 @@
 #pragma once
 
+#include <glm/glm.hpp>
+
 #include <list>
 #include <memory>
 
 namespace Tools {
-	namespace Agents { class IAgent; }
+	namespace Units { class IUnit; }
 }
 
 namespace Graphics {
@@ -13,6 +15,7 @@ namespace Graphics {
 		virtual ~ISelectionRenderer() {}
 
 	public: // Rendering Functions
-		virtual void RenderSelectionBoxes(const std::list<std::unique_ptr<Tools::Agents::IAgent>> &agents) = 0;
+		virtual void RenderUnitSelection(const std::list<std::reference_wrapper<Tools::Units::IUnit>> &units) = 0;
+		virtual void RenderSelectionBox(const glm::vec2 &bottomLeft, const glm::vec2 &size) = 0;
 	};
 }

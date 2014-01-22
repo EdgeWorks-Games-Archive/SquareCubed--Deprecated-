@@ -1,0 +1,10 @@
+# Make Sure Path Contains DevIL
+if (NOT EXISTS ${DEPENDENCY_DIR}/glew)
+	message (SEND_ERROR "Dependency folder does not contain DevIL.")
+endif()
+
+# Add DevIL Link Directory
+link_directories (${DEPENDENCY_DIR}/glew/lib)
+
+# To link this in a project just use:
+#target_link_libraries (MyEXE glew32)

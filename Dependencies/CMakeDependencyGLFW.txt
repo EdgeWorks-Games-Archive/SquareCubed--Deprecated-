@@ -1,10 +1,11 @@
-# Make Sure Path Contains GLM
+# Make Sure Path Contains GLFW
 if (NOT EXISTS ${DEPENDENCY_DIR}/glfw)
-	message (FATAL_ERROR "Dependency folder does not contain GLM.")
-endif()
+	message (SEND_ERROR "Dependency folder does not contain GLFW.")
+endif ()
 
 # Add GLFW Link Directory
 link_directories (${DEPENDENCY_DIR}/glfw/lib)
 
 # To link this in a project just use:
-# target_link_libraries (MyProject glfw3)
+#target_link_libraries (MyEXE debug glfw3debug)
+#target_link_libraries (MyEXE optimized glfw3release)

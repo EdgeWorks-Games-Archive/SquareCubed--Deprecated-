@@ -8,9 +8,9 @@ file (GLOB Physics_SRC
 
 # Define Source Groups
 source_group ("" FILES
-	CollisionResolver.h CollisionResolver.cpp
 	DataTypes.h DataTypes.cpp
 	Physics.h Physics.cpp
+	Types.h
 )
 source_group (Broadphase FILES
 	AABBBroadphase.h AABBBroadphase.cpp
@@ -18,7 +18,7 @@ source_group (Broadphase FILES
 )
 source_group (Colliders FILES
 	CircleCollider.h CircleCollider.cpp
-	Collider.h
+	ICollider.h
 )
 source_group (RigidBodies FILES
 	DynamicRigidBody.h DynamicRigidBody.cpp
@@ -28,8 +28,5 @@ source_group (RigidBodies FILES
 # Add Library Build Output
 add_library (Physics ${Physics_SRC})
 
-# Link Build Output
-link_directories (${PROJECT_BINARY_DIR}/Physics)
-
 # Set Directory
-SET_PROPERTY(TARGET Physics PROPERTY FOLDER "Common")
+set_property (TARGET Physics PROPERTY FOLDER "Common")

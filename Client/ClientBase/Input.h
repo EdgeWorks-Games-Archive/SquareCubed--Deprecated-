@@ -1,17 +1,36 @@
 #pragma once
 
 #include "InputData.h"
+#include "Types.h"
 
 #include <CommonLib/Events.h>
 
-namespace Context { class IContext; }
-
 namespace Input {
+	// Generic Data //
+
 	enum class MouseButton { None, Left, Right, Middle };
+
+	struct CursorPosition {
+		glm::vec2 Absolute;
+		glm::vec2 World;
+	};
+
+	struct KeyMods {
+		bool Shift;
+		bool Control;
+
+		KeyMods() :
+			Shift(),
+			Control()
+		{}
+	};
+
+	// Event Structs //
 
 	struct KeyChangeEventArgs final {
 		KeyID KeyId;
 		bool Down;
+		bool Repeat;
 		bool ShiftMod;
 	};
 
@@ -20,7 +39,7 @@ namespace Input {
 	};
 
 	struct MouseEventArgs final {
-		double X, Y;
+		CursorPosition CursorPosition;
 		MouseButton MouseButton;
 		bool IsPressed;
 
@@ -30,9 +49,10 @@ namespace Input {
 
 	class Input final {
 		Context::IContext &m_Context;
+		Graphics::IGraphics &m_Graphics;
 
 	public: // Initialization/Uninitialization
-		Input(Context::IContext &context);
+		Input(Context::IContext &context, Graphics::IGraphics &graphics);
 		~Input();
 
 	public: // Events
@@ -55,6 +75,10 @@ namespace Input {
 
 	public: // Complex Input Accessors
 		AxisDesc GetMovementAxis();
+		KeyMods& GetKeyMods();
+
+	public: // Mouse/Cursor Accessors
+		const CursorPosition& GetCursorPosition();
 
 	public: // Utilities
 		Input::KeyID GetKeyId(unsigned char key);
@@ -62,12 +86,16 @@ namespace Input {
 
 	private: // Input Storing
 		bool m_Keys[100];
-		Input::MouseEventArgs m_LastMouse;
+		KeyMods m_KeyMods;
+		MouseEventArgs m_LastMouse;
 
 	private: // Key Callback
 		void KeyCallback(int key, int scancode, int action, int mods);
 		void CharCallback(unsigned int ch);
 		void CursorPosCallback(double x, double y);
 		void MouseButtonCallback(int button, int action, int mods);
+
+	public: // Game Loop
+		void Update();
 	};
 }

@@ -8,27 +8,27 @@
 #include "Input.h"
 #include "IGraphics.h"
 #include "ICamera.h"
-#include "Agents.h"
-#include "PlayerAgent.h"
+#include "Units.h"
+#include "PlayerUnit.h"
 
 #include <CommonLib/ILoggingManager.h>
 
 namespace Tools {
 	namespace Player {
 		// Initialization/Uninitialization
-		RPGPlayer::RPGPlayer(Core::Engine &engine, Tools::Agents::Agents &agents, Physics::Physics &physics) :
+		RPGPlayer::RPGPlayer(Core::Engine &engine, Tools::Units::Units &units, Physics::Physics &physics) :
 			m_Logger(engine.GetLoggingManager().CreateLogger("Player")),
 
 			m_Network(engine.GetNetwork()),
 			m_Input(engine.GetInput()),
-			m_Agents(agents),
+			m_Units(units),
 			m_Physics(physics),
 
-			m_Agent(nullptr),
+			m_Unit(nullptr),
 			m_PacketHandler(m_Network.GetFactory().CreatePlayerHandler(*this)),
 			m_Dispatcher(m_Network.GetFactory().CreatePlayerDispatcher()),
 
-			m_Speed(25),
+			m_Speed(2.0f),
 			m_Deadzone(0.4f),
 
 			m_Camera(engine.GetGraphics().GetMainCamera()),
@@ -47,47 +47,55 @@ namespace Tools {
 
 		// Network Callback Functions
 
-		void RPGPlayer::ReceivedPlayerDesc(unsigned int agentId, DataTypes::Health health) {
-			m_Agent = new Tools::Agents::PlayerAgent(std::move(agentId), std::move(health), m_Physics);
-			m_Agents.AddAgent(m_Agent);
+		void RPGPlayer::ReceivedPlayerDesc(unsigned int unitId, DataTypes::Health health) {
+			m_Unit = new Tools::Units::PlayerUnit(std::move(unitId), std::move(health), m_Physics);
+			m_Units.Add(m_Unit);
 			m_Logger.LogInfo("Player Spawned");
 		}
 
 		// Game Loop
 
 		void RPGPlayer::Update(float delta) {
-			if (m_Agent != nullptr) {
+			if (m_Unit != nullptr) {
+				m_PacketTimer += delta;
 				Input::AxisDesc inpVal = m_Input.GetMovementAxis();
 				if (inpVal.Any) {
 					// Change Character Force
-					m_Agent->RigidBody.Force.x = inpVal.Scaled.x * m_Speed;
-					m_Agent->RigidBody.Force.y = inpVal.Scaled.y * m_Speed;
+					m_Unit->RigidBody.TargetVelocity.x = inpVal.Scaled.x * m_Speed;
+					m_Unit->RigidBody.TargetVelocity.y = inpVal.Scaled.y * m_Speed;
 
 					// Rotate Character
-					m_Agent->Rotation = inpVal.Angle;
+					m_Unit->Rotation = inpVal.Angle;
 				}
 				else {
 					// Reset Character Force
-					m_Agent->RigidBody.Force.x = 0;
-					m_Agent->RigidBody.Force.y = 0;
+					m_Unit->RigidBody.TargetVelocity.x = 0;
+					m_Unit->RigidBody.TargetVelocity.y = 0;
 				}
 
 				// Check if Force Changed
-				if (m_PreviousForce != m_Agent->RigidBody.Force) {
+				if (m_PreviousForce != m_Unit->RigidBody.TargetVelocity) {
 					// Send Updated Physics to Server
-					m_Dispatcher->SendPlayerPhysics(m_Agent->RigidBody, m_Agent->Rotation.Radians);
+					m_Dispatcher->SendPlayerPhysics(m_Unit->RigidBody, m_Unit->Rotation.Radians);
 
 					// Update Previous Force
-					m_PreviousForce = m_Agent->RigidBody.Force;
+					m_PreviousForce = m_Unit->RigidBody.TargetVelocity;
+
+					// Reset Physics Packet Timer
+					m_PacketTimer = 0.0f;
 				}
+
+				// Send Update at least Every Second
+				if (m_PacketTimer > 1.0f)
+					m_Dispatcher->SendPlayerPhysics(m_Unit->RigidBody, m_Unit->Rotation.Radians);
 
 				// Set Camera Position
 				float xOffset = m_CameraSize.x / 2 * m_Deadzone;
 				float yOffset = m_CameraSize.y / 2 * m_Deadzone;
-				float leftMax = m_Agent->GetPosition().x - xOffset;
-				float rightMax = m_Agent->GetPosition().x + xOffset;
-				float downMax = m_Agent->GetPosition().y - yOffset;
-				float upMax = m_Agent->GetPosition().y + yOffset;
+				float leftMax = m_Unit->GetPosition().x - xOffset;
+				float rightMax = m_Unit->GetPosition().x + xOffset;
+				float downMax = m_Unit->GetPosition().y - yOffset;
+				float upMax = m_Unit->GetPosition().y + yOffset;
 
 				if (m_CameraPosition.x < leftMax)
 					m_CameraPosition.x = leftMax;

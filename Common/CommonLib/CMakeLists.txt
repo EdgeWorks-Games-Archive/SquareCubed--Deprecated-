@@ -18,7 +18,7 @@ source_group ("" FILES
 	metadata.h
 )
 source_group (DataTypes FILES
-	agenttypes.h
+	unittypes.h
 	postypes.h
 	worldtypes.h
 )
@@ -36,8 +36,5 @@ source_group (Utils\\Logger FILES
 # Add Library Build Output
 add_library (CommonLib ${CommonLib_SRC})
 
-# Link Build Output
-link_directories (${PROJECT_BINARY_DIR}/CommonLib)
-
 # Set Directory
-SET_PROPERTY(TARGET CommonLib PROPERTY FOLDER "Common")
+set_property (TARGET CommonLib PROPERTY FOLDER "Common")

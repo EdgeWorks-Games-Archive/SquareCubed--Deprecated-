@@ -1,24 +1,63 @@
 #include "DynamicRigidBody.h"
 
+#include "Physics.h"
+#include "IBroadphase.h"
+#include "ICollider.h"
+
+#include <algorithm>
+
 namespace Physics {
-	void DynamicRigidBody::UpdatePhysics(const float delta) {
-		// Calculate velocity change
-		glm::vec2 velocityChange = m_MassData.GetInverseMass() * Force * delta;
+	DynamicRigidBody::DynamicRigidBody(Physics &physics, std::unique_ptr<ICollider> collider, const float maxVelocityChange) :
+		IRigidBody(std::move(collider)),
+		m_Physics(physics),
 
-		// Calculate friction and apply to velocity change
-		// 8.0f is just a random picked constant that ended up well.
-		// If you want the physics to be less 'floaty', increase it.
-		// Increasing this constant severely impacts the effect of forces.
-		velocityChange -= Velocity * 8.0f * delta;
+		Velocity(),
+		TargetVelocity(),
+		MaxVelocityChange(maxVelocityChange)
+	{
+		m_Physics.AttachDynamic(*this);
+	}
 
-		// Calculate new position
-		Position += (Velocity + (velocityChange * 0.5f)) * delta;
+	DynamicRigidBody::~DynamicRigidBody() {
+		m_Physics.DetachDynamic(*this);
+	}
 
-		// Set increased velocity
+	void DynamicRigidBody::UpdateVelocity(const float delta) {
+		// Calculate Velocity Per Second Change Needed
+		glm::vec2 velocityChange = TargetVelocity - Velocity;
+
+		// Add Velocity Caused by Nearby Pushing Rigidbodies
+		// Note: this might cause some problems with the player rigidbody
+		for (DynamicRigidBody &rigidBody : m_Physics.GetBroadphase().DetectDynamicCollisions(*this, m_Physics)) {
+			// Check if the Distance is smaller than the two radii combined
+			glm::vec2 diff = Position - rigidBody.Position;
+			if ((diff.x * diff.x) + (diff.y * diff.y) < (Collider->BroadphaseRadius + rigidBody.Collider->BroadphaseRadius) * (Collider->BroadphaseRadius + rigidBody.Collider->BroadphaseRadius)) {
+				// If diff is 0, glm::normalize will crash
+				if (diff.x == 0.0f && diff.y == 0.0f)
+					diff.x = this > &rigidBody ? 1.0f : -1.0f;
+
+				// Calculate the force with which to push us a bit away
+				velocityChange += glm::normalize(diff) * (16.0f * delta);
+			}
+		}
+
+		// Clamp Velocity Change per Current Delta
+		float sqVelChange = (velocityChange.x * velocityChange.x) + (velocityChange.y * velocityChange.y);
+		float maxVelChange = MaxVelocityChange * delta;
+		if (sqVelChange > (maxVelChange * maxVelChange)) {
+			// Exceeds, Calculate new Velocity in same Direction
+			velocityChange = glm::normalize(velocityChange) * maxVelChange;
+		}
+
+		// Calculate new Velocity
 		Velocity += std::move(velocityChange);
-
+		
 		// Update Broadphase Data
-		UpdateBroadphase();
+		Collider->UpdateBroadphaseData(*this);
+	}
+
+	void DynamicRigidBody::UpdatePosition(const float delta) {
+		Position += Velocity * delta;
 	}
 
 	void DynamicRigidBody::ResolveCollisions() {

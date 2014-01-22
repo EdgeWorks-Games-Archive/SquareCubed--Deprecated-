@@ -2,6 +2,8 @@
 
 #include <ClientBase/IContext.h>
 #include <ClientBase/IWindow.h>
+#include <ClientBase/IGraphics.h>
+#include <ClientBase/ICamera.h>
 
 namespace Input {
 	// Key Accessors
@@ -44,15 +46,23 @@ namespace Input {
 		return retVal;
 	}
 
-	// Utilities
-	KeyID Input::GetKeyId(unsigned char key) { return m_Context.GetKeyId(key); }
+	KeyMods& Input::GetKeyMods() { return m_KeyMods; }
 
+	// Mouse/Cursor Accessors
+
+	const CursorPosition& Input::GetCursorPosition() { return m_LastMouse.CursorPosition; }
+
+	// Utilities
+
+	KeyID Input::GetKeyId(unsigned char key) { return m_Context.GetKeyId(key); }
 	const SpecialKeyIDs& Input::GetSpecialKeyIds() { return m_Context.GetSpecialKeyIds(); }
 
 	// Initialization/Uninitialization
 
-	Input::Input(Context::IContext &context) :
+	Input::Input(Context::IContext &context, Graphics::IGraphics &graphics) :
 		m_Context(context),
+		m_Graphics(graphics),
+
 		m_ForwardKey(m_Context.GetKeyId('W')),
 		m_BackwardKey(m_Context.GetKeyId('S')),
 		m_LeftKey(m_Context.GetKeyId('A')),
@@ -61,35 +71,25 @@ namespace Input {
 		m_Keys()
 	{
 		// Bind Key Callback
-		m_Context.GetMainWindow().SetKeyCallback(std::bind(
-			&Input::KeyCallback,
-			this,
-			std::placeholders::_1,
-			std::placeholders::_2,
-			std::placeholders::_3,
-			std::placeholders::_4));
+		m_Context.GetMainWindow().SetKeyCallback([this](int key, int scancode, int action, int mods) {
+			KeyCallback(key, scancode, action, mods);
+		});
 
 		// Bind Char Callback
-		m_Context.GetMainWindow().SetCharCallback(std::bind(
-			&Input::CharCallback,
-			this,
-			std::placeholders::_1));
-
+		m_Context.GetMainWindow().SetCharCallback([this](unsigned int ch) {
+			CharCallback(ch);
+		});
+		
 		// Bind Cursor Pos Callback
-		m_Context.GetMainWindow().SetCursorPosCallback(std::bind(
-			&Input::CursorPosCallback,
-			this,
-			std::placeholders::_1,
-			std::placeholders::_2));
-
+		m_Context.GetMainWindow().SetCursorPosCallback([this](double x, double y) {
+			CursorPosCallback(x, y);
+		});
+		
 		// Bind Mouse Button Callback
-		m_Context.GetMainWindow().SetMouseButtonCallback(std::bind(
-			&Input::MouseButtonCallback,
-			this,
-			std::placeholders::_1,
-			std::placeholders::_2,
-			std::placeholders::_3));
-
+		m_Context.GetMainWindow().SetMouseButtonCallback([this](int button, int action, int mods) {
+			MouseButtonCallback(button, action, mods);
+		});
+		
 		// Log Initialization
 		//m_Logger.LogInfo("Input Initialized");
 	}
@@ -109,11 +109,18 @@ namespace Input {
 				m_Keys[key] = true;
 		}
 
+		// Set Key Mods (right now hardcoded values)
+		else if (key == 340) // Left Shift
+			m_KeyMods.Shift = !(action == 0);
+		else if (key == 341) // Left Control
+			m_KeyMods.Control = !(action == 0);
+
 		// Invoke Event
 		KeyChangeEventArgs evtArgs;
 		evtArgs.KeyId = key;
 		// action can be numbers other then 1 or 0
 		evtArgs.Down = !(action == 0);
+		evtArgs.Repeat = action == 2;
 		evtArgs.ShiftMod = false;
 		OnKeyChange.Invoke(evtArgs);
 	}
@@ -127,8 +134,10 @@ namespace Input {
 
 	void Input::CursorPosCallback(double x, double y) {
 		// Invoke Event
-		m_LastMouse.X = std::move(x);
-		m_LastMouse.Y = std::move(y);
+		m_LastMouse.CursorPosition.Absolute.x = (float)x;
+		m_LastMouse.CursorPosition.Absolute.y = (float)y;
+		// Might need to update immediately? Not sure, let's not.
+		//m_LastMouse.CursorPosition.World = m_Graphics.GetMainCamera().ResolveWorldPosition(m_LastMouse.CursorPosition.Absolute);
 		OnCursorPosChange.Invoke(m_LastMouse);
 	}
 
@@ -152,5 +161,11 @@ namespace Input {
 
 		// Invoke Event
 		OnMouseButtonChange.Invoke(m_LastMouse);
+	}
+
+	// Game Loop
+
+	void Input::Update() {
+		m_LastMouse.CursorPosition.World = m_Graphics.GetMainCamera().ResolveWorldPosition(m_LastMouse.CursorPosition.Absolute);
 	}
 }

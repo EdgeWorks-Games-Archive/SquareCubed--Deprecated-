@@ -1,0 +1,11 @@
+#topleft-label {
+    font-size: 12px;
+    padding-left: 6px;
+    float: left;
+}
+
+#topright-button {
+    font-size: 12px;
+    padding-right: 6px;
+    float: right;
+}

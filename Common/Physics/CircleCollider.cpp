@@ -3,10 +3,11 @@
 #include "IRigidBody.h"
 
 namespace Physics {
-	void CircleCollider::UpdateBroadphaseAABB(IRigidBody &rigidBody) {
-		rigidBody.BroadphaseAABB.Min.x = rigidBody.Position.x - Radius;
-		rigidBody.BroadphaseAABB.Min.y = rigidBody.Position.y - Radius;
-		rigidBody.BroadphaseAABB.Max.x = rigidBody.Position.x + Radius;
-		rigidBody.BroadphaseAABB.Max.y = rigidBody.Position.y + Radius;
+	void CircleCollider::UpdateBroadphaseData(IRigidBody &rigidBody) {
+		BroadphaseAABB.Min.x = rigidBody.Position.x - Radius;
+		BroadphaseAABB.Min.y = rigidBody.Position.y - Radius;
+		BroadphaseAABB.Max.x = rigidBody.Position.x + Radius;
+		BroadphaseAABB.Max.y = rigidBody.Position.y + Radius;
+		BroadphaseRadius = Radius;
 	}
 }

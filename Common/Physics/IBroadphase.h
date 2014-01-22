@@ -1,23 +1,17 @@
 #pragma once
 
+#include "Types.h"
+
 #include <list>
+#include <memory>
 
 namespace Physics {
-	class Physics;
-	class DynamicRigidBody;
-	class CollisionResolver;
-
-	/** Broadphase base interface.
-	 */
+	/** Broadphase base interface. */
 	class IBroadphase {
 	public: // Initialization/Uninitialization
 		virtual ~IBroadphase() {}
 
-	protected: // Broadphase Collection
-		friend class Physics;
-		virtual void DetectCollision(const std::list<std::reference_wrapper<DynamicRigidBody>> &dynamicRigidBodies, const CollisionResolver &resolver) = 0;
-
-	protected: // Physics Data Linking Function
-		void SetParent(Physics &physics);
+	public: // Broadphase Collection
+		virtual std::list<std::reference_wrapper<DynamicRigidBody>> DetectDynamicCollisions(const DynamicRigidBody &dynamicRigidBody, Physics &physics) = 0;
 	};
 }

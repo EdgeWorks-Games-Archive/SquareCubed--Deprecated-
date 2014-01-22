@@ -1,0 +1,24 @@
+# Make Sure Path Contains RakNet
+if (NOT EXISTS ${DEPENDENCY_DIR}/raknet/Source)
+	message (SEND_ERROR "Dependency folder does not contain RakNet.")
+else ()
+	# RakNet uses unsafe string functions, we need to add
+	# this to remove the warning spam from build output.
+	# Yes this works cross-platform.
+	add_definitions (-D_CRT_SECURE_NO_WARNINGS)
+
+	# Get All Files in the RakNet Source directory to Build
+	file (GLOB RakNet_SRC
+		"${DEPENDENCY_DIR}/raknet/Source/*.h"
+		"${DEPENDENCY_DIR}/raknet/Source/*.cpp"
+	)
+
+	# Add Library Build Output
+	add_library (RakNet ${RakNet_SRC})
+
+	# Link Required Libraries
+	target_link_libraries (RakNet ws2_32)
+
+	# Set Directory
+	set_property (TARGET RakNet PROPERTY FOLDER "Dependencies")
+endif ()

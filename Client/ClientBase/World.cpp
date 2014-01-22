@@ -1,5 +1,6 @@
 #include "World.h"
 
+#include "Engine.h"
 #include "IGraphics.h"
 #include "IGraphicsFactory.h"
 #include "ITileRenderer.h"
@@ -8,10 +9,10 @@ namespace Tools {
 	namespace World {
 		// Initialization/Uninitialization
 
-		World::World(Network::INetwork &network, Graphics::IGraphics &graphics, std::string tileArrayPath) :
-			m_TileProvider(network),
-			m_TileRenderer(graphics.GetFactory().CreateTileRenderer(
-			graphics.GetFactory().GetTileArray(tileArrayPath)
+		World::World(Core::Engine &engine, std::string tileArrayPath) :
+			m_TileProvider(engine.GetNetwork()),
+			m_TileRenderer(engine.GetGraphics().GetFactory().CreateTileRenderer(
+				engine.GetGraphics().GetFactory().GetTileArray(tileArrayPath)
 			))
 		{
 		}

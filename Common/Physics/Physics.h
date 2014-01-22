@@ -1,36 +1,31 @@
 #pragma once
 
-#include "CollisionResolver.h"
+#include "Types.h"
 
 #include <CommonLib/Logger.h>
 
 #include <memory>
 #include <list>
 
-/** Contains all functionality related to the Physics module.
- */
+/** Contains all functionality related to the Physics module. */
 namespace Physics {
-	class IBroadphase;
-
-	//class FixedRigidBody;
-	class DynamicRigidBody;
-
 	class Physics final {
 		Utils::Logger m_Logger;
 
 		std::unique_ptr<IBroadphase> m_Broadphase;
-		CollisionResolver m_CollisionResolver;
-
-		const float m_TickInterval;
-		float m_Accumelator;
 
 		std::list<std::reference_wrapper<DynamicRigidBody>> m_DynamicRigidBodies;
 
 	public: // Initialization/Uninitialization
-		Physics(Utils::ILoggingManager &logManager, std::unique_ptr<IBroadphase> broadphase, const float tickInterval);
+		Physics(Utils::ILoggingManager &logManager, std::unique_ptr<IBroadphase> broadphase);
 		~Physics();
 
-	public: // Attach/Detach Rigidbodies
+	public: // Accessors
+		const std::list<std::reference_wrapper<DynamicRigidBody>>& GetAllDynamic();
+		IBroadphase& GetBroadphase();
+
+	protected: // Attach/Detach Rigidbodies
+		friend DynamicRigidBody;
 		/** Attaches a dynamic rigidbody to the physics engine.
 		 * This will update the rigidbody when the physics state is updated.
 		 * \param[in, out]	rigidBody	A reference to the rigidbody.

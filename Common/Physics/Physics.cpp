@@ -6,14 +6,10 @@
 #include <CommonLib/LoggingManager.h>
 
 namespace Physics {
-	Physics::Physics(Utils::ILoggingManager &logManager, std::unique_ptr<IBroadphase> broadphase, const float tickInterval) :
+	Physics::Physics(Utils::ILoggingManager &logManager, std::unique_ptr<IBroadphase> broadphase) :
 		m_Logger(logManager.CreateLogger("Physics")),
 
 		m_Broadphase(std::move(broadphase)),
-		m_CollisionResolver(),
-
-		m_TickInterval(tickInterval),
-		m_Accumelator(),
 
 		m_DynamicRigidBodies()
 	{
@@ -28,6 +24,11 @@ namespace Physics {
 		}
 #endif
 	}
+
+	// Accessors
+
+	const std::list<std::reference_wrapper<DynamicRigidBody>>& Physics::GetAllDynamic() { return m_DynamicRigidBodies; }
+	IBroadphase& Physics::GetBroadphase() { return *m_Broadphase; }
 
 	// Attach/Detach Rigidbodies
 
@@ -51,20 +52,15 @@ namespace Physics {
 	// Game Loop
 
 	void Physics::UpdatePhysics(const float delta) {
-		// Add Delta to Accumelator
-		m_Accumelator += delta;
+		// Update all velocities and collisions
+		for (DynamicRigidBody &rigidBody : m_DynamicRigidBodies) {
+			rigidBody.UpdateVelocity(delta);
+		}
 
-		// Loop until all elapsed ticks have been processed
-		while (m_Accumelator >= m_TickInterval) {
-			m_Accumelator -= m_TickInterval;
-
-			// Update all rigidbody positions
-			for (DynamicRigidBody &rigidBody : m_DynamicRigidBodies) {
-				rigidBody.UpdatePhysics(m_TickInterval);
-			}
-
-			// Run Collision Detection
-			m_Broadphase->DetectCollision(m_DynamicRigidBodies, m_CollisionResolver);
+		// Update all positions, UpdateVelocity and UpdateCollisions
+		// rely on this position so only now change it
+		for (DynamicRigidBody &rigidBody : m_DynamicRigidBodies) {
+			rigidBody.UpdatePosition(delta);
 		}
 	}
 }

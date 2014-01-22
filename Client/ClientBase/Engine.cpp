@@ -94,7 +94,7 @@ namespace Core {
 		float delta = 0.016f;
 
 		// Hook Core Events
-		m_GUI->GetBindings().OnQuitCall.AttachFromThis(Engine::OnQuitCall, m_EventScope);
+		m_GUI->GetBindings().OnQuitCall.AttachMember(this, &Engine::OnQuitCall, m_EventScope);
 
 		// Run Game Loop
 		m_Running = true;
@@ -114,6 +114,10 @@ namespace Core {
 			// Update Everything
 			m_StateEngine->Update(delta);
 			m_GUI->Update();
+			
+			// Update input afterwards since camera position
+			// might change during other update functions.
+			m_Input->Update();
 			
 			// Render the State Engine
 			m_Graphics->BeginRender();

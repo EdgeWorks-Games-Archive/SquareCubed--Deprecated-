@@ -1,0 +1,44 @@
+/* Global Styling */
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+html {
+    background-color: rgba(0, 0, 0, 0.0);
+    font-family: Segoe UI, Arial, sans-serif;
+    font-size: 14px;
+    -webkit-user-select: none;
+}
+
+/* Clear-fix */
+.cf:after { clear: both; }
+
+/* Prevent Closing no-close Dialogs */
+.ui-noclose .ui-dialog-titlebar-close {
+    display: none;
+}
+
+/* Generic Styling */
+p { padding: 6px 0px; }
+.ui-progress-info {
+    font-style: italic;
+}
+.hidden { display:none; }
+
+/* Generic Form Styling */
+form { padding: 5px 0px; } /* 5 padding because of input field padding */
+form tr td label { width: 100%; }
+.table-widthhack { width: 10000px; }
+input.text {
+    width: 200px;
+    padding-left: 6px;
+    margin: 1px 0px 1px 0px;
+    background: #eeeeee;
+    border: 0px;
+}
+
+/* Generic Colors */
+.red {
+    color: red;
+}

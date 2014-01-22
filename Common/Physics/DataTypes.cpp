@@ -1,18 +1,6 @@
 #include "DataTypes.h"
 
 namespace Physics {
-	/// MassData ///
-
-	MassData::MassData(const float mass) :
-		m_Mass(std::move(mass)),
-		m_InverseMass(1 / m_Mass)
-	{}
-
-	void MassData::SetMass(const float mass) {
-		m_Mass = std::move(mass);
-		m_InverseMass = 1 / m_Mass;
-	}
-
 	/// AABBData ///
 
 	bool AABBData::Intersects(const AABBData& data) const {
@@ -25,7 +13,7 @@ namespace Physics {
 
 	bool AABBData::Contains(const glm::vec2 &point) const {
 		if (Max.x < point.x || Min.x > point.x) return false;
-		if (Max.y < point.y || Min.x > point.y) return false;
+		if (Max.y < point.y || Min.y > point.y) return false;
 
 		// No out of bounds found, therefor it's within the bounding box
 		return true;

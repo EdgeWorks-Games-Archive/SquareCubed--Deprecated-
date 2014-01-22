@@ -4,18 +4,18 @@
 #include <ClientBase/Input.h>
 #include <ClientBase/Content.h>
 
-#include <GLFWContext/GLFWContextLoader.h>
-#include <OpenGLGraphics/OpenGLGraphicsLoader.h>
-#include <RakNetNetwork/RakNetNetworkLoader.h>
-#include <CoherentUIOpenGLGUI/CoherentUIOpenGLUILoader.h>
+#include <Modules/GLFWContext/GLFWContextLoader.h>
+#include <Modules/OpenGLGraphics/OpenGLGraphicsLoader.h>
+#include <Modules/ClientRakNetNetwork/RakNetNetworkLoader.h>
+#include <Modules/CoherentUIOpenGLGUI/CoherentUIOpenGLUILoader.h>
 
-#include <MainMenuState/MainMenuStateSwitcher.h>
+#include <States/MainMenuState/MainMenuStateSwitcher.h>
 
 #include <CommonLib/LoggingManager.h>
 
 int main(int argc, char* args []) {
 	// Initialize Logger
-	Utils::ILoggingManager *loggingManager = new Utils::LoggingManager("../Logs/Client.log");
+	Utils::ILoggingManager *loggingManager = new Utils::LoggingManager("./Logs/Client.log");
 	Utils::Logger logger = loggingManager->CreateLogger("Loader");
 
 	logger.LogHighlight("Initializing all Engine Modules...");
@@ -36,7 +36,7 @@ int main(int argc, char* args []) {
 	engine.SetGraphics(graphics);
 
 	// Set up Input Module
-	Input::Input *input = new Input::Input(*context);
+	Input::Input *input = new Input::Input(*context, *graphics);
 	engine.SetInput(input);
 
 	// Set up Network Module

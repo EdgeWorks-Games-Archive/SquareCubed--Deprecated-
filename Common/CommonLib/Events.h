@@ -60,6 +60,9 @@ namespace Utils {
 				CallbackFunc(callback),
 				Scope(scope)
 			{}
+			
+			// Disallow Assign (TODO: Also disable copy and get that working)
+			CallbackEntry& operator=(const CallbackEntry&) = delete;
 		};
 
 		std::list<CallbackEntry> m_Callbacks;
@@ -73,11 +76,11 @@ namespace Utils {
 
 		template <typename ObjectType, typename MemberCallback>
 		void AttachMember(ObjectType *object, MemberCallback callback, EventScope &scope) {
-			Attach(std::bind(callback, object, std::placeholders::_1), scope);
+			// Bind Lambda Calling Member Callback
+			Attach([=](const T& args) {
+				(object->*callback)(args);
+			}, scope);
 		}
-
-		// Admittely a somewhat ugly hack but it makes classes using this look nicer
-		#define AttachFromThis(callback, scope) Attach(std::bind(&callback, this, std::placeholders::_1), scope)
 
 		void DetachForScope(EventScope &scope) {
 			auto i = m_Callbacks.begin();

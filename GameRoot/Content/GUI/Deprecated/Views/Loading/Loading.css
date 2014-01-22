@@ -1,0 +1,21 @@
+html {
+    /*background-color: rgba(0, 0, 0, 1.0);*/
+}
+
+#topleft-label {
+    font-size: 12px;
+    padding-left: 6px;
+    float: left;
+    color: white;
+}
+
+#bottomright-label {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    padding-right: 6px;
+    padding-bottom: 9px;
+    
+    color: white;
+    font-size: 24px;
+}

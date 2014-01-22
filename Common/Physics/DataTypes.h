@@ -5,39 +5,6 @@
 #include <memory>
 
 namespace Physics {
-	struct MassData final {
-	private:
-		float m_Mass;
-		float m_InverseMass;
-
-	public:
-		MassData(const float mass);
-
-		/** Sets the mass.
-		 * Stores the mass internally and precalculates the inverse mass.
-		 * \param[in]	mass	The mass to be stored.
-		 */
-		void SetMass(const float mass);
-
-		/** Gets the mass.
-		 * \return		The internally stored mass.
-		 */
-		inline const float GetMass() const { return m_Mass; }
-
-		/** Gets the precalculated inverse mass.
-		 * Used in calculations to avoid expensive division.
-		 * \return		The internally stored inverse mass.
-		 */
-		inline const float GetInverseMass() const { return m_InverseMass; }
-	};
-
-	struct MaterialData {
-		/** Describes the density of the material. */
-		float Density;
-		/** Describes the restitution or 'bounciness' of the material. */
-		float Restitution;
-	};
-
 	/** Defines an Axis Aligned Bounding Box's data.
 	 * Provides helper functions for dealing with AABB data.
 	 */
