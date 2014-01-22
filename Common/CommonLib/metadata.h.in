@@ -10,3 +10,6 @@
 #define _MTS(x) #x
 /** Converts a macro to string literal. */
 #define MTS(x) _MTS(x)
+
+/** Used instead of _DEBUG because a pre-release test could be built with release target. */
+#define _FULL_RELEASE
