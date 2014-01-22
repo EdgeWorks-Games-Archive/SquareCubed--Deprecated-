@@ -4,9 +4,6 @@
 
 #include <CommonLib/metadata.h>
 
-/** Used instead of _DEBUG because a pre-release test could be built with release target. */
-//#define _FULL_RELEASE
-
 #if VERSION_PATCH == 0
 #define RAW_APP_VERSION MTS(VERSION_MAJOR)"."MTS(VERSION_MINOR)
 #else
