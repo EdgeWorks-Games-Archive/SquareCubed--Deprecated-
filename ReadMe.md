@@ -25,7 +25,7 @@ Dependencies
 ------------
 You can download a package of precompiled dependencies for VC++ 2013 [here](https://dl.dropboxusercontent.com/u/69844866/Dependencies.zip).
 This package does not include CoherentUI and RakNet which must be manually licensed and downloaded.
-RakNet has an online automated form for requesting a indie license.
+RakNet has an online automated form for requesting an indie license.
 CoherentUI has an online evaluation request form.
 - GLFW
 - GLEW
@@ -35,13 +35,14 @@ CoherentUI has an online evaluation request form.
 
 Build Guide
 -----------
-This guide is for Visual Studio 2013. If you are on a different platform or using a different compiler you will have to manually make a dependency folder for your target.
+This guide is for Visual Studio 2013 with a 32-Bit Windows target (which also works on 64-bit). If you are on a different platform or using a different compiler you will have to manually make a dependency folder for your target.
 
 1. Download and unzip the dependency package.
 2. Place CoherentUI in the dependency folder in a folder "CoherentUI".
 3. Place RakNet in the dependency folder in a folder "raknet".
 4. Run CMake and fill in the dependency folder in the settings.
 5. If CMake does not report any problems, you can now generate a project file and build the game.
+6. (Optional) To use the debugger, set the debugging working directory to the GameRoot folder.
 
 Licenses
 --------
