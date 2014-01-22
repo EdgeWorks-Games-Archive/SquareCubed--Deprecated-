@@ -42,8 +42,6 @@ namespace CoherentUIOpenGLUI {
 		m_Bindings(m_ViewListener),
 		m_ElementFactory(m_ViewListener),
 
-		m_LogHandler(logManager),
-
 		m_Settings(),
 		m_System(nullptr),
 
@@ -57,7 +55,7 @@ namespace CoherentUIOpenGLUI {
 #ifdef _DEBUG
 		m_Settings.DebuggerPort = 1234;
 #endif
-		m_System = InitializeUISystem(COHERENT_KEY, m_Settings, &m_SystemListener, Coherent::Logging::Info, &m_LogHandler);
+		m_System = InitializeUISystem(COHERENT_UI_SDK_VER, COHERENT_KEY, m_Settings, &m_SystemListener, Coherent::Logging::Info, new LogHandler(logManager));
 		if (!m_System)
 			throw std::exception("Coherent UI failed to initialize!");
 

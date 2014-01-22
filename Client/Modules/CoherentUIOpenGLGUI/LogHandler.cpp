@@ -9,8 +9,6 @@ namespace CoherentUIOpenGLUI {
 		m_Logger(logManager.CreateLogger("Coherent"))
 	{}
 
-	LogHandler::~LogHandler() {}
-
 	void LogHandler::WriteLog(Coherent::Logging::Severity severity, const char* message, size_t length) {
 		const char *format;
 		Utils::LoggingLevel level;

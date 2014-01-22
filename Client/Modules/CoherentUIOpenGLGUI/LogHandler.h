@@ -12,7 +12,6 @@ namespace CoherentUIOpenGLUI {
 
 	public:
 		LogHandler(Utils::ILoggingManager &logManager);
-		~LogHandler();
 
 		void WriteLog(Coherent::Logging::Severity severity, const char* message, size_t length);
 		void Assert(const char* message);

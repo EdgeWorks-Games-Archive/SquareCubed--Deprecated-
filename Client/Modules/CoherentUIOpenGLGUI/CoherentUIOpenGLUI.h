@@ -35,9 +35,6 @@ namespace CoherentUIOpenGLUI {
 		GUIBindings m_Bindings;
 		ElementFactory m_ElementFactory;
 
-		// Logging
-		LogHandler m_LogHandler;
-
 		// OpenGL Stuff
 		GLuint m_ProgramID;
 		GLuint m_TextureID;

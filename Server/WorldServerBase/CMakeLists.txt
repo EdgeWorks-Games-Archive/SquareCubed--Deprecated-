@@ -48,6 +48,7 @@ source_group (Players FILES
 )
 source_group (World FILES
 	World.h World.cpp
+	Items.h Items.cpp
 )
 source_group (Debug FILES
 	Debug.h Debug.cpp
